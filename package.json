@@ -1,0 +1,23 @@
+{
+  "name": "fisheye",
+  "version": "1.0.0",
+  "description": "Photography Website",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css --style compressed",
+    "prefix": "postcss ./public/css/style.css --use autoprefixer -d ./public/css/prefixed/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mancjames/Fisheye.git"
+  },
+  "author": "James Hay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mancjames/Fisheye/issues"
+  },
+  "homepage": "https://github.com/mancjames/Fisheye#readme",
+  "dependencies": {
+    "node-sass": "^5.0.0"
+  }
+}
