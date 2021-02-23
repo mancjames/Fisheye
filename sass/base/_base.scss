@@ -9,10 +9,4 @@
 a {
     cursor: pointer;
     text-decoration: none;
-    color: inherit;
-    &:visited,
-    &:hover,
-    &:active {
-        color: inherit
-    }
 }

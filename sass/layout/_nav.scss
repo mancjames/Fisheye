@@ -1,0 +1,15 @@
+.tag {
+    font-family: $font-text;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $color-primary;
+    border: 1px $background-color-tertiary solid;
+    border-radius: 1em;
+    padding: .25rem .5rem;
+    transition: 250ms;
+    &:hover,
+    &:focus {
+        color: $color-white;
+        background-color: $background-color-primary;
+    }
+}
