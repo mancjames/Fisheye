@@ -1,0 +1,22 @@
+.card{
+    width: 12em;
+    height: 40em;
+    text-align: center;
+    &__photographer-portrait{
+        margin: 1rem auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        height: 10em;
+        width: 10em;
+        &-img{
+            position:absolute;
+            height: auto;
+            width: auto;    
+            max-width:100%;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+}

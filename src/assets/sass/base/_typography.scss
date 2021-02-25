@@ -1,17 +1,18 @@
 h1 {
     font-size: 2em;
     color: $color-secondary;
-    font-family: $font-title;
-    font-weight: 500;
+    font-family: $font;
+    font-weight: 400;
 }
  
 h2 {
-    font-size: 3em;
+    font-size: 2em;
     color: $color-primary;
-    font-family: $font-title;
+    font-family: $font;
+    font-weight: 400;
 }
  
 p {
     font-size: 1em;
-    font-family: $font-text;
+    font-family: $font;
 }
