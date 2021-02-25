@@ -1,5 +1,13 @@
 .container{
     height: 100%;
     width: 100%;
-    padding: 2rem 5rem;
+    padding: 0rem 3em;
+    &__header {
+        padding-top: 2em;
+    }
+    &__photographers{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
 }
