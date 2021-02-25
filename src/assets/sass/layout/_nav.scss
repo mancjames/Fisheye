@@ -14,3 +14,16 @@
     }
 }
 
+.nav{
+    &-list{
+        display: flex;
+        width: 100%;
+        &-item{
+            display: block;
+            margin: 0rem .5rem;
+            list-style-type: none;
+        }
+    }
+    
+}
+
