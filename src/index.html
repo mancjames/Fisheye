@@ -18,21 +18,21 @@
                 </div>
                 <nav class="nav" aria-label="main navigation" role="navigation">
                     <ul class="nav-list">
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Art</span>#Art</a></li>
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Portrait</span>#Portrait</a></li>
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Fashion</span>#Fashion</a></li>
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Architecture</span>#Architecture</a></li>
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Travel</span>#Travel</a></li>
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Sport</span>#Sport</a></li>
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Animals</span>#Animals</a></li>
-                        <li class="nav-list-item"><a href="#" class="tag"><span class="sr-only">Events</span>#Events</a></li> 
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionArt"><span class="sr-only">Art</span>#Art</a></li>
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionPortrait"><span class="sr-only">Portrait</span>#Portrait</a></li>
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionFashion"><span class="sr-only">Fashion</span>#Fashion</a></li>
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionArchitecture"><span class="sr-only">Architecture</span>#Architecture</a></li>
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionTravel"><span class="sr-only">Travel</span>#Travel</a></li>
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionSport"><span class="sr-only">Sport</span>#Sport</a></li>
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionAnimals"><span class="sr-only">Animals</span>#Animals</a></li>
+                        <li class="nav-list-item"><a href="#" class="tag" id="selectionEvents"><span class="sr-only">Events</span>#Events</a></li> 
                     </ul>
                 </nav>
                 <h1 class="header__title">Our photographers</h1>
         </header>
         <main class = "main container" id="main">
-            <div class="container__photographers">
-                <div class="card card__photographer">
+            <div class="container__photographers" id="cardContainer">
+                <div class="card card__photographer filtered-div" id="photographerCard">
                     <div class="card__photographer-portrait">
                         <img src="./assets/img/Mimi/Portrait_Nora.jpg" alt="Mimi Keel Portrait" class="card__photographer-portrait-img">
                     </div>
@@ -44,15 +44,15 @@
                         <p class="card__photographer-description-tagline">Finding beautiful everyday things</p>
                         <p class="card__photographer-description-price">$400/day</p>
                         <div class="card__photographer-tags">
+                            <a href="#" class="tag card__photographer-tags-item" id="Art" data-art="art"><span class="sr-only">Art</span>#Art</a>
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Art</span>#Art</a>
-                            <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Art</span>#Art</a>
-                            <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Fashion</span>#Fashion</a>
+                            <a href="#" class="tag card__photographer-tags-item" id="Fashion"><span class="sr-only">Fashion</span>#Fashion</a>
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Art</span>#Art</a>
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Architecture</span>#Architecture</a>
                         </div>
                     </div>
                 </div>
-                <div class="card card__photographer">
+                <div class="card card__photographer filtered-div">
                     <div class="card__photographer-portrait">
                         <img src="./assets/img/Mimi/Portrait_Nora.jpg" alt="Mimi Keel Portrait" class="card__photographer-portrait-img">
                     </div>
@@ -71,7 +71,7 @@
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Architecture</span>#Architecture</a>
                         </div>
                     </div>
-                </div><div class="card card__photographer">
+                </div><div class="card card__photographer filtered-div">
                     <div class="card__photographer-portrait">
                         <img src="./assets/img/Mimi/Portrait_Nora.jpg" alt="Mimi Keel Portrait" class="card__photographer-portrait-img">
                     </div>
@@ -90,7 +90,7 @@
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Architecture</span>#Architecture</a>
                         </div>
                     </div>
-                </div><div class="card card__photographer">
+                </div><div class="card card__photographer filtered-div">
                     <div class="card__photographer-portrait">
                         <img src="./assets/img/Mimi/Portrait_Nora.jpg" alt="Mimi Keel Portrait" class="card__photographer-portrait-img">
                     </div>
@@ -109,7 +109,7 @@
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Architecture</span>#Architecture</a>
                         </div>
                     </div>
-                </div><div class="card card__photographer">
+                </div><div class="card card__photographer filtered-div">
                     <div class="card__photographer-portrait">
                         <img src="./assets/img/Mimi/Portrait_Nora.jpg" alt="Mimi Keel Portrait" class="card__photographer-portrait-img">
                     </div>
@@ -128,7 +128,7 @@
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Architecture</span>#Architecture</a>
                         </div>
                     </div>
-                </div><div class="card card__photographer">
+                </div><div class="card card__photographer filtered-div">
                     <div class="card__photographer-portrait">
                         <img src="./assets/img/Mimi/Portrait_Nora.jpg" alt="Mimi Keel Portrait" class="card__photographer-portrait-img">
                     </div>
@@ -147,7 +147,7 @@
                             <a href="#" class="tag card__photographer-tags-item"><span class="sr-only">Architecture</span>#Architecture</a>
                         </div>
                     </div>
-                </div><div class="card card__photographer">
+                </div><div class="card card__photographer filtered-div">
                     <div class="card__photographer-portrait">
                         <img src="./assets/img/Mimi/Portrait_Nora.jpg" alt="Mimi Keel Portrait" class="card__photographer-portrait-img">
                     </div>
@@ -172,6 +172,6 @@
         <footer>
 
         </footer>
-        <script src="" async defer></script>
+        <script src="./assets/js/all.js" async defer></script>
     </body>
 </html>

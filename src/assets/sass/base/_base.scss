@@ -22,3 +22,12 @@ a {
     white-space: nowrap;
     width: 1px;
 }
+
+///classes for adding/removing cards for javascript
+.show {
+    display: block;
+  }
+  
+  .remove {
+    display: none;
+  }
