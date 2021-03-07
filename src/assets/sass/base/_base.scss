@@ -24,10 +24,10 @@ a {
 }
 
 ///classes for adding/removing cards for javascript
-.show {
-    display: block;
+[data-toggle='on'] {
+    display:block;
   }
   
-  .remove {
-    display: none;
+  [data-toggle='off'] {
+    display:none;
   }

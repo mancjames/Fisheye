@@ -1,90 +1,69 @@
+/* eslint-disable max-classes-per-file */
 const cardContainer = document.getElementById('cardContainer');
 
 function processData() {
   const data = request.response;
   const { photographers } = data;
   console.log(photographers);
-  console.log(photographers[0].tags);
 
   function showCards() {
+    class CreateCardElement {
+      constructor(elementType, classProperties, parentName) {
+        this.elementType = elementType;
+        this.classProperties = classProperties;
+        this.parentName = parentName;
+        this.element = document.createElement(this.elementType);
+        this.element.className = classProperties;
+        parentName.appendChild(this.element);
+      }
+    }
+
+    class CreateCardElementImage extends CreateCardElement {
+      constructor(elementType, classProperties, parentName, imgSrc, imgAlt) {
+        super(elementType, classProperties, parentName);
+        this.imgSrc = imgSrc;
+        this.imgAlt = imgAlt;
+        this.element.src = imgSrc;
+        this.element.alt = imgAlt;
+      }
+    }
+
+    class CreateCardElementDescription extends CreateCardElement {
+      constructor(elementType, classProperties, parentName, JSONtype) {
+        super(elementType, classProperties, parentName);
+        this.JSONtype = JSONtype;
+        this.element.innerText = this.JSONtype;
+      }
+    }
+
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < photographers.length; i++) {
-      // create elements
-      const article = document.createElement('article');
-      const photographerImage = document.createElement('img');
-      const divPhotographerTitle = document.createElement('div');
-      const divPhotographerPortrait = document.createElement('div');
-      const h2PhotographerTitle = document.createElement('h2');
-      const divPhotographerDescription = document.createElement('div');
-      const pPhotographerDescriptionLocation = document.createElement('p');
-      const pPhotographerDescriptionTagline = document.createElement('p');
-      const pPhotographerDescriptionPrice = document.createElement('p');
-      const divTag = document.createElement('div');
-      
-      
-      // Attaching classes to divs
-      divPhotographerPortrait.className = 'card__photographer-portrait';
-      article.className = 'card card__photographer';
-      divPhotographerTitle.className = 'card__photographer-title';
-      photographerImage.className = 'card__photographer-portrait-img';
-      h2PhotographerTitle.className = 'card__photographer-title-name';
-      divPhotographerDescription.className = 'card__photographer-description';
-      pPhotographerDescriptionLocation.className = 'card__photographer-description-location';
-      pPhotographerDescriptionTagline.className = 'card__photographer-description-tagline';
-      pPhotographerDescriptionPrice.className = 'card__photographer-description-price';
-      divTag.className = 'card__photographer-tags';
-      
-      
-      // Image Properties
-      photographerImage.src = `./assets/img/Photographers ID Photos/${photographers[i].portrait}`;
-      photographerImage.alt = `${photographers[i].name}`;
+      const article = new CreateCardElement('article', 'card card__photographer', cardContainer);
+      const photographerPortrait = new CreateCardElement('div', 'card__photographer-portrait', article.element);
+      const photographerImage = new CreateCardElementImage('img', 'card__photographer-portrait-img', photographerPortrait.element, `./assets/img/Photographers ID Photos/${photographers[i].portrait}`, `${photographers[i].name}`);
+      const photographerTitle = new CreateCardElement('div', 'card__photographer-title', article.element);
+      const photographerTitleName = new CreateCardElementDescription('h2', 'card__photographer-title-name', photographerTitle.element, `${photographers[i].name}`);
+      const photographerDescription = new CreateCardElement('div', 'card__photographer-description', article.element);
+      const photographerDescriptionLocation = new CreateCardElementDescription('p', 'card__photographer-description-location', photographerDescription.element, `${photographers[i].city}, ${photographers[i].country}`);
+      const photographerDescriptionTagline = new CreateCardElementDescription('p', 'card__photographer-description-tagline', photographerDescription.element, `${photographers[i].tagline}`);
+      const photographerDescriptionPrice = new CreateCardElementDescription('p', 'card__photographer-description-price', photographerDescription.element, `$${photographers[i].price}/day`);
+      const photographerTags = new CreateCardElement('div', 'card__photographer-tags', article.element);
+
       // Anchor Properties
 
-      // adding text to elements
-      h2PhotographerTitle.innerText = `${photographers[i].name}`;
-      pPhotographerDescriptionLocation.innerText = `${photographers[i].city}, ${photographers[i].country}`;
-      pPhotographerDescriptionTagline.innerText = `${photographers[i].tagline}`;
-      pPhotographerDescriptionPrice.innerText = `$${photographers[i].price}/day`;
-
+      // Loop for adding tags to end of card
       for (let j = 0; j < photographers[i].tags.length; j++) {
-        const divTagAnchor = document.createElement('a');
-        const divTagSpan = document.createElement('span');
-        divTagAnchor.className = 'tag card__photographer-tags-item';
-        divTagSpan.className = 'sr-only';
-        divTagAnchor.innerText = `${photographers[i].tags[j]}`;
-        divTagSpan.innerText = `${photographers[i].tags[j]}`;
-        divTag.appendChild(divTagAnchor);
-        divTagAnchor.appendChild(divTagSpan);
-      };
+        const photographerTagsAnchor = new CreateCardElementDescription('a', 'tag card__photographer-tags-item', photographerTags.element, `${photographers[i].tags[j]}`);
+        const photographerTagsSpan = new CreateCardElementDescription('span', 'sr-only', photographerTagsAnchor.element, `${photographers[i].tags[j]}`);
+        /*
 
-
-
-      // Appending elements to parent elements
-      cardContainer.appendChild(article);
-      article.append(divPhotographerPortrait, divPhotographerTitle, divPhotographerDescription);
-      divPhotographerPortrait.appendChild(photographerImage);
-      divPhotographerTitle.appendChild(h2PhotographerTitle);
-      divPhotographerDescription.append(pPhotographerDescriptionLocation,
-        pPhotographerDescriptionPrice,
-        pPhotographerDescriptionTagline,
-        divTag);
+        divTagAnchor.setAttribute('data-tag', `${photographers[i].tags[j]}`);
+        */
+      }
     }
   }
   showCards();
 }
-
-/*
-function createElement(elementName, element, className, parentName){
-    this.elementName = elementName;
-    this.element = element;
-    this.className = className;
-    this.parentName = parentName;
-    this.create = function() {
-        const this.elementName = document.createElement('`${this.element}`');
-        this.elementName.className = '`${this.className}`';
-        ${this.parentName}.appendChild(${this.elementName})
-    }
-}
-*/
 
 const requestURL = '../fisheyedata.json';
 const request = new XMLHttpRequest();
