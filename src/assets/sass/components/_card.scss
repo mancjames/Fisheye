@@ -39,6 +39,7 @@
             flex-wrap: wrap;
             justify-content: center;
             &-item {
+                list-style-type: none;
                 margin: .2em;
             }
         }
