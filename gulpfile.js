@@ -31,7 +31,7 @@ function html() {
     .pipe(gulpIf(isProd, htmlmin({
       collapseWhitespace: true,
     })))
-    .pipe(gulp.dest('Doc'));
+    .pipe(gulp.dest('doc'));
 }
 
 function css() {
@@ -47,7 +47,7 @@ function css() {
     }))
     .pipe(gulpIf(!isProd, sourcemaps.write()))
     .pipe(gulpIf(isProd, cssmin()))
-    .pipe(gulp.dest('Doc/assets/css/'));
+    .pipe(gulp.dest('doc/assets/css/'));
 }
 
 function js() {
@@ -57,25 +57,25 @@ function js() {
     }))
     .pipe(concat('all.js'))
     .pipe(gulpIf(isProd, uglify()))
-    .pipe(gulp.dest('Doc/assets/js'));
+    .pipe(gulp.dest('doc/assets/js'));
 }
 
 function img() {
   return gulp.src('src/assets/img/*')
     .pipe(gulpIf(isProd, imagemin()))
-    .pipe(gulp.dest('Doc/assets/img/'));
+    .pipe(gulp.dest('doc/assets/img/'));
 }
 
 function fonts() {
   return gulp.src('src/assets/fonts/*.{eot,svg,ttf,woff,woff2}')
-    .pipe(gulp.dest('Doc/assets/fonts/'));
+    .pipe(gulp.dest('doc/assets/fonts/'));
 }
 
 function serve() {
   browserSync.init({
     open: true,
     notify: false,
-    server: './Doc',
+    server: './doc',
   });
 }
 
@@ -93,7 +93,7 @@ function watchFiles() {
 }
 
 function del() {
-  return gulp.src('Doc/*', { read: false })
+  return gulp.src('doc/*', { read: false })
     .pipe(clean());
 }
 
