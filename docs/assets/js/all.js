@@ -4,7 +4,6 @@ const cardContainer = document.getElementById('cardContainer');
 function processData() {
   const data = request.response;
   const { photographers } = data;
-  console.log(photographers);
 
   function showCards() {
     // class constructor for creating card elements
@@ -142,7 +141,7 @@ function processData() {
   showCards();
 }
 
-const requestURL = '../fisheyedata.json';
+const requestURL = './fisheyedata.json';
 const request = new XMLHttpRequest();
 request.open('GET', requestURL);
 request.responseType = 'json';
