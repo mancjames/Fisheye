@@ -6,66 +6,67 @@ function processData() {
   const { photographers } = data;
 
   function showCards() {
-    // class constructor for creating card elements
     class CreateCardElement {
-      constructor(elementType, classProperties, parentName) {
-        this.elementType = elementType;
-        this.classProperties = classProperties;
-        this.parentName = parentName;
-        this.element = document.createElement(this.elementType);
-        this.element.className = classProperties;
-        parentName.appendChild(this.element);
-      }
-    }
-    // extender to include additional properties needed for images
-    class CreateCardElementImage extends CreateCardElement {
-      constructor(elementType, classProperties, parentName, imgSrc, imgAlt) {
-        super(elementType, classProperties, parentName);
+      constructor(imgSrc, name, city, country, tagline, price) {
         this.imgSrc = imgSrc;
-        this.imgAlt = imgAlt;
-        this.element.src = imgSrc;
-        this.element.alt = imgAlt;
+        this.name = name;
+        this.city = city;
+        this.country = country;
+        this.tagline = tagline;
+        this.price = price;
       }
-    }
-    // extender to include additional elements needed to get JSON data
-    class CreateCardElementDescription extends CreateCardElement {
-      constructor(elementType, classProperties, parentName, JSONdata) {
-        super(elementType, classProperties, parentName);
-        this.JSONdata = JSONdata;
-        this.element.innerText = JSONdata;
+
+      createCard() {
+        const article = document.createElement('article');
+        article.className = 'card card__photographer';
+        article.innerHTML = `
+          
+          <div class="card__photographer-portrait">
+            <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
+          </div>
+          <div class="card__photographer-title">
+            <h2 class="card__photographer-title-name">${this.name}</h2></div>
+          <div class="card__photographer-description">
+            <p class="card__photographer-description-location">${this.city}, ${this.country}</p>
+            <p class="card__photographer-description-tagline">${this.tagline}</p>
+            <p class="card__photographer-description-price">$${this.price}/day</p>
+          </div>
+          <div class="card__photographer-tags">
+            <ul class="card__photographer-tags-list">
+            </ul>
+          </div>
+       
+        <br />
+      `;
+        cardContainer.appendChild(article);
       }
     }
 
     // loop created below so objects created dependent on length of photographer array in JSON
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < photographers.length; i++) {
-      // setting Data-tag's on cards to help with creating filter
-      // getting array from JSON
-      const tagArray = photographers[i].tags;
-      // Turning it into a string
-      const tagString = String(tagArray);
-      // Replacing commas to help seperate
-      const tagOptions = tagString.replace(/,/g, ' ');
-      // Adding to article element to help change display options for filter
+      const photographerCards = new CreateCardElement(photographers[i].portrait, 
+                                                      photographers[i].name, 
+                                                      photographers[i].city, 
+                                                      photographers[i].country, 
+                                                      photographers[i].tagline, 
+                                                      photographers[i].price);
+      photographerCards.createCard();
 
-      // Created elements below by making each a new object from the class constructor created above
-      const article = new CreateCardElement('article', `card card__photographer ${tagOptions}`, cardContainer);
-      const photographerPortrait = new CreateCardElement('div', 'card__photographer-portrait', article.element);
-      const photographerImage = new CreateCardElementImage('img', 'card__photographer-portrait-img', photographerPortrait.element, `./assets/img/Photographers ID Photos/${photographers[i].portrait}`, `${photographers[i].name}`);
-      const photographerTitle = new CreateCardElement('div', 'card__photographer-title', article.element);
-      const photographerTitleName = new CreateCardElementDescription('h2', 'card__photographer-title-name', photographerTitle.element, `${photographers[i].name}`);
-      const photographerDescription = new CreateCardElement('div', 'card__photographer-description', article.element);
-      const photographerDescriptionLocation = new CreateCardElementDescription('p', 'card__photographer-description-location', photographerDescription.element, `${photographers[i].city}, ${photographers[i].country}`);
-      const photographerDescriptionTagline = new CreateCardElementDescription('p', 'card__photographer-description-tagline', photographerDescription.element, `${photographers[i].tagline}`);
-      const photographerDescriptionPrice = new CreateCardElementDescription('p', 'card__photographer-description-price', photographerDescription.element, `$${photographers[i].price}/day`);
-      const photographerTags = new CreateCardElement('div', 'card__photographer-tags', article.element);
-
-      // Anchor Properties
-
-      // Loop to go through the tags array nested in the JSON photographer data
       for (let j = 0; j < photographers[i].tags.length; j++) {
-        const photographerTagsAnchor = new CreateCardElementDescription('li', 'tag card__photographer-tags-item', photographerTags.element, `${photographers[i].tags[j]}`);
-        const photographerTagsSpan = new CreateCardElementDescription('span', 'sr-only', photographerTagsAnchor.element, `${photographers[i].tags[j]}`);
+        const tags = photographers[i].tags[j];
+        //code for creating li elements to add to tag section
+        const ul = document.getElementsByClassName('card__photographer-tags-list');
+        const li = document.createElement('li');
+        li.className = ('tag card__photographer-tags-list-item');
+        li.innerHTML = `
+          <span class="sr-only">${tags}</span>
+          ${tags}
+          `;
+        ul[i].appendChild(li);
+        //code to use tag variable above to add to class names for each of the photographer articles to allow searching
+        const articleSelection = document.getElementsByTagName('article');
+        articleSelection[i].classList.add(tags);
       }
     }
 
@@ -90,7 +91,7 @@ function processData() {
         });
 
         navListItem.classList.add('active');
-        var tagValue = navListItem.getAttribute('data-filter-tag');
+        const tagValue = navListItem.getAttribute('data-filter-tag');
         console.log(tagValue);
 
         cardSelections.forEach((cardSelection) => {
