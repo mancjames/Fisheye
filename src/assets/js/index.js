@@ -45,17 +45,17 @@ function processData() {
     // loop created below so objects created dependent on length of photographer array in JSON
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < photographers.length; i++) {
-      const photographerCards = new CreateCardElement(photographers[i].portrait, 
-                                                      photographers[i].name, 
-                                                      photographers[i].city, 
-                                                      photographers[i].country, 
-                                                      photographers[i].tagline, 
-                                                      photographers[i].price);
+      const photographerCards = new CreateCardElement(photographers[i].portrait,
+        photographers[i].name,
+        photographers[i].city,
+        photographers[i].country,
+        photographers[i].tagline,
+        photographers[i].price);
       photographerCards.createCard();
 
       for (let j = 0; j < photographers[i].tags.length; j++) {
         const tags = photographers[i].tags[j];
-        //code for creating li elements to add to tag section
+        // code for creating li elements to add to tag section
         const ul = document.getElementsByClassName('card__photographer-tags-list');
         const li = document.createElement('li');
         li.className = ('tag card__photographer-tags-list-item');
@@ -64,10 +64,10 @@ function processData() {
           ${tags}
           `;
         ul[i].appendChild(li);
-        //code to use tag variable above to add to class names for each of the photographer articles to allow searching
+        // code to use tag variable above to add to class names for each of the photographer articles to allow searching
         const articleSelection = document.getElementsByTagName('article');
         articleSelection[i].classList.add(tags);
-        //code to add data-tag to tags on card for help with searching
+        // code to add data-tag to tags on card for help with searching
         const dataTag = document.createAttribute('data-filter-tag');
         dataTag.value = tags;
         li.setAttributeNode(dataTag);
@@ -90,53 +90,64 @@ function processData() {
     tagList.forEach((tagListItem) => {
       // adding Event Listener for selecting options
       tagListItem.addEventListener('click', () => {
+        // code to change background on active item
         tagList.forEach((tagListItem) => {
           tagListItem.classList.remove('active');
         });
-
         tagListItem.classList.add('active');
-        const tagValue = tagListItem.getAttribute('data-filter-tag');
 
+        const tagValue = tagListItem.getAttribute('data-filter-tag');
+        // below to help make all not selected display:none 
         cardSelections.forEach((cardSelection) => {
           cardSelection.style.display = 'none';
         });
-
-        if (tagValue == 'art') {
-          selectionArt.forEach((cardArt) => {
-            cardArt.style.display = 'block';
-          });
-        } else if (tagValue == 'portrait') {
-          selectionPortrait.forEach((cardPortrait) => {
-            cardPortrait.style.display = 'block';
-          });
-        } else if (tagValue == 'fashion') {
-          selectionFashion.forEach((cardFashion) => {
-            cardFashion.style.display = 'block';
-          });
-        } else if (tagValue == 'architecture') {
-          selectionArchitecture.forEach((cardArchitecture) => {
-            cardArchitecture.style.display = 'block';
-          });
-        } else if (tagValue == 'travel') {
-          selectionTravel.forEach((cardTravel) => {
-            cardTravel.style.display = 'block';
-          });
-        } else if (tagValue == 'sports') {
-          selectionSport.forEach((cardSport) => {
-            cardSport.style.display = 'block';
-          });
-        } else if (tagValue == 'animals') {
-          selectionAnimals.forEach((cardAnimals) => {
-            cardAnimals.style.display = 'block';
-          });
-        } else if (tagValue == 'events') {
-          selectionEvents.forEach((cardEvents) => {
-            cardEvents.style.display = 'block';
-          });
-        } else if (tagValue == 'all') {
-          cardSelections.forEach((cardSelection) => {
-            cardSelection.style.display = 'block';
-          });
+        //switch statement showing all selected options as display:block;
+        switch (tagValue) {
+          case 'art':
+            selectionArt.forEach((cardArt) => {
+              cardArt.style.display = 'block';
+            });
+            break;
+          case 'portrait':
+            selectionPortrait.forEach((cardPortrait) => {
+              cardPortrait.style.display = 'block';
+            });
+            break;
+          case 'fashion':
+            selectionFashion.forEach((cardFashion) => {
+              cardFashion.style.display = 'block';
+            });
+            break;
+          case 'architecture':
+            selectionArchitecture.forEach((cardArchitecture) => {
+              cardArchitecture.style.display = 'block';
+            });
+            break;
+          case 'travel':
+            selectionTravel.forEach((cardTravel) => {
+              cardTravel.style.display = 'block';
+            });
+            break;
+          case 'sports':
+            selectionSport.forEach((cardSport) => {
+              cardSport.style.display = 'block';
+            });
+            break;
+          case 'animals':
+            selectionAnimals.forEach((cardAnimals) => {
+              cardAnimals.style.display = 'block';
+            });
+            break;
+          case 'events':
+            selectionEvents.forEach((cardEvents) => {
+              cardEvents.style.display = 'block';
+            });
+            break;
+          case 'all':
+            cardSelections.forEach((cardSelection) => {
+              cardSelection.style.display = 'block';
+            });
+            break;
         }
       });
     });
