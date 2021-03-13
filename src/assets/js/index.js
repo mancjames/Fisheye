@@ -67,10 +67,14 @@ function processData() {
         //code to use tag variable above to add to class names for each of the photographer articles to allow searching
         const articleSelection = document.getElementsByTagName('article');
         articleSelection[i].classList.add(tags);
+        //code to add data-tag to tags on card for help with searching
+        const dataTag = document.createAttribute('data-filter-tag');
+        dataTag.value = tags;
+        li.setAttributeNode(dataTag);
       }
     }
 
-    const navList = document.querySelectorAll('.nav ul li');
+    const tagList = document.querySelectorAll('.nav ul li, .card__photographer-tags-list-item');
     // if statement options
     const selectionArt = document.querySelectorAll('.art');
     const selectionPortrait = document.querySelectorAll('.portrait');
@@ -83,16 +87,15 @@ function processData() {
 
     const cardSelections = document.querySelectorAll('.card__photographer');
     // forEach loop to get each tag Option
-    navList.forEach((navListItem) => {
+    tagList.forEach((tagListItem) => {
       // adding Event Listener for selecting options
-      navListItem.addEventListener('click', () => {
-        navList.forEach((navListItem) => {
-          navListItem.classList.remove('active');
+      tagListItem.addEventListener('click', () => {
+        tagList.forEach((tagListItem) => {
+          tagListItem.classList.remove('active');
         });
 
-        navListItem.classList.add('active');
-        const tagValue = navListItem.getAttribute('data-filter-tag');
-        console.log(tagValue);
+        tagListItem.classList.add('active');
+        const tagValue = tagListItem.getAttribute('data-filter-tag');
 
         cardSelections.forEach((cardSelection) => {
           cardSelection.style.display = 'none';
