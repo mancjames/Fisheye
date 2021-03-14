@@ -88,15 +88,13 @@ function processData() {
 
     // forEach loop to get each tag Option
     tagList.forEach((tagListItem) => {
-      
-      // adding Event Listener for selecting options
-      tagListItem.addEventListener('click', () => {
-        // code to change background on active item
+      const tagValue = tagListItem.getAttribute('data-filter-tag');
+      function tagSelection() {
         tagList.forEach((tagListItem) => {
           tagListItem.classList.remove('active');
         });
         tagListItem.classList.add('active');
-        const tagValue = tagListItem.getAttribute('data-filter-tag');
+
         // below to help make all not selected display:none
         cardSelections.forEach((cardSelection) => {
           cardSelection.style.display = 'none';
@@ -149,8 +147,20 @@ function processData() {
             });
             break;
         }
+      }
+      // adding Event Listener for selecting options
+      tagListItem.addEventListener('click', () => {
+        tagSelection();
+      });
+
+      tagListItem.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          console.log(e);
+          tagSelection();
+        }
       });
     });
+
     // allowing user to tab through child elements
     const divElements = document.querySelectorAll('div');
 
