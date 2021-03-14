@@ -11,9 +11,9 @@
     left: 50%;
     border-radius: 4px;
     padding: .5em 1em;
-    transform: translateY(-100%) translateX(-50%);
+    transform: translateY(-300%) translateX(-50%);
     transition: transform 300ms;
     &:focus{
-        transform: translateY(25%) translateX(-50%);
+        transform: translateY(-120%) translateX(-50%);
     }
   }

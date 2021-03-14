@@ -1,6 +1,4 @@
 /* eslint-disable max-classes-per-file */
-const cardContainer = document.getElementById('cardContainer');
-
 function processData() {
   const data = request.response;
   const { photographers } = data;
@@ -17,15 +15,16 @@ function processData() {
       }
 
       createCard() {
+        const cardContainer = document.getElementById('cardContainer');
         const article = document.createElement('article');
         article.className = 'card card__photographer';
         article.innerHTML = `
-          
-          <div class="card__photographer-portrait">
+          <div class="card__photographer-portrait" tabindex="0">
             <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
           </div>
-          <div class="card__photographer-title">
-            <h2 class="card__photographer-title-name">${this.name}</h2></div>
+          <div class="card__photographer-title" tabindex="0">
+            <h2 class="card__photographer-title-name">${this.name}</h2>
+            </div>
           <div class="card__photographer-description">
             <p class="card__photographer-description-location">${this.city}, ${this.country}</p>
             <p class="card__photographer-description-tagline">${this.tagline}</p>
@@ -35,13 +34,10 @@ function processData() {
             <ul class="card__photographer-tags-list">
             </ul>
           </div>
-       
-        <br />
       `;
         cardContainer.appendChild(article);
       }
     }
-
     // loop created below so objects created dependent on length of photographer array in JSON
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < photographers.length; i++) {
@@ -52,6 +48,7 @@ function processData() {
         photographers[i].tagline,
         photographers[i].price);
       photographerCards.createCard();
+      photographerCards.tabIndex = [i];
 
       for (let j = 0; j < photographers[i].tags.length; j++) {
         const tags = photographers[i].tags[j];
@@ -71,11 +68,14 @@ function processData() {
         const dataTag = document.createAttribute('data-filter-tag');
         dataTag.value = tags;
         li.setAttributeNode(dataTag);
+        const tabIndexTag = document.createAttribute('tabindex');
+        tabIndexTag.value = '0';
+        li.setAttributeNode(tabIndexTag);
       }
     }
 
+    // code for creating filter options by pressing tag name
     const tagList = document.querySelectorAll('.nav ul li, .card__photographer-tags-list-item');
-    // if statement options
     const selectionArt = document.querySelectorAll('.art');
     const selectionPortrait = document.querySelectorAll('.portrait');
     const selectionFashion = document.querySelectorAll('.fashion');
@@ -84,10 +84,11 @@ function processData() {
     const selectionSport = document.querySelectorAll('.sport');
     const selectionAnimals = document.querySelectorAll('.animals');
     const selectionEvents = document.querySelectorAll('.events');
-
     const cardSelections = document.querySelectorAll('.card__photographer');
+
     // forEach loop to get each tag Option
     tagList.forEach((tagListItem) => {
+      
       // adding Event Listener for selecting options
       tagListItem.addEventListener('click', () => {
         // code to change background on active item
@@ -95,13 +96,12 @@ function processData() {
           tagListItem.classList.remove('active');
         });
         tagListItem.classList.add('active');
-
         const tagValue = tagListItem.getAttribute('data-filter-tag');
-        // below to help make all not selected display:none 
+        // below to help make all not selected display:none
         cardSelections.forEach((cardSelection) => {
           cardSelection.style.display = 'none';
         });
-        //switch statement showing all selected options as display:block;
+        // switch statement showing all selected options as display:block;
         switch (tagValue) {
           case 'art':
             selectionArt.forEach((cardArt) => {
@@ -151,6 +151,20 @@ function processData() {
         }
       });
     });
+    // allowing user to tab through child elements
+    const divElements = document.querySelectorAll('div');
+
+    function addHandler(divElement) {
+      divElement.addEventListener('keyup', (e) => {
+        if (e.keycode === 9) {
+          divElement.className.add('card--active');
+        }
+      });
+    }
+
+    for (let i = 0; i < divElements.length; i++) {
+      addHandler(divElements[i]);
+    }
   }
 
   showCards();

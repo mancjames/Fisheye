@@ -2,6 +2,9 @@
     width: 20em;
     height: 25em;
     text-align: center;
+    &--active {
+        border: 1em solid $color-primary;
+    }
     &__photographer {
         margin: 3em 0em;
         &-portrait {
