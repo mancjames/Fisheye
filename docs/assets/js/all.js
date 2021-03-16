@@ -1,3 +1,10 @@
+const requestURL = './fisheyedata.json';
+const request = new XMLHttpRequest();
+request.open('GET', requestURL);
+request.responseType = 'json';
+request.send();
+request.onload = processData;
+
 /* eslint-disable max-classes-per-file */
 function processData() {
   const data = request.response;
@@ -19,19 +26,19 @@ function processData() {
         const article = document.createElement('article');
         article.className = 'card card__photographer';
         article.innerHTML = `
-          <div class="card__photographer-portrait" tabindex="0">
+          <a href="#"><div class="card__photographer-portrait">
             <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
           </div>
-          <div class="card__photographer-title" tabindex="0">
+          <div class="card__photographer-title">
             <h2 class="card__photographer-title-name">${this.name}</h2>
-            </div>
+            </div></a>
           <div class="card__photographer-description">
             <p class="card__photographer-description-location">${this.city}, ${this.country}</p>
             <p class="card__photographer-description-tagline">${this.tagline}</p>
             <p class="card__photographer-description-price">$${this.price}/day</p>
           </div>
           <div class="card__photographer-tags">
-            <ul class="card__photographer-tags-list">
+            <ul class="card__photographer-tags-list" role="navigation" aria-label="Links to tagged photographers">
             </ul>
           </div>
       `;
@@ -61,7 +68,7 @@ function processData() {
           ${tags}
           `;
         ul[i].appendChild(li);
-        // code to use tag variable above to add to class names for each of the photographer articles to allow searching
+        // add classes for each of the photographer articles based on tags for searching
         const articleSelection = document.getElementsByTagName('article');
         articleSelection[i].classList.add(tags);
         // code to add data-tag to tags on card for help with searching
@@ -89,12 +96,12 @@ function processData() {
     // forEach loop to get each tag Option
     tagList.forEach((tagListItem) => {
       const tagValue = tagListItem.getAttribute('data-filter-tag');
+      // function for selecting tags to use in event listener
       function tagSelection() {
         tagList.forEach((tagListItem) => {
           tagListItem.classList.remove('active');
         });
         tagListItem.classList.add('active');
-
         // below to help make all not selected display:none
         cardSelections.forEach((cardSelection) => {
           cardSelection.style.display = 'none';
@@ -152,37 +159,14 @@ function processData() {
       tagListItem.addEventListener('click', () => {
         tagSelection();
       });
-
       tagListItem.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-          console.log(e);
           tagSelection();
         }
       });
     });
-
-    // allowing user to tab through child elements
-    const divElements = document.querySelectorAll('div');
-
-    function addHandler(divElement) {
-      divElement.addEventListener('keyup', (e) => {
-        if (e.keycode === 9) {
-          divElement.className.add('card--active');
-        }
-      });
-    }
-
-    for (let i = 0; i < divElements.length; i++) {
-      addHandler(divElements[i]);
-    }
   }
-
   showCards();
 }
 
-const requestURL = './fisheyedata.json';
-const request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-request.onload = processData;
+
