@@ -89,11 +89,23 @@ function processData() {
   const selectionEvents = document.querySelectorAll('.events');
   const cardSelections = document.querySelectorAll('.card__photographer');
 
+  const selection = {
+    'art': selectionArt,
+    'portrait': selectionPortrait,
+    'fashion': selectionFashion,
+    'architecture': selectionArchitecture,
+    'travel': selectionTravel,
+    'sport': selectionSport,
+    'animals': selectionAnimals,
+    'events': selectionEvents,
+    'all': cardSelections
+  };
+
   // forEach loop to get each tag option
   tagList.forEach((tagListItem) => {
     const tagValue = tagListItem.getAttribute('data-filter-tag');
     // function for selecting tags to use in event listener
-    function tagSelection() {
+    function tagSelection(tagValueSelection) {
       // To add/remove active class on selected tags
       tagList.forEach((tagListItem) => {
         tagListItem.classList.remove('active');
@@ -102,58 +114,12 @@ function processData() {
       cardSelections.forEach((cardSelection) => {
         cardSelection.style.display = 'none';
       });
-      // switch statement showing all selected options as display:block;
-      switch (tagValue) {
-        case 'art':
-          selectionArt.forEach((cardArt) => {
-            cardArt.style.display = 'block';
-          });
-          break;
-        case 'portrait':
-          selectionPortrait.forEach((cardPortrait) => {
-            cardPortrait.style.display = 'block';
-          });
-          break;
-        case 'fashion':
-          selectionFashion.forEach((cardFashion) => {
-            cardFashion.style.display = 'block';
-          });
-          break;
-        case 'architecture':
-          selectionArchitecture.forEach((cardArchitecture) => {
-            cardArchitecture.style.display = 'block';
-          });
-          break;
-        case 'travel':
-          selectionTravel.forEach((cardTravel) => {
-            cardTravel.style.display = 'block';
-          });
-          break;
-        case 'sports':
-          selectionSport.forEach((cardSport) => {
-            cardSport.style.display = 'block';
-          });
-          break;
-        case 'animals':
-          selectionAnimals.forEach((cardAnimals) => {
-            cardAnimals.style.display = 'block';
-          });
-          break;
-        case 'events':
-          selectionEvents.forEach((cardEvents) => {
-            cardEvents.style.display = 'block';
-          });
-          break;
-        case 'all':
-          cardSelections.forEach((cardSelection) => {
-            cardSelection.style.display = 'block';
-          });
-          break;
-        default:
-          cardSelections.forEach((cardSelection) => {
-            cardSelection.style.display = 'block';
-          });
-      }
+      //allow filtering based on nav option
+      tagValueSelection = tagValue;
+      selectionChoice = selection[tagValueSelection];
+      selectionChoice.forEach((selectionCard) => {
+        selectionCard.style.display = 'block';
+      })
     }
     // adding Event Listener for selecting options
     tagListItem.addEventListener('click', () => {
