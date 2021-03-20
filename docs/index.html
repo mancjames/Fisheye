@@ -13,33 +13,42 @@
 </head>
 
 <body>
-    <header class="header container container__header"> <a href="#main" class="skip-link">Skip to Content</a>
-        <a href="./" aria-label="homepage link">
-            <div class="header__logo">
-                <img src="./assets/img/logo.svg" alt="logo" class="header__logo-img" aria-label="logo" role="img">
-            </div>
-        </a>
+    <div class="dynamic-content" id="default-content">
+        <header class="header container container__header"> <a href="./" aria-label="homepage link">
+                <div class="header__logo">
+                    <img src="./assets/img/logo.svg" alt="logo" class="header__logo-img" aria-label="logo" role="img">
+                </div>
+            </a>
+            <a href="#main" class="skip-link">Skip to Content</a>
 
-        <nav class="nav" aria-label="main navigation" role="navigation">
-            <ul class="nav-list" id="nav-list">
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="art"><span class="sr-only">Art</span>#Art</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="portrait"><span class="sr-only">Portrait</span>#Portrait</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="fashion"><span class="sr-only">Fashion</span>#Fashion</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="architecture"><span class="sr-only">Architecture</span>#Architecture</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="travel"><span class="sr-only">Travel</span>#Travel</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="sport"><span class="sr-only">Sport</span>#Sport</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="animals"><span class="sr-only">Animals</span>#Animals</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="events"><span class="sr-only">Events</span>#Events</li>
-                <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="all"><span class="sr-only">All</span>#All</li>
-            </ul>
-        </nav>
-        <h1 class="header__title">Our photographers</h1>
+            <nav class="nav" aria-label="main navigation" role="navigation">
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="art"><span class="sr-only">Art</span>#Art</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="portrait"><span class="sr-only">Portrait</span>#Portrait</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="fashion"><span class="sr-only">Fashion</span>#Fashion</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="architecture"><span class="sr-only">Architecture</span>#Architecture</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="travel"><span class="sr-only">Travel</span>#Travel</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="sport"><span class="sr-only">Sport</span>#Sport</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="animals"><span class="sr-only">Animals</span>#Animals</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="events"><span class="sr-only">Events</span>#Events</li>
+                    <li class="nav-list-item tag tag-option" tabindex="0" data-filter-tag="all"><span class="sr-only">All</span>#All</li>
+                </ul>
+            </nav>
+            <h1 class="header__title">Our photographers</h1>
 
-    </header>
-    <main class="main container" id="main">
-        <section class="container__photographers" id="cardContainer"></section>
-    </main>
-    <footer></footer>
+        </header>
+        <main class="main container" id="main">
+            <section class="container__photographers" id="cardContainer"></section>
+        </main>
+    </div>
+    <div class="dynamic-content" id="photographer-page">
+        <header class="header container container__header"> <a href="./" aria-label="homepage link">
+                <div class="header__logo">
+                    <img src="./assets/img/logo.svg" alt="logo" class="header__logo-img" aria-label="logo" role="img">
+                </div>
+            </a>
+
+    </div>
     <script src="./assets/js/all.js" async defer></script>
 </body>
 

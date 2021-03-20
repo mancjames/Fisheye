@@ -10,13 +10,14 @@ function processData() {
   const { photographers } = data;
   // Creating Card Elements
   class CreateCardElement {
-    constructor(imgSrc, name, city, country, tagline, price) {
+    constructor(imgSrc, name, city, country, tagline, price, id) {
       this.imgSrc = imgSrc;
       this.name = name;
       this.city = city;
       this.country = country;
       this.tagline = tagline;
       this.price = price;
+      this.id = id;
     }
 
     createCard() {
@@ -24,7 +25,7 @@ function processData() {
       const article = document.createElement('article');
       article.className = 'card card__photographer';
       article.innerHTML = `
-          <a href="#"><div class="card__photographer-portrait">
+          <a href="./dc=${this.id}"><div class="card__photographer-portrait">
             <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
           </div>
           <div class="card__photographer-title">
@@ -51,7 +52,8 @@ function processData() {
       photographers[i].city,
       photographers[i].country,
       photographers[i].tagline,
-      photographers[i].price);
+      photographers[i].price,
+      photographers[i].id);
     photographerCards.createCard();
     // Loop to create tags based on JSON data
     for (let j = 0; j < photographers[i].tags.length; j++) {
@@ -131,9 +133,24 @@ function processData() {
       }
     });
   });
-  window.addEventListener("hashchange", function() {
-    console.log(location.hash);
-  });
+
+// Parse the URL parameter
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+// Give the parameter a variable name
+var dynamicContent = getParameterByName('dc');
+
+console.log(dynamicContent);
+
+}
+
+
 
 request.onload = processData;
