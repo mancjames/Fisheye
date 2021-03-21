@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 const requestURL = './fisheyedata.json';
 const request = new XMLHttpRequest();
 request.open('GET', requestURL);
@@ -8,6 +9,8 @@ request.send();
 function processData() {
   const data = request.response;
   const { photographers } = data;
+  const { media } = data;
+
   // Creating Card Elements
   class CreateCardElement {
     constructor(imgSrc, name, city, country, tagline, price, id) {
@@ -133,12 +136,12 @@ function processData() {
       }
     });
   });
-  
-  
-  const photographersId = []
-  for (let i = 0; i < photographers.length; i++){
-    const test = JSON.stringify(photographers[i].id)
-    photographersId.push(test)
+
+  // creating array to help with URL parsing
+  const photographersId = [];
+  for (let i = 0; i < photographers.length; i++) {
+    const photographersString = JSON.stringify(photographers[i].id);
+    photographersId.push(photographersString);
   }
   // Parse the URL parameter
   function getParameterByName(name, url) {
@@ -152,7 +155,7 @@ function processData() {
   }
   // Give the parameter a variable name
   const dynamicContent = getParameterByName('dc');
-  
+
   $(document).ready(() => {
     // Check if the URL parameter is apples
     if (photographersId.indexOf(dynamicContent) !== -1) {
@@ -163,6 +166,60 @@ function processData() {
       $('#default-content').show();
     }
   });
+
+  // Creating Banner Elements
+  class CreateBannerElement {
+    constructor(imgSrc, name, city, country, tagline, id) {
+      this.imgSrc = imgSrc;
+      this.name = name;
+      this.city = city;
+      this.country = country;
+      this.tagline = tagline;
+      this.id = id;
+    }
+
+    createBanner() {
+      const singlePhotographerContainer = document.getElementById('singlePhotographerContainer');
+      const article = document.createElement('article');
+      article.className = 'card card__photographer';
+      article.innerHTML = `
+          <div class="card__photographer-portrait">
+            <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
+          </div>
+          <div class="card__photographer-title">
+            <h2 class="card__photographer-title-name">${this.name}</h2>
+            </div>
+          <div class="card__photographer-description">
+            <p class="card__photographer-description-location">${this.city}, ${this.country}</p>
+            <p class="card__photographer-description-tagline">${this.tagline}</p>
+            
+          </div>
+          <div class="card__photographer-tags">
+            <ul class="card__photographer-tags-list" role="navigation" aria-label="Links to tagged photographers">
+            </ul>
+          </div>
+      `;
+      singlePhotographerContainer.appendChild(article);
+    }
+  }
+  const singlePhotographer = photographers.find(photographer => photographer.id == dynamicContent);
+  console.log(singlePhotographer)
+  const photographerBanner = new CreateBannerElement(singlePhotographer.portrait,
+      singlePhotographer.name,
+      singlePhotographer.city,
+      singlePhotographer.country,
+      singlePhotographer.tagline);
+      photographerBanner.createBanner();
+
+  
+
+
+
+
+
+
+
+
 }
 
 request.onload = processData;
