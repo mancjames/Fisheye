@@ -25,7 +25,7 @@ function processData() {
       const article = document.createElement('article');
       article.className = 'card card__photographer';
       article.innerHTML = `
-          <a href="./dc=${this.id}"><div class="card__photographer-portrait">
+          <a href="?dc=${this.id}"><div class="card__photographer-portrait">
             <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
           </div>
           <div class="card__photographer-title">
@@ -92,15 +92,15 @@ function processData() {
   const cardSelections = document.querySelectorAll('.card__photographer');
 
   const selection = {
-    'art': selectionArt,
-    'portrait': selectionPortrait,
-    'fashion': selectionFashion,
-    'architecture': selectionArchitecture,
-    'travel': selectionTravel,
-    'sport': selectionSport,
-    'animals': selectionAnimals,
-    'events': selectionEvents,
-    'all': cardSelections
+    art: selectionArt,
+    portrait: selectionPortrait,
+    fashion: selectionFashion,
+    architecture: selectionArchitecture,
+    travel: selectionTravel,
+    sport: selectionSport,
+    animals: selectionAnimals,
+    events: selectionEvents,
+    all: cardSelections,
   };
 
   // forEach loop to get each tag option
@@ -116,12 +116,12 @@ function processData() {
       cardSelections.forEach((cardSelection) => {
         cardSelection.style.display = 'none';
       });
-      //allow filtering based on nav option
+      // allow filtering based on nav option
       tagValueSelection = tagValue;
       selectionChoice = selection[tagValueSelection];
       selectionChoice.forEach((selectionCard) => {
         selectionCard.style.display = 'block';
-      })
+      });
     }
     // adding Event Listener for selecting options
     tagListItem.addEventListener('click', () => {
@@ -133,24 +133,36 @@ function processData() {
       }
     });
   });
-
-// Parse the URL parameter
-function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
+  
+  
+  const photographersId = []
+  for (let i = 0; i < photographers.length; i++){
+    const test = JSON.stringify(photographers[i].id)
+    photographersId.push(test)
+  }
+  // Parse the URL parameter
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
+    const results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+  // Give the parameter a variable name
+  const dynamicContent = getParameterByName('dc');
+  
+  $(document).ready(() => {
+    // Check if the URL parameter is apples
+    if (photographersId.indexOf(dynamicContent) !== -1) {
+      $('#photographer-page').show();
+    }
+    // Check if the URL parmeter is empty or not defined, display default content
+    else {
+      $('#default-content').show();
+    }
+  });
 }
-// Give the parameter a variable name
-var dynamicContent = getParameterByName('dc');
-
-console.log(dynamicContent);
-
-}
-
-
 
 request.onload = processData;
