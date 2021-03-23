@@ -46,6 +46,32 @@ function processData() {
       `;
       cardContainer.appendChild(article);
     }
+
+    createBanner() {
+      const article = document.getElementById('singlePhotographerBanner');
+      article.innerHTML = `
+        <div class="card__banner-information">
+          <div class="card__banner-description">
+            <div class="card__banner-title">
+              <h2 class="card__banner-title-name">${this.name}</h2>
+              </div>
+              <p class="card__banner-description-location">${this.city}, ${this.country}</p>
+              <p class="card__banner-description-tagline">${this.tagline}</p>
+            <div class="card__banner-tags">
+              <ul class="card__banner-tags-list" id="card__banner-tags-list" role="navigation" aria-label="Links to tagged photographs">
+              </ul>
+            </div>
+          </div>
+          <div class="card__banner-contact">
+              <button class="btn btn-contact">Contact Me</button>
+          </div>
+        </div>
+          <div class="card__banner-portrait">
+            <img class="card__banner-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
+          </div>
+
+      `;
+    }
   }
   // loop created below so objects created dependent on length of photographer array in JSON
   // eslint-disable-next-line no-plusplus
@@ -167,48 +193,8 @@ function processData() {
     }
   });
 
-  // Creating Banner Elements
-  class CreateBannerElement {
-    constructor(imgSrc, name, city, country, tagline, id) {
-      this.imgSrc = imgSrc;
-      this.name = name;
-      this.city = city;
-      this.country = country;
-      this.tagline = tagline;
-      this.id = id;
-    }
-
-    createBanner() {
-      const singlePhotographerContainer = document.getElementById('singlePhotographerContainer');
-      const article = document.createElement('article');
-      article.className = 'card__banner';
-      article.innerHTML = `
-        <div class="card__banner-information">
-          <div class="card__banner-description">
-            <div class="card__banner-title">
-              <h2 class="card__banner-title-name">${this.name}</h2>
-              </div>
-              <p class="card__banner-description-location">${this.city}, ${this.country}</p>
-              <p class="card__banner-description-tagline">${this.tagline}</p>
-            <div class="card__banner-tags">
-              <ul class="card__banner-tags-list" id="card__banner-tags-list" role="navigation" aria-label="Links to tagged photographs">
-              </ul>
-            </div>
-          </div>
-          <div class="card__banner-contact">
-              <button class="btn">Contact Me</button>
-          </div>
-        </div>
-          <div class="card__banner-portrait">
-            <img class="card__banner-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
-          </div>
-
-      `;
-      singlePhotographerContainer.appendChild(article);
-    }
-  }
   const singlePhotographer = photographers.find((photographer) => photographer.id == dynamicContent);
-  const photographerBanner = new CreateBannerElement(singlePhotographer.portrait,
+  const photographerBanner = new CreateCardElement(singlePhotographer.portrait,
     singlePhotographer.name,
     singlePhotographer.city,
     singlePhotographer.country,
@@ -225,6 +211,12 @@ function processData() {
             ${tags}
             `;
     ul.appendChild(li);
+    const dataTag = document.createAttribute('data-filter-tag');
+      dataTag.value = tags;
+      li.setAttributeNode(dataTag);
+      const tabIndexTag = document.createAttribute('tabindex');
+      tabIndexTag.value = '0';
+      li.setAttributeNode(tabIndexTag);
   }
 }
 
