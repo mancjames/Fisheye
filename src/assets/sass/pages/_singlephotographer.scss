@@ -1,0 +1,106 @@
+.singlephotographer{
+    &__sorting{
+        display: flex;
+        align-items: center;
+    }
+    &__dropdown{
+        margin-left: 1em;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: $background-color-primary;
+        color: $color-white;
+        font-family: $font;
+        border-radius: 5px;
+        &.open &-options{
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        &-wrapper{
+            position: relative;
+            user-select: none;
+            width: 9em;
+        }
+        &-trigger{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .8em;
+            border: none;
+            @include transitionshort;
+            &:hover,
+            &:focus{
+                background-color: $background-color-secondary;
+                color: black;
+            }
+        }
+        &-options{
+            position: absolute;
+            display: block;
+            top: 100%;
+            left: 0;
+            right: 0;
+            @include transitionshort;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 2;
+        }
+        &-option{
+            position: relative;
+            display: block;
+            background-color: $background-color-primary;
+            color: $color-white;
+            padding: .8em;
+            cursor: pointer;
+            @include transitionshort;
+            &:hover,
+            &:focus{
+                background-color: $background-color-secondary;
+                color: black;
+            }
+            &.selected{
+                background-color: $background-color-secondary;
+                color: black;
+            }
+        }
+        &-arrow{
+            position: absolute;
+            top: 50%;
+            left: 85%;
+            height: .8em;
+            width: .8em;
+            transform: translate(-50%, -50%);
+        }
+        &-arrow::before, 
+        &-arrow::after {
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            width: 0.15rem;
+            height: 100%;
+            transition: all 0.5s;
+       }
+        &-arrow::before {
+            left: -.27em;
+            transform: rotate(45deg);
+            background-color: $color-white;
+       }
+        &-arrow::after {
+            left: .27em;
+            transform: rotate(-45deg);
+            background-color: $color-white;
+       }
+        &.open &-arrow::before {
+            left: -.27em;
+            transform: rotate(-45deg);
+       }
+        &.open &-arrow::after {
+            left: .27em;
+            transform: rotate(45deg);
+       }
+    }
+    
+}

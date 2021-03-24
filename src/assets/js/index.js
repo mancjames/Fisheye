@@ -212,12 +212,27 @@ function processData() {
             `;
     ul.appendChild(li);
     const dataTag = document.createAttribute('data-filter-tag');
-      dataTag.value = tags;
-      li.setAttributeNode(dataTag);
-      const tabIndexTag = document.createAttribute('tabindex');
-      tabIndexTag.value = '0';
-      li.setAttributeNode(tabIndexTag);
+    dataTag.value = tags;
+    li.setAttributeNode(dataTag);
+    const tabIndexTag = document.createAttribute('tabindex');
+    tabIndexTag.value = '0';
+    li.setAttributeNode(tabIndexTag);
   }
 }
 
+// show and hide dropdown list item on button click
+document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function() {
+  this.querySelector('.singlephotographer__dropdown').classList.toggle('open');
+})
+for (const option of document.querySelectorAll(".singlephotographer__dropdown-option")) {
+  option.addEventListener('click', function() {
+      if (!this.classList.contains('selected')) {
+          this.parentNode.querySelector('.singlephotographer__dropdown-option.selected').classList.remove('selected');
+          this.classList.add('selected');
+          this.closest('.singlephotographer__dropdown').querySelector('.singlephotographer__dropdown-trigger span').textContent = this.textContent;
+      }
+  })
+}
+
 request.onload = processData;
+
