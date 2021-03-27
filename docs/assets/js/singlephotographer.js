@@ -55,6 +55,7 @@ function processData() {
       this.price = price;
       this.id = id;
     }
+
     createBanner() {
       const article = document.getElementById('singlePhotographerBanner');
       article.innerHTML = `
@@ -109,6 +110,29 @@ function processData() {
     tabIndexTag.value = '0';
     li.setAttributeNode(tabIndexTag);
   }
+
+  const photographerMedia = media.filter((x)=>x.photographerId == pageId);
+  for (let i = 0; i < photographerMedia.length; i++){
+      console.log(photographerMedia[i]);
+  }
+
+ 
+
+  /*
+  function pictureFactory(require){
+      const type = {
+          video : media.video,
+          picture: media.image
+      };
+      return {
+          createMedia: function (type, attributes) {
+              var MediaType = media[type];
+
+              return new MediaType(attributes);
+          }
+      }
+  }
+  */
 }
 
 // show and hide dropdown list item on button click

@@ -55,7 +55,7 @@ function processData() {
       this.price = price;
       this.id = id;
     }
-
+    
     createCard() {
       const cardContainer = document.getElementById('cardContainer');
       const article = document.createElement('article');
