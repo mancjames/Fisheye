@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FishEye</title>
+    <meta name="description" content="The accessable photography site">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dynamic-content" id="photographer-page">
+        <header class="header container container__header"> <a href="./" aria-label="homepage link">
+                <div class="header__logo">
+                    <img src="./assets/img/logo.svg" alt="logo" class="header__logo-img" aria-label="logo" role="img">
+                </div>
+            </a>
+
+        </header>
+        <main class="main container">
+            <section>
+                <article class="card__banner container__banner" id="singlePhotographerBanner"></article>
+                <div class="singlephotographer__sorting">
+                    <p>Order By</p>
+                    <div class="singlephotographer__dropdown-wrapper">
+                        <div class="singlephotographer__dropdown" tabindex="0">
+                            <div class="singlephotographer__dropdown-trigger"> <span>Popularity</span>
+
+                            </div>
+                            <div class="singlephotographer__dropdown-arrow"></div>
+                            <div class="singlephotographer__dropdown-options"> <span class="singlephotographer__dropdown-option selected" tabindex="0" data-value="popularity">Popularity</span>
+                                <span class="singlephotographer__dropdown-option" tabindex="0" data-value="date">Date</span>
+                                <span class="singlephotographer__dropdown-option" tabindex="0" data-value="title">Title</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </section>
+    <section class="container__media" id="mediaContainer"></section>
+    </main>
+    </div>
+    <script src="./assets/js/singlephotographer.js" async defer></script>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+</body>
+
+</html>

@@ -6,7 +6,6 @@ const htmlmin = require('gulp-htmlmin');
 const cssmin = require('gulp-cssmin');
 const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
-const concat = require('gulp-concat');
 const jsImport = require('gulp-js-import');
 const sourcemaps = require('gulp-sourcemaps');
 const htmlPartial = require('gulp-html-partial');
@@ -55,7 +54,6 @@ function js() {
     .pipe(jsImport({
       hideConsole: true,
     }))
-    .pipe(concat('all.js'))
     .pipe(gulpIf(isProd, uglify()))
     .pipe(gulp.dest('docs/assets/js'));
 }

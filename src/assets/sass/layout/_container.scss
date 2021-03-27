@@ -5,7 +5,8 @@
     &__header {
         padding-top: 2em;
     }
-    &__photographers{
+    &__photographers,
+    &__media{
         display: flex;
         flex-wrap: wrap;
         > * {
