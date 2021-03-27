@@ -61,7 +61,7 @@ function processData() {
       const article = document.createElement('article');
       article.className = 'card card__photographer';
       article.innerHTML = `
-          <a href="/singlephotographer.html?dc=${this.id}"><div class="card__photographer-portrait">
+          <a href="/photographerdetail.html?dc=${this.id}"><div class="card__photographer-portrait">
             <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
           </div>
           <div class="card__photographer-description">
@@ -144,7 +144,6 @@ function processData() {
     const tagValue = tagListItem.getAttribute('data-filter-tag');
     // function for selecting tags to use in event listener
     function tagSelection(tagValueSelection) {
-      // To add/remove active class on selected tags
       tagList.forEach((tagListItem) => {
         tagListItem.classList.remove('active');
       });
@@ -156,7 +155,7 @@ function processData() {
       tagValueSelection = tagValue;
       selectionChoice = selection[tagValueSelection];
       selectionChoice.forEach((selectionCard) => {
-        selectionCard.style.display = 'block';
+      selectionCard.style.display = 'block';
       });
     }
     // adding Event Listener for selecting options

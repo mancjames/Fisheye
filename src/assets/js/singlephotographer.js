@@ -55,7 +55,6 @@ function processData() {
       this.price = price;
       this.id = id;
     }
-
     createBanner() {
       const article = document.getElementById('singlePhotographerBanner');
       article.innerHTML = `
@@ -78,7 +77,6 @@ function processData() {
           <div class="card__banner-portrait">
             <img class="card__banner-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
           </div>
-
       `;
     }
   }
