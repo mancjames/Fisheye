@@ -61,7 +61,7 @@ function processData() {
       const article = document.createElement('article');
       article.className = 'card card__photographer';
       article.innerHTML = `
-          <a href="/photographerdetail.html?dc=${this.id}"><div class="card__photographer-portrait">
+          <a href="./photographerdetail.html?dc=${this.id}"><div class="card__photographer-portrait">
             <img class="card__photographer-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
           </div>
           <div class="card__photographer-description">

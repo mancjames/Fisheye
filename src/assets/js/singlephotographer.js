@@ -44,8 +44,8 @@ function processData() {
     document.addEventListener('DOMContentLoaded', callback);
   }
 
-  // Creating Card Elements
-  class CreateCardElement {
+  // Creating Banner Elements
+  class CreateBannerElement {
     constructor(imgSrc, name, city, country, tagline, price, id) {
       this.imgSrc = imgSrc;
       this.name = name;
@@ -82,11 +82,23 @@ function processData() {
     }
   }
 
+  class CreatePhotographerMedia {
+      constructor(id, photographerId, image, video, likes, date, price){
+          this.id = id;
+          this.photographerId = photographerId;
+          this.image = image;
+          this.video = video;
+          this.likes = likes;
+          this.date = date;
+          this.price = price;
+      }
+  }
+
   const params = new URLSearchParams(document.location.search.substring(1));
   const pageId = params.get('dc');
 
   const singlePhotographer = photographers.find((photographer) => photographer.id == pageId);
-  const photographerBanner = new CreateCardElement(singlePhotographer.portrait,
+  const photographerBanner = new CreateBannerElement(singlePhotographer.portrait,
     singlePhotographer.name,
     singlePhotographer.city,
     singlePhotographer.country,
