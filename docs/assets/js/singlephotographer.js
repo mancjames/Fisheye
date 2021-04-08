@@ -57,8 +57,8 @@ function processData() {
     }
 
     createBanner() {
-      const article = document.getElementById('singlePhotographerBanner');
-      article.innerHTML = `
+      const banner = document.getElementById('singlePhotographerBanner');
+      banner.innerHTML = `
         <div class="card__banner-information">
           <div class="card__banner-description">
             <div class="card__banner-title">
@@ -83,15 +83,50 @@ function processData() {
   }
 
   class CreatePhotographerMedia {
-      constructor(id, photographerId, image, video, likes, date, price){
-          this.id = id;
-          this.photographerId = photographerId;
-          this.image = image;
-          this.video = video;
-          this.likes = likes;
-          this.date = date;
-          this.price = price;
-      }
+    constructor(id, image, video, imgAlt, likes, date, price) {
+      this.id = id;
+      this.image = image;
+      this.video = video;
+      this.imgAlt = imgAlt;
+      this.likes = likes;
+      this.date = date;
+      this.price = price;
+    }
+
+    createImageCard() {
+      const mediaContainer = document.getElementById('mediaContainer');
+      const imageCard = document.createElement('article');
+      imageCard.className = 'card card__media';
+      imageCard.innerHTML = `
+            <picture class="card__media-image">
+                <img class="card__media-img" src="./assets/img/${singlePhotographer.name}/${this.image}" alt="${this.imgAlt}">
+            </picture>
+            <div class="card__media-description">
+                <p class="card__media-description-name">${this.imgAlt}</p>
+                <p class="card__media-description-price">${this.price}</p>
+                <p class="card__media-description-likes">${this.likes}</p>
+            </div>
+        `;
+      mediaContainer.appendChild(imageCard);
+    }
+
+    createVideoCard() {
+      const mediaContainer = document.getElementById('mediaContainer');
+      const videoCard = document.createElement('article');
+      videoCard.className = 'card card__media';
+      videoCard.innerHTML = `
+            <video class="card__media-video">
+                <src="./assets/img/${singlePhotographer.name}/${this.image}" type="video/mp4">
+                Your browser does not support videos
+            </video>
+            <div class="card__media-description">
+                <p class="card__media-description-name">${this.imgAlt}</p>
+                <p class="card__media-description-price">${this.price}</p>
+                <p class="card__media-description-likes">${this.likes}</p>
+            </div>
+        `;
+      mediaContainer.appendChild(videoCard);
+    }
   }
 
   const params = new URLSearchParams(document.location.search.substring(1));
@@ -123,28 +158,22 @@ function processData() {
     li.setAttributeNode(tabIndexTag);
   }
 
-  const photographerMedia = media.filter((x)=>x.photographerId == pageId);
-  for (let i = 0; i < photographerMedia.length; i++){
-      console.log(photographerMedia[i]);
+  const photographerMedia = media.filter((x) => x.photographerId == pageId);
+  for (let i = 0; i < photographerMedia.length; i++) {
+    const photographerMediaCard = new CreatePhotographerMedia(photographerMedia[i].id,
+        photographerMedia[i].image,
+        photographerMedia[i].video,
+        photographerMedia[i].imgAlt,
+        photographerMedia[i].likes,
+        photographerMedia[i].date,
+        photographerMedia[i].price);
+        if (photographerMedia[i].image === undefined){
+            photographerMediaCard.createVideoCard();
+        } else if (photographerMedia[i].video === undefined){
+            photographerMediaCard.createImageCard();
+        }
+        console.log(photographerMediaCard);
   }
-
- 
-
-  /*
-  function pictureFactory(require){
-      const type = {
-          video : media.video,
-          picture: media.image
-      };
-      return {
-          createMedia: function (type, attributes) {
-              var MediaType = media[type];
-
-              return new MediaType(attributes);
-          }
-      }
-  }
-  */
 }
 
 // show and hide dropdown list item on button click

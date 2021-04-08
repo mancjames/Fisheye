@@ -55,7 +55,7 @@ function processData() {
       this.price = price;
       this.id = id;
     }
-    
+
     createCard() {
       const cardContainer = document.getElementById('cardContainer');
       const article = document.createElement('article');
@@ -155,7 +155,7 @@ function processData() {
       tagValueSelection = tagValue;
       selectionChoice = selection[tagValueSelection];
       selectionChoice.forEach((selectionCard) => {
-      selectionCard.style.display = 'block';
+        selectionCard.style.display = 'block';
       });
     }
     // adding Event Listener for selecting options
