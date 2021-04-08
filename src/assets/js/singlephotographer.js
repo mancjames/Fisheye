@@ -98,7 +98,7 @@ function processData() {
       const imageCard = document.createElement('article');
       imageCard.className = 'card card__media';
       imageCard.innerHTML = `
-            <div class="card__media-image">
+            <div class="card__media-media">
                 <img class="card__media-img" src="./assets/img/${singlePhotographer.name}/${this.image}" alt="${this.imgAlt}">
             </div>
             <div class="card__media-description">
@@ -115,10 +115,12 @@ function processData() {
       const videoCard = document.createElement('article');
       videoCard.className = 'card card__media';
       videoCard.innerHTML = `
+      <div class="card__media-media">
             <video class="card__media-video">
                 <source src="./assets/img/${singlePhotographer.name}/${this.video}" type="video/mp4">
                 Your browser does not support videos
             </video>
+            </div>
             <div class="card__media-description">
                 <p class="card__media-description-name">${this.imgAlt}</p>
                 <p class="card__media-description-price">${this.price}</p>
