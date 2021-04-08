@@ -116,7 +116,7 @@ function processData() {
       videoCard.className = 'card card__media';
       videoCard.innerHTML = `
             <video class="card__media-video">
-                <src="./assets/img/${singlePhotographer.name}/${this.image}" type="video/mp4">
+                <source src="./assets/img/${singlePhotographer.name}/${this.video}" type="video/mp4">
                 Your browser does not support videos
             </video>
             <div class="card__media-description">
