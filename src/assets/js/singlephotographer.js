@@ -98,9 +98,9 @@ function processData() {
       const imageCard = document.createElement('article');
       imageCard.className = 'card card__media';
       imageCard.innerHTML = `
-            <picture class="card__media-image">
+            <div class="card__media-image">
                 <img class="card__media-img" src="./assets/img/${singlePhotographer.name}/${this.image}" alt="${this.imgAlt}">
-            </picture>
+            </div>
             <div class="card__media-description">
                 <p class="card__media-description-name">${this.imgAlt}</p>
                 <p class="card__media-description-price">${this.price}</p>
