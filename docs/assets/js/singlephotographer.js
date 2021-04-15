@@ -99,7 +99,7 @@ function processData() {
       imageCard.className = 'card card__media';
       imageCard.innerHTML = `
             <div class="card__media-media">
-                <img class="card__media-img" id=${this.id} src="./assets/img/${singlePhotographer.name}/${this.image}" alt="${this.imgAlt}">
+                <img class="card__media-img slide" id=${this.id} src="./assets/img/${singlePhotographer.name}/${this.image}" alt="${this.imgAlt}">
             </div>
             <div class="card__media-description">
                 <p class="card__media-description-name">${this.imgAlt}</p>
@@ -116,7 +116,7 @@ function processData() {
       videoCard.className = 'card card__media';
       videoCard.innerHTML = `
       <div class="card__media-media">
-            <video class="card__media-video" id=${this.id}>
+            <video class="card__media-video slide" id=${this.id}>
                 <source src="./assets/img/${singlePhotographer.name}/${this.video}" type="video/mp4">
                 Your browser does not support videos
             </video>
@@ -163,39 +163,40 @@ function processData() {
   const photographerMedia = media.filter((x) => x.photographerId == pageId);
   for (let i = 0; i < photographerMedia.length; i++) {
     const photographerMediaCard = new CreatePhotographerMedia(photographerMedia[i].id,
-        photographerMedia[i].image,
-        photographerMedia[i].video,
-        photographerMedia[i].imgAlt,
-        photographerMedia[i].likes,
-        photographerMedia[i].date,
-        photographerMedia[i].price);
-        if (photographerMedia[i].image === undefined){
-            photographerMediaCard.createVideoCard();
-        } else if (photographerMedia[i].video === undefined){
-            photographerMediaCard.createImageCard();
-        }  
-  }
-  // Get the modal
-var modal = document.getElementById('mediaModal');
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('623534343');
-var modalImg = document.getElementById("modalContent");
-
-img.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-   
-}
-
- 
-}
-
- // Close the Modal
- function closeModal() {
-    document.getElementById("mediaModal").style.display = "none";
+      photographerMedia[i].image,
+      photographerMedia[i].video,
+      photographerMedia[i].imgAlt,
+      photographerMedia[i].likes,
+      photographerMedia[i].date,
+      photographerMedia[i].price);
+    if (photographerMedia[i].image === undefined) {
+      photographerMediaCard.createVideoCard();
+    } else if (photographerMedia[i].video === undefined) {
+      photographerMediaCard.createImageCard();
+    }
   }
 
+  const slides = document.querySelectorAll('.slide');
+
+  slides.forEach((slide) => {
+    // Get the modal
+    const modal = document.getElementById('mediaModal');
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    const img = document.getElementById(slide.id);
+    const modalImg = document.getElementById('modalContent');
+
+    img.onclick = function () {
+      modal.style.display = 'block';
+      modalImg.src = this.src;
+    };
+  });
+}
+
+// Close the Modal
+function closeModal() {
+  document.getElementById('mediaModal').style.display = 'none';
+}
 
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
@@ -225,15 +226,9 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
       }
     }
   });
-
-
-
 }
 
 request.onload = processData;
-
-
-
 
 /*
   function changeSlide(n) {
@@ -248,7 +243,7 @@ function showSlide(n) {
   const slides = document.getElementsByClassName('slide');
 
   if (n > slides.length) {
-    slideIndex = 1;	
+    slideIndex = 1;
   }
   if (n < 1) {
   	slideIndex = slides.length;
