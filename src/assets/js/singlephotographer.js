@@ -99,7 +99,7 @@ function processData() {
       imageCard.className = 'card card__media';
       imageCard.innerHTML = `
             <div class="card__media-media">
-                <img class="card__media-img" src="./assets/img/${singlePhotographer.name}/${this.image}" alt="${this.imgAlt}">
+                <img class="card__media-img" id=${this.id} src="./assets/img/${singlePhotographer.name}/${this.image}" alt="${this.imgAlt}">
             </div>
             <div class="card__media-description">
                 <p class="card__media-description-name">${this.imgAlt}</p>
@@ -116,7 +116,7 @@ function processData() {
       videoCard.className = 'card card__media';
       videoCard.innerHTML = `
       <div class="card__media-media">
-            <video class="card__media-video">
+            <video class="card__media-video" id=${this.id}>
                 <source src="./assets/img/${singlePhotographer.name}/${this.video}" type="video/mp4">
                 Your browser does not support videos
             </video>
@@ -173,10 +173,29 @@ function processData() {
             photographerMediaCard.createVideoCard();
         } else if (photographerMedia[i].video === undefined){
             photographerMediaCard.createImageCard();
-        }
-        console.log(photographerMediaCard);
+        }  
+  }
+  // Get the modal
+var modal = document.getElementById(mediaModal);
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('623534343');
+var modalImg = document.getElementById("modalContent");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+  // Close the Modal
+  function closeModal() {
+    document.getElementById("mediaModal").style.display = "none";
   }
 }
+
+
+
 
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
@@ -206,6 +225,38 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
       }
     }
   });
+
+
+
 }
 
 request.onload = processData;
+
+
+
+
+/*
+  function changeSlide(n) {
+	showSlide(slideIndex += n);
+}
+
+function toSlide(n) {
+	showSlide(slideIndex = n);
+}
+
+function showSlide(n) {
+  const slides = document.getElementsByClassName('slide');
+
+  if (n > slides.length) {
+    slideIndex = 1;	
+  }
+  if (n < 1) {
+  	slideIndex = slides.length;
+  }
+
+  for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  slides[slideIndex - 1].style.display = 'block';
+}
+*/

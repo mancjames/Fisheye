@@ -34,18 +34,26 @@
                             <div class="singlephotographer__dropdown-options"> <span class="singlephotographer__dropdown-option selected" tabindex="0" data-value="popularity">Popularity</span>
                                 <span class="singlephotographer__dropdown-option" tabindex="0" data-value="date">Date</span>
                                 <span class="singlephotographer__dropdown-option" tabindex="0" data-value="title">Title</span>
-
                             </div>
                         </div>
                     </div>
                 </div>
     </div>
     </section>
-    <section class="container container__media" id="mediaContainer"></section>
+    <section class="container container__media" id="mediaContainer">
+<div id="mediaModal" class="modal__media">
+    <span class="modal__media-close" onclick="closeModal()">&times;</span>
+    <div class="modal__media-content" id="modalContent">
+      <a class="modal__media-prev" onclick="changeSlide(-1)">&#10094;</a>
+      <a class="modal__media-next" onclick="changeSlide(1)">&#10095;</a>
+      <div class="modal__media-caption-container">
+        <p id="modalMediaCaption"></p>
+      </div>
+  </div>
+    </section>
     </main>
     </div>
     <script src="./assets/js/singlephotographer.js" async defer></script>
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 </body>
 
 </html>
