@@ -176,25 +176,25 @@ function processData() {
         }  
   }
   // Get the modal
-var modal = document.getElementById(mediaModal);
+var modal = document.getElementById('mediaModal');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
 var img = document.getElementById('623534343');
 var modalImg = document.getElementById("modalContent");
-var captionText = document.getElementById("caption");
+
 img.onclick = function(){
     modal.style.display = "block";
     modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
+   
 }
 
-  // Close the Modal
-  function closeModal() {
+ 
+}
+
+ // Close the Modal
+ function closeModal() {
     document.getElementById("mediaModal").style.display = "none";
   }
-}
-
-
 
 
 // show and hide dropdown list item on button click
