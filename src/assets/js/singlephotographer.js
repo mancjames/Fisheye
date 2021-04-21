@@ -117,7 +117,7 @@ function processData() {
       videoCard.innerHTML = `
       <div class="card__media-media">
             <video class="card__media-video slide" id=${this.id} src="./assets/img/${singlePhotographer.name}/${this.video}" type="video/mp4">
-                Your browser does not support videos
+                ${this.imgAlt}
             </video>
             </div>
             <div class="card__media-description">
@@ -179,29 +179,30 @@ const slides = document.querySelectorAll('.slide');
 
 slides.forEach((slide)=>{
       // Get the modal
-var modal = document.getElementById('mediaModal');
+var modalMedia = document.getElementById('mediaModal');
 // Get the image and insert it inside the modal - use its "alt" text as a caption
 var img = document.getElementById(slide.id);
 var modalImg = document.getElementById("modalContent");
 var modalVideo = document.getElementById("modalVideoContent");
-
+var modalMediaCaption = document.getElementById("modalMediaCaption");
 
 img.onclick = function(){
     if (img.src.match('.mp4')) {
-        modal.style.display = "block";
+        modalMedia.style.display = "block";
         modalVideo.style.display = "block";
         modalImg.style.display = "none";
-    // modalImg.src = this.src;
         modalVideo.src = this.src;
+        modalMediaCaption.innerHTML = this.innerHTML;
     } else {
-        modal.style.display = "block";
+        modalMedia.style.display = "block";
         modalImg.style.display = "block";
         modalVideo.style.display = "none";
-    // modalImg.src = this.src;
         modalImg.src = this.src;
+        modalMediaCaption.innerHTML = this.alt;
     }
     
 }
+console.log(slide);
 });
 
 

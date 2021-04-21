@@ -114,14 +114,11 @@
         &-description{
             display: flex;
             color: $color-primary;
-            &-name{
-                
-            }
             &-price{
                 margin-left: auto;
             }
             &-likes{
-                margin-left: 1em;
+                margin-left: .75em;
             }
         }
     }
