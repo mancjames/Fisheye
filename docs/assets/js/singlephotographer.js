@@ -103,8 +103,8 @@ function processData() {
             </div>
             <div class="card__media-description">
                 <p class="card__media-description-name">${this.imgAlt}</p>
-                <p class="card__media-description-price">${this.price}</p>
-                <p class="card__media-description-likes">${this.likes}</p>
+                <p class="card__media-description-price">${this.price} $</p>
+                <p class="card__media-description-likes">${this.likes} <i class="fas fa-heart"></i></p>
             </div>
         `;
       mediaContainer.appendChild(imageCard);
@@ -122,8 +122,8 @@ function processData() {
             </div>
             <div class="card__media-description">
                 <p class="card__media-description-name">${this.imgAlt}</p>
-                <p class="card__media-description-price">${this.price}</p>
-                <p class="card__media-description-likes">${this.likes}</p>
+                <p class="card__media-description-price">${this.price} $</p>
+                <p class="card__media-description-likes">${this.likes} <i class="fas fa-heart"></i></p>
             </div>
         `;
       mediaContainer.appendChild(videoCard);

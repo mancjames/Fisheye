@@ -113,7 +113,16 @@
         }
         &-description{
             display: flex;
-            color: $color-primary
+            color: $color-primary;
+            &-name{
+                
+            }
+            &-price{
+                margin-left: auto;
+            }
+            &-likes{
+                margin-left: 1em;
+            }
         }
     }
 }
