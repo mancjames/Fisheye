@@ -178,14 +178,15 @@ function processData() {
   const slides = document.querySelectorAll('.slide');
 
   slides.forEach((slide) => {
-    // Get the modal
+    //Modal Selectors
     const modalMedia = document.getElementById('mediaModal');
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
     const img = document.getElementById(slide.id);
     const modalImg = document.getElementById('modalContent');
     const modalVideo = document.getElementById('modalVideoContent');
     const modalMediaCaption = document.getElementById('modalMediaCaption');
-
+    const modalNext = document.getElementById('modalNext');
+    //const modalPrev document.getElementById('modalPrev');
+    //function for picking media type for modal content
     function chooseMediaModal() {
       if (img.src.match('.mp4')) {
         modalMedia.style.display = 'block';
@@ -201,7 +202,7 @@ function processData() {
         modalMediaCaption.innerHTML = slide.alt;
       }
     }
-
+    //Event Listeners
     img.addEventListener('click', () => {
       chooseMediaModal();
     });
@@ -212,6 +213,10 @@ function processData() {
       }
     });
 
+    modalNext.addEventListener('click', () => {
+        var curr = Array.prototype.slice.call(document.getElementById(mediaContainer).children);
+        console.log(curr)
+    })
     /*
  $('.next').click(function() {
     var curr = $(modalImg).attr('src');
