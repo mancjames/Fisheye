@@ -27,8 +27,15 @@
             background-color: #fefefe;
             margin: auto;
             padding: 0;
-            width: 90%;
+            
             max-width: 1200px;
+            height: 80%;
+           
+            &-media{
+                height: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
         &-prev,
         &-next{
