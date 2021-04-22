@@ -176,17 +176,21 @@ function processData() {
   }
 
   const slides = document.querySelectorAll('.slide');
+  const modalMedia = document.getElementById('mediaModal');
+  const modalImg = document.getElementById('modalContent');
+  const modalVideo = document.getElementById('modalVideoContent');
+  const modalMediaCaption = document.getElementById('modalMediaCaption');
 
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].setAttribute('onclick', `toSlide(${i + 1})`);
+  }
   slides.forEach((slide) => {
-    //Modal Selectors
-    const modalMedia = document.getElementById('mediaModal');
+    // Modal Selectors
+
     const img = document.getElementById(slide.id);
-    const modalImg = document.getElementById('modalContent');
-    const modalVideo = document.getElementById('modalVideoContent');
-    const modalMediaCaption = document.getElementById('modalMediaCaption');
-    const modalNext = document.getElementById('modalNext');
-    //const modalPrev document.getElementById('modalPrev');
-    //function for picking media type for modal content
+
+    // const modalPrev document.getElementById('modalPrev');
+    // function for picking media type for modal content
     function chooseMediaModal() {
       if (img.src.match('.mp4')) {
         modalMedia.style.display = 'block';
@@ -202,7 +206,7 @@ function processData() {
         modalMediaCaption.innerHTML = slide.alt;
       }
     }
-    //Event Listeners
+    // Event Listeners
     img.addEventListener('click', () => {
       chooseMediaModal();
     });
@@ -212,25 +216,36 @@ function processData() {
         chooseMediaModal();
       }
     });
-
-    modalNext.addEventListener('click', () => {
-        var curr = Array.prototype.slice.call(document.getElementById(mediaContainer).children);
-        console.log(curr)
-    })
-    /*
- $('.next').click(function() {
-    var curr = $(modalImg).attr('src');
-    var next = $('img[src="' + curr + '"]').parent('li').next().find('img').attr('src');
-    modalImg.attr('src', next);
   });
 
-  $('.prev').click(function() {
-    var curr = $('modalImg').attr('src');
-    var prev = $('img[src="' + curr + '"]').parent('li').prev().find('img').attr('src');
-    modalImg.attr('src', prev);
-  });
-*/
-  });
+  let slideIndex = 1;
+  showSlide(slideIndex);
+
+  function changeSlide(n) {
+    showSlide(slideIndex += n);
+  }
+
+  function toSlide(n) {
+    showSlide(slideIndex = n);
+  }
+
+  function showSlide(n) {
+    const slides = document.getElementsByClassName('slide');
+
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+  }
 }
 
 // Close the Modal
