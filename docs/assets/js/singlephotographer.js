@@ -182,6 +182,7 @@ function processData() {
   }
   
 createCards(photographerMedia);
+
   const slides = document.querySelectorAll('.slide');
   const modalMedia = document.getElementById('mediaModal');
   const modalImg = document.getElementById('modalContent');
@@ -253,18 +254,62 @@ createCards(photographerMedia);
 
   //dropdown filtering
 
-  const likeButton = document.getElementById('likes');
-  const sortLikes = photographerMedia.sort((a,b) => {
+  const popularityButton = document.getElementById('popularity');
+  const dateButton = document.getElementById('date');
+  var titleButton = document.getElementById('title');
+  const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option')
+
+  const sortPopularity = photographerMedia.sort((a,b) => {
     if (a.likes > b.likes) return -1;
     if (a.likes < b.likes) return 1;
     return 0;
   });
 
-  likeButton.addEventListener('click',()=>{
+  const sortDate = photographerMedia.sort((a,b) => {
+    if (a.date > b.date) return -1;
+    if (a.date < b.date) return 1;
+    return 0;
+  });
+
+  const sortTitle = photographerMedia.sort((a,b) => {
+    if (a.imgAlt > b.imgAlt) return 1;
+    if (a.imgAlt < b.imgAlt) return -1;
+    return 0;
+  });
+console.log(sortTitle);
+
+filterButton.forEach((button) => {
+  button.addEventListener('click', () => {
     mediaContainer.innerHTML = "";
-    createCards(sortLikes)
+    if (button.id === 'popularity'){
+      createCards(sortPopularity);
+
+    } else if (button.id === 'date'){
+      createCards(sortDate);
+
+    } else if (button.id === 'title'){
+      createCards(sortTitle);
+    } else {
+      createCards(photographerMedia);
+    }
   })
- 
+})
+
+
+
+  /*
+  popularityButton.addEventListener('click',()=>{
+    mediaContainer.innerHTML="";
+    createCards(sortPopularity);
+    console.log('popular');
+  });
+
+  dateButton.addEventListener('click',()=>{
+    mediaContainer.innerHTML="";
+    createCards(sortDate);
+    console.log('sort');
+  });
+  */
 }
 
 // Close the Modal
