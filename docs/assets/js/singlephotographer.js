@@ -82,6 +82,8 @@ function processData() {
     }
   }
 
+  const mediaContainer = document.getElementById('mediaContainer');
+
   class CreatePhotographerMedia {
     constructor(id, image, video, imgAlt, likes, date, price) {
       this.id = id;
@@ -94,7 +96,7 @@ function processData() {
     }
 
     createImageCard() {
-      const mediaContainer = document.getElementById('mediaContainer');
+      
       const imageCard = document.createElement('article');
       imageCard.className = 'card card__media';
       imageCard.innerHTML = `
@@ -111,7 +113,6 @@ function processData() {
     }
 
     createVideoCard() {
-      const mediaContainer = document.getElementById('mediaContainer');
       const videoCard = document.createElement('article');
       videoCard.className = 'card card__media';
       videoCard.innerHTML = `
@@ -141,7 +142,9 @@ function processData() {
     singlePhotographer.tagline);
   photographerBanner.createBanner();
 
-  for (let i = 0; i < singlePhotographer.tags.length; i++) {
+  var i;
+  var l = singlePhotographer.tags.length;
+  for (let i = 0; i < l; i++) {
     const tags = singlePhotographer.tags[i];
     const ul = document.getElementById('card__banner-tags-list');
     const li = document.createElement('li');
@@ -160,35 +163,34 @@ function processData() {
   }
 
   const photographerMedia = media.filter((x) => x.photographerId == pageId);
-  for (let i = 0; i < photographerMedia.length; i++) {
-    const photographerMediaCard = new CreatePhotographerMedia(photographerMedia[i].id,
-      photographerMedia[i].image,
-      photographerMedia[i].video,
-      photographerMedia[i].imgAlt,
-      photographerMedia[i].likes,
-      photographerMedia[i].date,
-      photographerMedia[i].price);
-    if (photographerMedia[i].image === undefined) {
-      photographerMediaCard.createVideoCard();
-    } else if (photographerMedia[i].video === undefined) {
-      photographerMediaCard.createImageCard();
+  var m = photographerMedia.length;
+  function createCards(card){
+    for (let i = 0; i < m; i++) {
+      const photographerMediaCard = new CreatePhotographerMedia(card[i].id,
+        card[i].image,
+        card[i].video,
+        card[i].imgAlt,
+        card[i].likes,
+        card[i].date,
+        card[i].price);
+      if (card[i].image === undefined) {
+        photographerMediaCard.createVideoCard();
+      } else if (card[i].video === undefined) {
+        photographerMediaCard.createImageCard();
+      }
     }
   }
-
+  
+createCards(photographerMedia);
   const slides = document.querySelectorAll('.slide');
   const modalMedia = document.getElementById('mediaModal');
   const modalImg = document.getElementById('modalContent');
   const modalVideo = document.getElementById('modalVideoContent');
   const modalMediaCaption = document.getElementById('modalMediaCaption');
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].setAttribute('onclick', `toSlide(${i + 1})`);
-  }
+  
   slides.forEach((slide) => {
     // Modal Selectors
-
     const img = document.getElementById(slide.id);
-
     // const modalPrev document.getElementById('modalPrev');
     // function for picking media type for modal content
     function chooseMediaModal() {
@@ -218,8 +220,10 @@ function processData() {
     });
   });
 
-  let slideIndex = 1;
-  showSlide(slideIndex);
+  n = slides.length;
+  for (let i = 0; i < n; i++) {
+    slides[i].setAttribute('onclick', `toSlide(${i + 1})`);
+  }
 
   function changeSlide(n) {
     showSlide(slideIndex += n);
@@ -240,12 +244,27 @@ function processData() {
       slideIndex = slides.length;
     }
 
-    for (let i = 0; i < slides.length; i++) {
+    for (let i = 0; i < n; i++) {
       slides[i].style.display = 'none';
     }
 
     slides[slideIndex - 1].style.display = 'block';
   }
+
+  //dropdown filtering
+
+  const likeButton = document.getElementById('likes');
+  const sortLikes = photographerMedia.sort((a,b) => {
+    if (a.likes > b.likes) return -1;
+    if (a.likes < b.likes) return 1;
+    return 0;
+  });
+
+  likeButton.addEventListener('click',()=>{
+    mediaContainer.innerHTML = "";
+    createCards(sortLikes)
+  })
+ 
 }
 
 // Close the Modal
@@ -264,6 +283,7 @@ document.querySelector('.singlephotographer__dropdown').addEventListener('keypre
   }
 });
 
+//dropdown functionality
 for (const option of document.querySelectorAll('.singlephotographer__dropdown-option')) {
   option.addEventListener('click', function () {
     if (!this.classList.contains('selected')) {
@@ -282,6 +302,7 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
     }
   });
 }
+
 
 request.onload = processData;
 
