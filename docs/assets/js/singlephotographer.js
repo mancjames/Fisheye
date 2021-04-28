@@ -96,7 +96,6 @@ function processData() {
     }
 
     createImageCard() {
-      
       const imageCard = document.createElement('article');
       imageCard.className = 'card card__media';
       imageCard.innerHTML = `
@@ -183,12 +182,13 @@ function processData() {
   
 createCards(photographerMedia);
 
-  const slides = document.querySelectorAll('.slide');
+//lightbox
+  let slides = document.querySelectorAll('.slide');
   const modalMedia = document.getElementById('mediaModal');
   const modalImg = document.getElementById('modalContent');
   const modalVideo = document.getElementById('modalVideoContent');
   const modalMediaCaption = document.getElementById('modalMediaCaption');
-  
+ 
   slides.forEach((slide) => {
     // Modal Selectors
     const img = document.getElementById(slide.id);
@@ -220,7 +220,7 @@ createCards(photographerMedia);
       }
     });
   });
-
+/*
   n = slides.length;
   for (let i = 0; i < n; i++) {
     slides[i].setAttribute('onclick', `toSlide(${i + 1})`);
@@ -251,32 +251,34 @@ createCards(photographerMedia);
 
     slides[slideIndex - 1].style.display = 'block';
   }
-
+*/
   //dropdown filtering
 
-  const popularityButton = document.getElementById('popularity');
-  const dateButton = document.getElementById('date');
-  var titleButton = document.getElementById('title');
-  const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option')
 
-  const sortPopularity = photographerMedia.sort((a,b) => {
+  const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
+  const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));
+  const photographerMediaCopy2 = JSON.parse(JSON.stringify(photographerMedia));
+  const photographerMediaCopy3 = JSON.parse(JSON.stringify(photographerMedia));
+
+  const sortPopularity = photographerMediaCopy1.sort((a,b) => {
     if (a.likes > b.likes) return -1;
     if (a.likes < b.likes) return 1;
     return 0;
   });
 
-  const sortDate = photographerMedia.sort((a,b) => {
-    if (a.date > b.date) return -1;
-    if (a.date < b.date) return 1;
+
+  const sortDate = photographerMediaCopy2.sort((a,b) => {
+    if (a.date > b.date) return 1;
+    if (a.date < b.date) return -1;
     return 0;
   });
 
-  const sortTitle = photographerMedia.sort((a,b) => {
+
+  const sortTitle = photographerMediaCopy3.sort((a,b) => {
     if (a.imgAlt > b.imgAlt) return 1;
     if (a.imgAlt < b.imgAlt) return -1;
     return 0;
   });
-console.log(sortTitle);
 
 filterButton.forEach((button) => {
   button.addEventListener('click', () => {
