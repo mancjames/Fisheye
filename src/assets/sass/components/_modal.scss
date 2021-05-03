@@ -1,14 +1,14 @@
 .modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 5em;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
     &__media{
-        display: none;
-        position: fixed;
-        z-index: 1;
-        padding-top: 5em;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
         background-color: white;
         &-close{
             color: $color-primary;
@@ -61,5 +61,8 @@
             color: $color-primary;
             margin-top: 1em;
         }
+    }
+    &__contact{
+        background-color: $background-color-secondary;
     }
 }

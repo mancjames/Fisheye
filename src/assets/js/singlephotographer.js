@@ -62,7 +62,7 @@ function processData() {
         <div class="card__banner-information">
           <div class="card__banner-description">
             <div class="card__banner-title">
-              <h2 class="card__banner-title-name">${this.name}</h2>
+              <h2 class="card__banner-title-name" id="photographerName">${this.name}</h2>
               </div>
               <p class="card__banner-description-location">${this.city}, ${this.country}</p>
               <p class="card__banner-description-tagline">${this.tagline}</p>
@@ -72,7 +72,7 @@ function processData() {
             </div>
           </div>
           <div class="card__banner-contact">
-              <button class="btn btn-contact">Contact Me</button>
+              <button class="btn btn-contact" id="contactButton">Contact Me</button>
           </div>
         </div>
           <div class="card__banner-portrait">
@@ -141,8 +141,8 @@ function processData() {
     singlePhotographer.tagline);
   photographerBanner.createBanner();
 
-  var i;
-  var l = singlePhotographer.tags.length;
+  let i;
+  const l = singlePhotographer.tags.length;
   for (let i = 0; i < l; i++) {
     const tags = singlePhotographer.tags[i];
     const ul = document.getElementById('card__banner-tags-list');
@@ -162,8 +162,8 @@ function processData() {
   }
 
   const photographerMedia = media.filter((x) => x.photographerId == pageId);
-  var m = photographerMedia.length;
-  function createCards(card){
+  const m = photographerMedia.length;
+  function createCards(card) {
     for (let i = 0; i < m; i++) {
       const photographerMediaCard = new CreatePhotographerMedia(card[i].id,
         card[i].image,
@@ -179,16 +179,16 @@ function processData() {
       }
     }
   }
-  
-createCards(photographerMedia);
 
-//lightbox
+  createCards(photographerMedia);
+
+  // lightbox
   // let slides = document.querySelectorAll('.slide');
   // const modalMedia = document.getElementById('mediaModal');
   // const modalImg = document.getElementById('modalContent');
   // const modalVideo = document.getElementById('modalVideoContent');
   // const modalMediaCaption = document.getElementById('modalMediaCaption');
- 
+
   // slides.forEach((slide) => {
   //   // Modal Selectors
   //   const img = document.getElementById(slide.id);
@@ -220,7 +220,7 @@ createCards(photographerMedia);
   //     }
   //   });
   // });
-/*
+  /*
   n = slides.length;
   for (let i = 0; i < n; i++) {
     slides[i].setAttribute('onclick', `toSlide(${i + 1})`);
@@ -252,50 +252,44 @@ createCards(photographerMedia);
     slides[slideIndex - 1].style.display = 'block';
   }
 */
-  //dropdown filtering
-
+  // dropdown filtering
 
   const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));
   const photographerMediaCopy2 = JSON.parse(JSON.stringify(photographerMedia));
   const photographerMediaCopy3 = JSON.parse(JSON.stringify(photographerMedia));
 
-  const sortPopularity = photographerMediaCopy1.sort((a,b) => {
+  const sortPopularity = photographerMediaCopy1.sort((a, b) => {
     if (a.likes > b.likes) return -1;
     if (a.likes < b.likes) return 1;
     return 0;
   });
 
-
-  const sortDate = photographerMediaCopy2.sort((a,b) => {
+  const sortDate = photographerMediaCopy2.sort((a, b) => {
     if (a.date > b.date) return 1;
     if (a.date < b.date) return -1;
     return 0;
   });
 
-
-  const sortTitle = photographerMediaCopy3.sort((a,b) => {
+  const sortTitle = photographerMediaCopy3.sort((a, b) => {
     if (a.imgAlt > b.imgAlt) return 1;
     if (a.imgAlt < b.imgAlt) return -1;
     return 0;
   });
- const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
-filterButton.forEach((button) => {
-  button.addEventListener('click', () => {
-    mediaContainer.innerHTML = "";
-    if (button.id === 'popularity'){
-      createCards(sortPopularity);
-
-    } else if (button.id === 'date'){
-      createCards(sortDate);
-
-    } else if (button.id === 'title'){
-      createCards(sortTitle);
-    } else {
-      createCards(photographerMedia);
-    }
-  })
-})
-
+  const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
+  filterButton.forEach((button) => {
+    button.addEventListener('click', () => {
+      mediaContainer.innerHTML = '';
+      if (button.id === 'popularity') {
+        createCards(sortPopularity);
+      } else if (button.id === 'date') {
+        createCards(sortDate);
+      } else if (button.id === 'title') {
+        createCards(sortTitle);
+      } else {
+        createCards(photographerMedia);
+      }
+    });
+  });
 }
 
 // // Close the Modal
@@ -314,7 +308,7 @@ document.querySelector('.singlephotographer__dropdown').addEventListener('keypre
   }
 });
 
-//dropdown functionality
+// dropdown functionality
 for (const option of document.querySelectorAll('.singlephotographer__dropdown-option')) {
   option.addEventListener('click', function () {
     if (!this.classList.contains('selected')) {
@@ -333,7 +327,6 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
     }
   });
 }
-
 
 request.onload = processData;
 

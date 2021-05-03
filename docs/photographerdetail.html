@@ -40,10 +40,10 @@
                         </div>
                     </div>
                 </div>
+            </section>
     </div>
-    </section>
     <section class="container container__media" id="mediaContainer"></section>
-    <div id="mediaModal" class="modal__media"> <span class="modal__media-close" onclick="closeModal()">&times;</span>
+    <div id="mediaModal" class="modal modal__media"> <span class="modal__media-close" onclick="closeModal()">&times;</span>
 
         <div class="modal__media-content">
             <img id="modalContent" class="modal__media-content-media" src="">
@@ -54,7 +54,39 @@
                 <p id="modalMediaCaption"></p>
             </div>
         </div>
-        </main>
+    </div>
+    <div id="contactModal" class="modal modal__contact">
+        <div class="modal__contact-content"> <span class="modal__contact-close" id="contactClose" tabindex="0">&times;</span>
+
+            <h2 class="modal__contact-title" id="contactName"></h2>
+            <div class="modal__contact-body">
+                <form name="Contact" action="photographerdetail.html" method="get" id="contactForm">
+                    <div class="modal__contact-form-data">
+                        <label>First name</label>
+                        <input type="text" class="modal__contact-form-input" name="first" />
+                        <br>
+                    </div>
+                    <div class="modal__contact-form-data">
+                        <label>Last name</label>
+                        <input type="text" class="modal__contact-form-input" name="last" />
+                        <br>
+                    </div>
+                    <div class="modal__contact-form-data">
+                        <label>Email</label>
+                        <input type="email" class="modal__contact-form-input" name="first" />
+                        <br>
+                    </div>
+                    <div class="modal__contact-form-data">
+                        <label>Message</label>
+                        <input type="text" class="modal__contact-form-input--message" name="message" />
+                        <br>
+                    </div>
+                    <input type="submit" class="btn btn-submit" value="Send" id="btnSubmit" />
+                </form>
+            </div>
+        </div>
+    </div>
+    </main>
     </div>
     <script src="./assets/js/singlephotographer.js" type="text/javascript"></script>
     <script src="./assets/js/contactModal.js" type="text/javascript"></script>
