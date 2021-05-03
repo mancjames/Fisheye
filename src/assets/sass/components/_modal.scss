@@ -63,6 +63,26 @@
         }
     }
     &__contact{
-        background-color: $background-color-secondary;
+        background-color: transparent;
+        &-close{
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            &:hover,
+            &:focus{
+                cursor: pointer;
+            }
+        }
+        &-content{
+            margin: 5% auto;
+            padding: 1em 2em;
+            background-color: $background-color-secondary;
+            width: 100%;
+            max-width: 50em;
+            position: relative;
+        }
     }
 }
