@@ -183,43 +183,43 @@ function processData() {
 createCards(photographerMedia);
 
 //lightbox
-  let slides = document.querySelectorAll('.slide');
-  const modalMedia = document.getElementById('mediaModal');
-  const modalImg = document.getElementById('modalContent');
-  const modalVideo = document.getElementById('modalVideoContent');
-  const modalMediaCaption = document.getElementById('modalMediaCaption');
+  // let slides = document.querySelectorAll('.slide');
+  // const modalMedia = document.getElementById('mediaModal');
+  // const modalImg = document.getElementById('modalContent');
+  // const modalVideo = document.getElementById('modalVideoContent');
+  // const modalMediaCaption = document.getElementById('modalMediaCaption');
  
-  slides.forEach((slide) => {
-    // Modal Selectors
-    const img = document.getElementById(slide.id);
-    // const modalPrev document.getElementById('modalPrev');
-    // function for picking media type for modal content
-    function chooseMediaModal() {
-      if (img.src.match('.mp4')) {
-        modalMedia.style.display = 'block';
-        modalVideo.style.display = 'block';
-        modalImg.style.display = 'none';
-        modalVideo.src = slide.src;
-        modalMediaCaption.innerHTML = slide.innerHTML;
-      } else {
-        modalMedia.style.display = 'block';
-        modalImg.style.display = 'block';
-        modalVideo.style.display = 'none';
-        modalImg.src = slide.src;
-        modalMediaCaption.innerHTML = slide.alt;
-      }
-    }
-    // Event Listeners
-    img.addEventListener('click', () => {
-      chooseMediaModal();
-    });
+  // slides.forEach((slide) => {
+  //   // Modal Selectors
+  //   const img = document.getElementById(slide.id);
+  //   // const modalPrev document.getElementById('modalPrev');
+  //   // function for picking media type for modal content
+  //   function chooseMediaModal() {
+  //     if (img.src.match('.mp4')) {
+  //       modalMedia.style.display = 'block';
+  //       modalVideo.style.display = 'block';
+  //       modalImg.style.display = 'none';
+  //       modalVideo.src = slide.src;
+  //       modalMediaCaption.innerHTML = slide.innerHTML;
+  //     } else {
+  //       modalMedia.style.display = 'block';
+  //       modalImg.style.display = 'block';
+  //       modalVideo.style.display = 'none';
+  //       modalImg.src = slide.src;
+  //       modalMediaCaption.innerHTML = slide.alt;
+  //     }
+  //   }
+  //   // Event Listeners
+  //   img.addEventListener('click', () => {
+  //     chooseMediaModal();
+  //   });
 
-    img.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        chooseMediaModal();
-      }
-    });
-  });
+  //   img.addEventListener('keypress', (e) => {
+  //     if (e.key === 'Enter') {
+  //       chooseMediaModal();
+  //     }
+  //   });
+  // });
 /*
   n = slides.length;
   for (let i = 0; i < n; i++) {
@@ -255,7 +255,6 @@ createCards(photographerMedia);
   //dropdown filtering
 
 
-  const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
   const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));
   const photographerMediaCopy2 = JSON.parse(JSON.stringify(photographerMedia));
   const photographerMediaCopy3 = JSON.parse(JSON.stringify(photographerMedia));
@@ -279,7 +278,7 @@ createCards(photographerMedia);
     if (a.imgAlt < b.imgAlt) return -1;
     return 0;
   });
-
+ const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
 filterButton.forEach((button) => {
   button.addEventListener('click', () => {
     mediaContainer.innerHTML = "";
@@ -297,27 +296,12 @@ filterButton.forEach((button) => {
   })
 })
 
-
-
-  /*
-  popularityButton.addEventListener('click',()=>{
-    mediaContainer.innerHTML="";
-    createCards(sortPopularity);
-    console.log('popular');
-  });
-
-  dateButton.addEventListener('click',()=>{
-    mediaContainer.innerHTML="";
-    createCards(sortDate);
-    console.log('sort');
-  });
-  */
 }
 
-// Close the Modal
-function closeModal() {
-  document.getElementById('mediaModal').style.display = 'none';
-}
+// // Close the Modal
+// function closeModal() {
+//   document.getElementById('mediaModal').style.display = 'none';
+// }
 
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
