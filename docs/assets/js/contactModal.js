@@ -28,7 +28,7 @@ const contactForm = new Promise((resolve, reject) => {
       closeContactModal;
     }
   });
-}).then(()=>{
-    const name = document.getElementById('photographerName').textContent;
-    document.getElementById('contactName').innerHTML = `Contact Me </br> ${name}`;
-}); 
+}).then(() => {
+  const name = document.getElementById('photographerName').textContent;
+  document.getElementById('contactName').innerHTML = `Contact Me <br> ${name}`;
+});

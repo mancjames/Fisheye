@@ -76,13 +76,35 @@
                 cursor: pointer;
             }
         }
+        &-title{
+            margin-bottom: .25em;
+        }
         &-content{
-            margin: 5% auto;
+            margin: 0 auto;
             padding: 1em 2em;
             background-color: $background-color-secondary;
             width: 100%;
-            max-width: 50em;
+            max-width: 30em;
             position: relative;
+        }
+        label{
+            display: inline-block;
+            font-size: 1.5em;
+            font-family: $font;
+            margin-top: .125em;
+            margin-bottom: .125em;
+        }
+        &-form-input{
+            border: none;
+            margin: 0;
+            padding: 8px;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 1.5em;
+            height: 2em;
+            &--message{
+                height: 6em;
+            }
         }
     }
 }
