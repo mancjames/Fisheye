@@ -17,10 +17,9 @@ fetch('./fisheyedata.json')
     } else {
       document.addEventListener('DOMContentLoaded', callback);
     }
-
+    //code below grabs ID from url for banner creation
     const params = new URLSearchParams(document.location.search.substring(1));
     const pageId = params.get('dc');
-
     const singlePhotographer = photographers.find((photographer) => photographer.id == pageId);
     const photographerBanner = new Banner(singlePhotographer.portrait,
       singlePhotographer.name,
@@ -28,8 +27,6 @@ fetch('./fisheyedata.json')
       singlePhotographer.country,
       singlePhotographer.tagline);
     photographerBanner.create();
-
-    let i;
     const l = singlePhotographer.tags.length;
     for (let i = 0; i < l; i++) {
       const tags = singlePhotographer.tags[i];
@@ -41,14 +38,11 @@ fetch('./fisheyedata.json')
             ${tags}
             `;
       ul.appendChild(li);
-      const dataTag = document.createAttribute('data-filter-tag');
-      dataTag.value = tags;
-      li.setAttributeNode(dataTag);
       const tabIndexTag = document.createAttribute('tabindex');
       tabIndexTag.value = '0';
       li.setAttributeNode(tabIndexTag);
     }
-
+    //create Photographer content based on ID
     const photographerMedia = media.filter((x) => x.photographerId == pageId);
     const m = photographerMedia.length;
     function createCards(card) {
@@ -68,80 +62,9 @@ fetch('./fisheyedata.json')
         }
       }
     }
-
     createCards(photographerMedia);
-    
 
-    // lightbox
-    // let slides = document.querySelectorAll('.slide');
-    // const modalMedia = document.getElementById('mediaModal');
-    // const modalImg = document.getElementById('modalContent');
-    // const modalVideo = document.getElementById('modalVideoContent');
-    // const modalMediaCaption = document.getElementById('modalMediaCaption');
 
-    // slides.forEach((slide) => {
-    //   // Modal Selectors
-    //   const img = document.getElementById(slide.id);
-    //   // const modalPrev document.getElementById('modalPrev');
-    //   // function for picking media type for modal content
-    //   function chooseMediaModal() {
-    //     if (img.src.match('.mp4')) {
-    //       modalMedia.style.display = 'block';
-    //       modalVideo.style.display = 'block';
-    //       modalImg.style.display = 'none';
-    //       modalVideo.src = slide.src;
-    //       modalMediaCaption.innerHTML = slide.innerHTML;
-    //     } else {
-    //       modalMedia.style.display = 'block';
-    //       modalImg.style.display = 'block';
-    //       modalVideo.style.display = 'none';
-    //       modalImg.src = slide.src;
-    //       modalMediaCaption.innerHTML = slide.alt;
-    //     }
-    //   }
-    //   // Event Listeners
-    //   img.addEventListener('click', () => {
-    //     chooseMediaModal();
-    //   });
-
-    //   img.addEventListener('keypress', (e) => {
-    //     if (e.key === 'Enter') {
-    //       chooseMediaModal();
-    //     }
-    //   });
-    // });
-    /*
-  n = slides.length;
-  for (let i = 0; i < n; i++) {
-    slides[i].setAttribute('onclick', `toSlide(${i + 1})`);
-  }
-
-  function changeSlide(n) {
-    showSlide(slideIndex += n);
-  }
-
-  function toSlide(n) {
-    showSlide(slideIndex = n);
-  }
-
-  function showSlide(n) {
-    const slides = document.getElementsByClassName('slide');
-
-    if (n > slides.length) {
-      slideIndex = 1;
-    }
-
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-
-    for (let i = 0; i < n; i++) {
-      slides[i].style.display = 'none';
-    }
-
-    slides[slideIndex - 1].style.display = 'block';
-  }
-*/
     // dropdown filtering
 
     const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));
@@ -182,10 +105,6 @@ fetch('./fisheyedata.json')
     });
   });
 
-// // Close the Modal
-// function closeModal() {
-//   document.getElementById('mediaModal').style.display = 'none';
-// }
 
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
@@ -217,29 +136,3 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
     }
   });
 }
-
-/*
-  function changeSlide(n) {
-	showSlide(slideIndex += n);
-}
-
-function toSlide(n) {
-	showSlide(slideIndex = n);
-}
-
-function showSlide(n) {
-  const slides = document.getElementsByClassName('slide');
-
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-  	slideIndex = slides.length;
-  }
-
-  for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  slides[slideIndex - 1].style.display = 'block';
-}
-*/
