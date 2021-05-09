@@ -1,16 +1,8 @@
-// /* eslint-disable max-classes-per-file */
-// const requestURL = './fisheyedata.json';
-// const request = new XMLHttpRequest();
-// request.open('GET', requestURL);
-// request.responseType = 'json';
-// request.send();
-
 fetch('./fisheyedata.json')
   .then((response) => response.json())
   .then((data) => {
     const { photographers } = data;
-    console.log(photographers);
-
+    
     function callback() {
     // creating array to help with URL parsing
       const photographersId = [];

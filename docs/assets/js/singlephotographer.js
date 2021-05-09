@@ -1,12 +1,6 @@
-/* eslint-disable max-classes-per-file */
-const requestURL = './fisheyedata.json';
-const request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-
-function processData() {
-  const data = request.response;
+fetch('./fisheyedata.json')
+  .then((response) => response.json())
+  .then((data) => {
   const { photographers } = data;
   const { media } = data;
 
@@ -290,7 +284,7 @@ function processData() {
       }
     });
   });
-}
+});
 
 // // Close the Modal
 // function closeModal() {
@@ -327,8 +321,6 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
     }
   });
 }
-
-request.onload = processData;
 
 /*
   function changeSlide(n) {
