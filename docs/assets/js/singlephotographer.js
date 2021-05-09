@@ -1,4 +1,5 @@
 import callback from './pageparse.js';
+import Banner from './classBanner.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -15,43 +16,6 @@ fetch('./fisheyedata.json')
     } else {
       document.addEventListener('DOMContentLoaded', callback);
     }
-    // Creating Banner Elements
-    class CreateBannerElement {
-      constructor(imgSrc, name, city, country, tagline, price, id) {
-        this.imgSrc = imgSrc;
-        this.name = name;
-        this.city = city;
-        this.country = country;
-        this.tagline = tagline;
-        this.price = price;
-        this.id = id;
-      }
-
-      createBanner() {
-        const banner = document.getElementById('singlePhotographerBanner');
-        banner.innerHTML = `
-        <div class="card__banner-information">
-          <div class="card__banner-description">
-            <div class="card__banner-title">
-              <h2 class="card__banner-title-name" id="photographerName">${this.name}</h2>
-              </div>
-              <p class="card__banner-description-location">${this.city}, ${this.country}</p>
-              <p class="card__banner-description-tagline">${this.tagline}</p>
-            <div class="card__banner-tags">
-              <ul class="card__banner-tags-list" id="card__banner-tags-list">
-              </ul>
-            </div>
-          </div>
-          <div class="card__banner-contact">
-              <button class="btn btn-contact" id="contactButton">Contact Me</button>
-          </div>
-        </div>
-          <div class="card__banner-portrait">
-            <img class="card__banner-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
-          </div>
-      `;
-      }
-    }
 
     const mediaContainer = document.getElementById('mediaContainer');
 
@@ -65,6 +29,7 @@ fetch('./fisheyedata.json')
         this.date = date;
         this.price = price;
       }
+
       createImageCard() {
         const imageCard = document.createElement('article');
         imageCard.className = 'card card__media';
@@ -104,12 +69,12 @@ fetch('./fisheyedata.json')
     const pageId = params.get('dc');
 
     const singlePhotographer = photographers.find((photographer) => photographer.id == pageId);
-    const photographerBanner = new CreateBannerElement(singlePhotographer.portrait,
+    const photographerBanner = new Banner(singlePhotographer.portrait,
       singlePhotographer.name,
       singlePhotographer.city,
       singlePhotographer.country,
       singlePhotographer.tagline);
-    photographerBanner.createBanner();
+    photographerBanner.create();
 
     let i;
     const l = singlePhotographer.tags.length;
