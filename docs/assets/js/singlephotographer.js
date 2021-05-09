@@ -1,4 +1,4 @@
-import { callback } from './pageparse.js';
+import callback from './pageparse.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -65,7 +65,6 @@ fetch('./fisheyedata.json')
         this.date = date;
         this.price = price;
       }
-
       createImageCard() {
         const imageCard = document.createElement('article');
         imageCard.className = 'card card__media';

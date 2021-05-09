@@ -15,6 +15,9 @@ const contactForm = new Promise((resolve, reject) => {
   function closeContactModal() {
     contactModal.style.display = 'none';
   }
+  //add name to contact modal
+  const name = document.getElementById('photographerName').textContent;
+  document.getElementById('contactName').innerHTML = `Contact Me <br> ${name}`;
   //log information to console
   function submitToConsole(){
     let x = document.getElementById('contactForm').elements;
@@ -46,7 +49,4 @@ const contactForm = new Promise((resolve, reject) => {
     closeContactModal();
     contactForm.reset();
   })
-}).then(() => {
-  const name = document.getElementById('photographerName').textContent;
-  document.getElementById('contactName').innerHTML = `Contact Me <br> ${name}`;
 });

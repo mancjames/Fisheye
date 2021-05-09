@@ -1,10 +1,10 @@
-import {callback} from './pageparse.js';
+import callback from './pageparse.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
   .then((data) => {
     const { photographers } = data;
-    //Page parsing
+    // Page parsing
     if (
       document.readyState === 'complete'
      || (document.readyState !== 'loading' && !document.documentElement.doScroll)
@@ -15,7 +15,7 @@ fetch('./fisheyedata.json')
     }
 
     // Creating Card Elements
-    class CreateCardElement {
+    class CardElement {
       constructor(imgSrc, name, city, country, tagline, price, id) {
         this.imgSrc = imgSrc;
         this.name = name;
@@ -25,8 +25,7 @@ fetch('./fisheyedata.json')
         this.price = price;
         this.id = id;
       }
-
-      createCard() {
+      create() {
         const cardContainer = document.getElementById('cardContainer');
         const article = document.createElement('article');
         article.className = 'card card__photographer';
@@ -53,14 +52,14 @@ fetch('./fisheyedata.json')
     // loop created below so objects created dependent on length of photographer array in JSON
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < photographers.length; i++) {
-      const photographerCards = new CreateCardElement(photographers[i].portrait,
+      const photographerCards = new CardElement(photographers[i].portrait,
         photographers[i].name,
         photographers[i].city,
         photographers[i].country,
         photographers[i].tagline,
         photographers[i].price,
         photographers[i].id);
-      photographerCards.createCard();
+      photographerCards.create();
       // Loop to create tags based on JSON data
       for (let j = 0; j < photographers[i].tags.length; j++) {
         const tags = photographers[i].tags[j];
@@ -123,7 +122,7 @@ fetch('./fisheyedata.json')
         });
         // allow filtering based on nav option
         tagValueSelection = tagValue;
-        selectionChoice = selection[tagValueSelection];
+        let selectionChoice = selection[tagValueSelection];
         selectionChoice.forEach((selectionCard) => {
           selectionCard.style.display = 'block';
         });
