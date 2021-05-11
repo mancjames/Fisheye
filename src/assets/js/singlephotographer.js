@@ -1,6 +1,7 @@
 import callback from './pageparse.js';
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
+import contact from './contactModal.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -103,6 +104,8 @@ fetch('./fisheyedata.json')
         }
       });
     });
+
+    contact();
   });
 
 
