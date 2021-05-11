@@ -1,4 +1,4 @@
-export default function contact() {
+export function contact() {
   const contactPromise = new Promise((resolve, reject) => {
     setTimeout(resolve, 1000);
   }).then(() => {
