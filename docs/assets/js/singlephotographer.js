@@ -2,7 +2,7 @@ import callback from './pageparse.js';
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
 import{contact as contactForm} from './contactModal.js';
-import {lightbox, closeLightbox} from './lightbox.js';
+import {ModalContent, lightbox, openLightbox, closeLightbox} from './lightbox.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -56,7 +56,8 @@ fetch('./fisheyedata.json')
           card[i].imgAlt,
           card[i].likes,
           card[i].date,
-          card[i].price);
+          card[i].price,
+          i + 1)
         if (card[i].image) {
           photographerMediaCard.createImageCard();
         } else if (card[i].video) {
@@ -107,10 +108,25 @@ fetch('./fisheyedata.json')
     });
     //contact form function
     contactForm();
-    //open lightbox function
-    lightbox();
-  });
 
+    //create Photographer content based on ID
+    function createLightbox(card) {
+      for (let i = 0; i < m; i++) {
+        const lightboxContent = new ModalContent(
+          singlePhotographer.name,
+          card[i].image,
+          card[i].video)
+        if (card[i].image) {
+          lightboxContent.image();
+        } else if (card[i].video) {
+          lightboxContent.video();
+        }
+      }
+    }
+    createLightbox(photographerMedia);
+  });
+  lightbox();
+openLightbox();
 //close lightbox function
 closeLightbox();
 

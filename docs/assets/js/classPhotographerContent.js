@@ -1,7 +1,7 @@
 const mediaContainer = document.getElementById('mediaContainer');
 
 export default class PhotographerContent {
-  constructor(id, name, image, video, imgAlt, likes, date, price) {
+  constructor(id, name, image, video, imgAlt, likes, date, price, toSlide) {
     this.id = id;
     this.name = name;
     this.image = image;
@@ -10,6 +10,7 @@ export default class PhotographerContent {
     this.likes = likes;
     this.date = date;
     this.price = price;
+    this.toSlide = toSlide
   }
 
   createImageCard() {
@@ -17,7 +18,7 @@ export default class PhotographerContent {
     imageCard.className = 'card card__media';
     imageCard.innerHTML = `
           <div class="card__media-media">
-              <img class="card__media-img slide" tabindex=0 id=${this.id} src="./assets/img/${this.name}/${this.image}" alt="${this.imgAlt}">
+              <img class="card__media-img" tabindex=0 id=${this.id} src="./assets/img/${this.name}/${this.image}" alt="${this.imgAlt}" onclick="toSlide(${this.toSlide})">
           </div>
           <div class="card__media-description">
               <p class="card__media-description-name">${this.imgAlt}</p>
@@ -33,7 +34,7 @@ export default class PhotographerContent {
     videoCard.className = 'card card__media';
     videoCard.innerHTML = `
     <div class="card__media-media">
-          <video class="card__media-video slide" tabindex=0 id=${this.id} src="./assets/img/${this.name}/${this.video}" type="video/mp4">
+          <video class="card__media-video" tabindex=0 id=${this.id} src="./assets/img/${this.name}/${this.video}" type="video/mp4" onclick="toSlide(${this.toSlide})">
               ${this.imgAlt}
           </video>
           </div>

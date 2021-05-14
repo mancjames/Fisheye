@@ -1,85 +1,98 @@
-fetch('./fisheyedata.json')
-  .then((response) => response.json())
-  .then((data) => {
-    const { media } = data;
-    const params = new URLSearchParams(document.location.search.substring(1));
-    const pageId = params.get('dc');
-    const photographerMedia = media.filter((x) => x.photographerId == pageId);
-  })
+const mediaModal = document.getElementById('mediaModal');
 
-// lightbox open
-export function lightbox() {
-  const slides = document.querySelectorAll('.slide');
-  const modalMedia = document.getElementById('mediaModal');
-  const modalImg = document.getElementById('modalContent');
-  const modalVideo = document.getElementById('modalVideoContent');
-  const modalMediaCaption = document.getElementById('modalMediaCaption');
+export class ModalContent {
+  constructor(name, image, video) {
+    this.name = name;
+    this.image = image;
+    this.video = video;
+  }
 
-  slides.forEach((slide) => {
-  // Modal Selectors
-    const img = document.getElementById(slide.id);
-    // function for picking media type for modal content
-    function chooseMediaModal() {
-      if (img.src.match('.mp4')) {
-        modalMedia.style.display = 'block';
-        modalVideo.style.display = 'block';
-        modalImg.style.display = 'none';
-        modalVideo.src = slide.src;
-        modalMediaCaption.innerHTML = slide.innerHTML;
-      } else {
-        modalMedia.style.display = 'block';
-        modalImg.style.display = 'block';
-        modalVideo.style.display = 'none';
-        modalImg.src = slide.src;
-        modalMediaCaption.innerHTML = slide.alt;
-      }
-    }
-    // Event Listeners
-    img.addEventListener('click', () => {
-      chooseMediaModal();
-    });
+  image() {
+    const modalContent = document.createElement('div');
+    modalContent.classname = 'modal__media-content slide'
+    modalContent.innerHTML = `
+          <img  id="modalContent" class="modal__media-content-media slide" src="./assets/img/${this.name}/${this.image}">
+          <a class="modal__media-prev" onclick="changeSlide(-1)">&#10094;</a>
+          <a class="modal__media-next" onclick="changeSlide(1)">&#10095;</a>
+          <div class="modal__media-caption-container">
+            <p id="modalMediaCaption"></p>
+          </div>
+      `;
+    mediaModal.appendChild(image);
+  }
 
-    img.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        chooseMediaModal();
-      }
-    });
-  });
+  video() {
+    const modalContent = document.createElement('div');
+    modalContent.classname = 'modal__media-content slide'
+    modalContent.innerHTML = `
+    <video id ="modalVideoContent" class="modal__media-content-media slide" src="./assets/img/${this.name}/${this.video}" type="video/mp4" autoplay>
+    </video>
+    <a class="modal__media-prev" onclick="changeSlide(-1)">&#10094;</a>
+          <a class="modal__media-next" onclick="changeSlide(1)">&#10095;</a>
+          <div class="modal__media-caption-container">
+            <p id="modalMediaCaption"></p>
+          </div>
+      `;
+    mediaModal.appendChild(video);
+  }
 }
 
-// export function lightboxNavigation(data) {
-//   const n = data.length;
-//   for (let i = 0; i < n; i++) {
-//     data[i].setAttribute('onclick', `toSlide(${i + 1})`);
-//   }
 
-//   function changeSlide(n) {
-//     showSlide(slideIndex += n);
-//   }
+export function lightbox() {
+  const lightboxPromise = new Promise((resolve, reject) => {
+    setTimeout(resolve, 1000);
+  }).then(() => {
+  let slideIndex = 1;
+  showSlide(slideIndex);
 
-//   function toSlide(n) {
-//     showSlide(slideIndex = n);
-//   }
+  // You are providing the functionality for your clickable content, which is
+  // your previews, dots, controls and the close button.
 
-//   function showSlide(n) {
+  // Note that you are assigning new values here to our slidIndex.
 
-//     if (n > data.length) {
-//       slideIndex = 1;
-//     }
+ function changeSlide(n) {
+    showSlide(slideIndex += n);
+  }
 
-//     if (n < 1) {
-//       slideIndex = data.length;
-//     }
+function toSlide(n) {
+    showSlide(slideIndex = n);
+  }
 
-//     for (let i = 0; i < n; i++) {
-//       data[i].style.display = 'none';
-//     }
+  // This is your logic for the light box. It will decide which slide to show
+  // and which dot is active.
 
-//     data[slideIndex - 1].style.display = 'block';
-//   }
+function showSlide(n) {
+    const slides = document.getElementsByClassName('slide');
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
 
-// }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
 
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+  }
+
+});
+}
+export function openLightbox() {
+  const open = document.getElementById('mediaModal');
+  // Event Listeners
+  open.addEventListener('click', () => {
+    document.getElementById('mediaModal').style.display = 'block';
+  });
+
+  open.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('mediaModal').style.display = 'block';
+    }
+  });
+}
 // Close the Modal
 export function closeLightbox() {
   const close = document.getElementById('lightboxClose');
