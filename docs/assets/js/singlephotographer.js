@@ -1,8 +1,7 @@
 import callback from './pageparse.js';
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
-import{contact as contactForm} from './contactModal.js';
-import {ModalContent, lightbox, openLightbox, closeLightbox} from './lightbox.js';
+import { contact as contactForm } from './contactModal.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -19,7 +18,7 @@ fetch('./fisheyedata.json')
     } else {
       document.addEventListener('DOMContentLoaded', callback);
     }
-    //code below grabs ID from url for banner creation
+    // code below grabs ID from url for banner creation
     const params = new URLSearchParams(document.location.search.substring(1));
     const pageId = params.get('dc');
     const singlePhotographer = photographers.find((photographer) => photographer.id == pageId);
@@ -44,9 +43,11 @@ fetch('./fisheyedata.json')
       tabIndexTag.value = '0';
       li.setAttributeNode(tabIndexTag);
     }
-    //create Photographer content based on ID
+
+    // create Photographer content based on ID
     const photographerMedia = media.filter((x) => x.photographerId == pageId);
     const m = photographerMedia.length;
+    const lightboxNext = document.getElementById('mediaNext');
     function createCards(card) {
       for (let i = 0; i < m; i++) {
         const photographerMediaCard = new PhotographerContent(card[i].id,
@@ -57,16 +58,16 @@ fetch('./fisheyedata.json')
           card[i].likes,
           card[i].date,
           card[i].price,
-          i + 1)
+          i + 1);
         if (card[i].image) {
           photographerMediaCard.createImageCard();
         } else if (card[i].video) {
           photographerMediaCard.createVideoCard();
         }
+        
       }
     }
     createCards(photographerMedia);
-
 
     // dropdown filtering
 
@@ -106,29 +107,17 @@ fetch('./fisheyedata.json')
         }
       });
     });
-    //contact form function
+    // contact form function
     contactForm();
-
-    //create Photographer content based on ID
-    function createLightbox(card) {
-      for (let i = 0; i < m; i++) {
-        const lightboxContent = new ModalContent(
-          singlePhotographer.name,
-          card[i].image,
-          card[i].video)
-        if (card[i].image) {
-          lightboxContent.image();
-        } else if (card[i].video) {
-          lightboxContent.video();
-        }
-      }
-    }
-    createLightbox(photographerMedia);
   });
-  lightbox();
-openLightbox();
-//close lightbox function
-closeLightbox();
+
+  //lightbox
+     
+  const lightboxClose = document.getElementById('mediaLightboxClose');
+  const lightbox = document.getElementById('mediaLightbox');
+  lightboxClose.addEventListener('click', () => {
+   lightbox.style.display = "none";
+  })
 
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
