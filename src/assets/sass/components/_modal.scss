@@ -41,6 +41,9 @@
         }
         &-prev,
         &-next{
+            border:none;
+            background-color: transparent;
+            outline: none;
             cursor: pointer;
             position: absolute;
             top: 50%;

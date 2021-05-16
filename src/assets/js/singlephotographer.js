@@ -2,6 +2,7 @@ import callback from './pageparse.js';
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
 import { contact as contactForm } from './contactModal.js';
+import createLightbox from './lightbox.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -47,7 +48,6 @@ fetch('./fisheyedata.json')
     // create Photographer content based on ID
     const photographerMedia = media.filter((x) => x.photographerId == pageId);
     const m = photographerMedia.length;
-    const lightboxNext = document.getElementById('mediaNext');
     function createCards(card) {
       for (let i = 0; i < m; i++) {
         const photographerMediaCard = new PhotographerContent(card[i].id,
@@ -67,38 +67,9 @@ fetch('./fisheyedata.json')
     }
     createCards(photographerMedia);
 
-    const lightbox = document.getElementById('mediaLightbox');
-    const lightboxBody = document.getElementById('mediaLightboxBody');
-    const lightboxCaption = document.getElementById('mediaLightboxCaption');
-    const slides  = document.getElementsByClassName('card__media-media');
+    //lightbox
 
-
-    for (let i = 0; i < slides.length; i++){
-      slides[i].addEventListener('click', ()=>{
-        lightboxNext.dataset.next = i + 1;
-      })
-    };
-
-    lightboxNext.addEventListener('click', () => {
-      let i = parseInt(lightboxNext.dataset.next);
-      if (i < slides.length) {
-        lightboxBody.innerHTML = "";
-        lightboxCaption.innerHTML = "";
-        const item = photographerMedia[i];
-        if (item.image) {
-          lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${singlePhotographer.name}/${item.image}" alt="${item.imgAlt}">`;
-        lightboxCaption.innerHTML = `<p>${item.imgAlt}</p>`;
-        } else if (item.video) {
-          lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 id=${item.id} src="./assets/img/${singlePhotographer.name}/${item.video}" type="video/mp4" autoplay>
-          ${item.imgAlt}
-          </video>`;
-          lightboxCaption.innerHTML = `<p>${item.imgAlt}</p>`;
-        }
-        lightboxNext.dataset.next = ++i;
-      } else {
-        lightboxNext.disabled = true;
-      }
-    } )
+    createLightbox(singlePhotographer, photographerMedia);
 
     // dropdown filtering
 
