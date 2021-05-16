@@ -3,6 +3,8 @@ const mediaContainer = document.getElementById('mediaContainer');
 const lightbox = document.getElementById('mediaLightbox');
 const lightboxBody = document.getElementById('mediaLightboxBody');
 const lightboxCaption = document.getElementById('mediaLightboxCaption');
+const lightboxNext = document.getElementById('mediaNext');
+let i = 0;
 
 export default class PhotographerContent {
   constructor(id, name, image, video, imgAlt, likes, date, price) {
