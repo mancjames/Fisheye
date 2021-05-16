@@ -59,7 +59,7 @@ fetch('./fisheyedata.json')
           card[i].date,
           card[i].price);
         if (card[i].image) {
-          photographerMediaCard.createImageCard()
+          photographerMediaCard.createImageCard();
         } else if (card[i].video) {
           photographerMediaCard.createVideoCard();  
         }
@@ -94,16 +94,20 @@ fetch('./fisheyedata.json')
       if (a.imgAlt < b.imgAlt) return -1;
       return 0;
     });
+    
     const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
     filterButton.forEach((button) => {
       button.addEventListener('click', () => {
         mediaContainer.innerHTML = '';
         if (button.id === 'popularity') {
           createCards(sortPopularity);
+          createLightbox(singlePhotographer, sortPopularity);
         } else if (button.id === 'date') {
           createCards(sortDate);
+          createLightbox(singlePhotographer, sortDate);
         } else if (button.id === 'title') {
           createCards(sortTitle);
+          createLightbox(singlePhotographer, sortTitle);
         } else {
           createCards(photographerMedia);
         }
