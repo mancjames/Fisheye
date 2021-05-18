@@ -48,7 +48,7 @@ export default function tagNavigation() {
     });
     tagListItem.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        tagSelection();
+        tagListItem.click();
       }
     });
   });

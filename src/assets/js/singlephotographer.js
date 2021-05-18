@@ -113,6 +113,7 @@ fetch('./fisheyedata.json')
         }
       });
     });
+
     // contact form function
     contactForm();
 
@@ -121,11 +122,12 @@ fetch('./fisheyedata.json')
     mediaLikeBtns.forEach((mediaLikeBtn) => {
       function likeIncrease() {
         let likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
-        const likesIncrease = ++likes;
+        let likesIncrease = ++likes;
         mediaLikeBtn.previousSibling.innerHTML = `${likesIncrease} `;
       }
       mediaLikeBtn.addEventListener('click', () => {
         likeIncrease();
+        document.getElementById('counterLikes').innerHTML = `${++likesTotal} `;
       });
       mediaLikeBtn.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -134,6 +136,16 @@ fetch('./fisheyedata.json')
         }
       });
     });
+
+    // Counter Information
+    var likeValues = [];
+    mediaLikeBtns.forEach((mediaLikeBtn) => {
+      const likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
+      likeValues.push(likes);
+    });
+    let likesTotal = likeValues.reduce((a, b) => a + b, 0);
+    document.getElementById('counterLikes').innerHTML = `${likesTotal} `;
+    document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
   });
 
 // lightbox
