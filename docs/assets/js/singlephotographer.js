@@ -70,7 +70,7 @@ fetch('./fisheyedata.json')
     //lightbox
 
     createLightbox(singlePhotographer, photographerMedia);
-
+    
     // dropdown filtering
 
     const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));

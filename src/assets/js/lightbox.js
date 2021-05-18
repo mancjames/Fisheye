@@ -7,13 +7,14 @@ export default function createLightbox(singlePhotographer, data) {
 
   for (let i = 0; i < slides.length; i++) {
     slides[i].addEventListener('click', () => {
-      lightboxNext.dataset.slide = i + 1;
+      lightboxNext.dataset.slide = i++;
     });
   }
 
   function slideNext() {
     let i = parseInt(lightboxNext.dataset.slide);
     if (i < slides.length) {
+        console.log(i);
       lightboxBody.innerHTML = '';
       lightboxCaption.innerHTML = '';
       const item = data[i];
@@ -34,6 +35,7 @@ export default function createLightbox(singlePhotographer, data) {
 
   function slidePrevious() {
     let i = parseInt(lightboxNext.dataset.slide);
+    console.log(i);
     if (i < slides.length) {
       lightboxBody.innerHTML = '';
       lightboxCaption.innerHTML = '';
