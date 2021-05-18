@@ -122,4 +122,16 @@
             }
         }
     }
+    &__counter{
+        width: 15em;
+        height: 3em;
+        background: $background-color-secondary;
+        position: fixed;
+        bottom: 0;
+        right: 2%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+    }
 }

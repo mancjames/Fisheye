@@ -5,7 +5,7 @@ const lightboxBody = document.getElementById('mediaLightboxBody');
 const lightboxCaption = document.getElementById('mediaLightboxCaption');
 
 export default class PhotographerContent {
-  constructor(id, name, image, video, imgAlt, likes, date, price) {
+  constructor(id, name, image, video, imgAlt, likes, date, price, dayPrice) {
     this.id = id;
     this.name = name;
     this.image = image;
@@ -26,7 +26,7 @@ export default class PhotographerContent {
           <div class="card__media-description">
               <p class="card__media-description-name">${this.imgAlt}</p>
               <p class="card__media-description-price">${this.price} $</p>
-              <p class="card__media-description-likes"><span id="likes">${this.likes}</span><button class="btn-likes fas fa-heart"></button></p>
+              <p class="card__media-description-likes"><span>${this.likes} </span><button class="btn-likes fas fa-heart"></button></p>
           </div>
       `;
     // lightbox event listener
@@ -63,5 +63,14 @@ export default class PhotographerContent {
       lightboxCaption.innerHTML = `<p>${this.imgAlt}</p>`;
     });
     mediaContainer.appendChild(videoCard);
+  }
+
+  createLikeCounter(){
+    const likeCounter = document.createElement('div');
+    likeCounter.className = 'card-counter'
+    likeCounter.innerHTML = `
+    
+    `;
+    mediaContainer.appendChild(likeCounter);
   }
 }

@@ -122,7 +122,7 @@ fetch('./fisheyedata.json')
       function likeIncrease() {
         let likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
         const likesIncrease = ++likes;
-        mediaLikeBtn.previousSibling.innerHTML = likesIncrease;
+        mediaLikeBtn.previousSibling.innerHTML = `${likesIncrease} `;
       }
       mediaLikeBtn.addEventListener('click', () => {
         likeIncrease();
