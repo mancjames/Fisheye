@@ -61,16 +61,16 @@ fetch('./fisheyedata.json')
         if (card[i].image) {
           photographerMediaCard.createImageCard();
         } else if (card[i].video) {
-          photographerMediaCard.createVideoCard();  
+          photographerMediaCard.createVideoCard();
         }
       }
     }
     createCards(photographerMedia);
 
-    //lightbox
+    // lightbox
 
     createLightbox(singlePhotographer, photographerMedia);
-    
+
     // dropdown filtering
 
     const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));
@@ -94,7 +94,7 @@ fetch('./fisheyedata.json')
       if (a.imgAlt < b.imgAlt) return -1;
       return 0;
     });
-    
+
     const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
     filterButton.forEach((button) => {
       button.addEventListener('click', () => {
@@ -115,6 +115,25 @@ fetch('./fisheyedata.json')
     });
     // contact form function
     contactForm();
+
+    // Likes event listener
+    const mediaLikeBtns = document.querySelectorAll('.btn-likes');
+    mediaLikeBtns.forEach((mediaLikeBtn) => {
+      function likeIncrease() {
+        let likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
+        const likesIncrease = ++likes;
+        mediaLikeBtn.previousSibling.innerHTML = likesIncrease;
+      }
+      mediaLikeBtn.addEventListener('click', () => {
+        likeIncrease();
+      });
+      mediaLikeBtn.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          mediaLikeBtn.click();
+        }
+      });
+    });
   });
 
 // lightbox

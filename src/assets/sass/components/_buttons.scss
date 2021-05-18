@@ -16,5 +16,10 @@
     &-submit{
         margin: 1.5em 0;
     }
+    &-likes{
+        color: $background-color-primary;
+        background-color: transparent;
+        border: none;
+    }
 }
 

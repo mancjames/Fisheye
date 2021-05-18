@@ -4,7 +4,6 @@ const lightbox = document.getElementById('mediaLightbox');
 const lightboxBody = document.getElementById('mediaLightboxBody');
 const lightboxCaption = document.getElementById('mediaLightboxCaption');
 
-
 export default class PhotographerContent {
   constructor(id, name, image, video, imgAlt, likes, date, price) {
     this.id = id;
@@ -27,10 +26,12 @@ export default class PhotographerContent {
           <div class="card__media-description">
               <p class="card__media-description-name">${this.imgAlt}</p>
               <p class="card__media-description-price">${this.price} $</p>
-              <p class="card__media-description-likes">${this.likes} <i class="fas fa-heart"></i></p>
+              <p class="card__media-description-likes"><span id="likes">${this.likes}</span><button class="btn-likes fas fa-heart"></button></p>
           </div>
       `;
-    imageCard.addEventListener('click', () => {
+    // lightbox event listener
+    const image = imageCard.getElementsByTagName('img')[0];
+    image.addEventListener('click', () => {
       lightbox.style.display = 'block';
       lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${this.name}/${this.image}" alt="${this.imgAlt}">`;
       lightboxCaption.innerHTML = `<p>${this.imgAlt}</p>`;
@@ -53,7 +54,8 @@ export default class PhotographerContent {
               <p class="card__media-description-likes">${this.likes} <i class="fas fa-heart"></i></p>
           </div>
       `;
-    videoCard.addEventListener('click', () => {
+    const video = videoCard.getElementsByTagName('video')[0];
+    video.addEventListener('click', () => {
       lightbox.style.display = 'block';
       lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 id=${this.id} src="./assets/img/${this.name}/${this.video}" type="video/mp4" autoplay>
         ${this.imgAlt}
