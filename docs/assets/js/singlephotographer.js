@@ -2,7 +2,7 @@ import callback from './pageparse.js';
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
 import { contact as contactForm } from './contactModal.js';
-import {createLightbox, closeLightbox} from './lightbox.js';
+import { createLightbox, closeLightbox } from './lightbox.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -71,6 +71,42 @@ fetch('./fisheyedata.json')
 
     createLightbox(singlePhotographer, photographerMedia);
 
+    //likes
+
+    function likes() {
+      // Likes event listener
+      const mediaLikeBtns = document.querySelectorAll('.btn-likes');
+      mediaLikeBtns.forEach((mediaLikeBtn) => {
+        function likeIncrease() {
+          let like = parseInt(mediaLikeBtn.previousSibling.innerHTML);
+          const likesIncrease = ++like;
+          mediaLikeBtn.previousSibling.innerHTML = `${likesIncrease} `;
+        }
+        mediaLikeBtn.addEventListener('click', () => {
+          likeIncrease();
+          document.getElementById('counterLikes').innerHTML = `${++likesTotal} `;
+        });
+        mediaLikeBtn.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            mediaLikeBtn.click();
+          }
+        });
+      });
+      // Counter Information
+      const likeValues = [];
+      mediaLikeBtns.forEach((mediaLikeBtn) => {
+        const likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
+        likeValues.push(likes);
+      });
+      let likesTotal = likeValues.reduce((a, b) => a + b, 0);
+      document.getElementById('counterLikes').innerHTML = `${likesTotal} `;
+      document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
+    }
+
+
+    likes();
+
     // dropdown filtering
 
     const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));
@@ -102,12 +138,15 @@ fetch('./fisheyedata.json')
         if (button.id === 'popularity') {
           createCards(sortPopularity);
           createLightbox(singlePhotographer, sortPopularity);
+          likes();
         } else if (button.id === 'date') {
           createCards(sortDate);
           createLightbox(singlePhotographer, sortDate);
+          likes();
         } else if (button.id === 'title') {
           createCards(sortTitle);
           createLightbox(singlePhotographer, sortTitle);
+          likes();
         } else {
           createCards(photographerMedia);
         }
@@ -117,38 +156,10 @@ fetch('./fisheyedata.json')
     // contact form function
     contactForm();
 
-    // Likes event listener
-    const mediaLikeBtns = document.querySelectorAll('.btn-likes');
-    mediaLikeBtns.forEach((mediaLikeBtn) => {
-      function likeIncrease() {
-        let likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
-        let likesIncrease = ++likes;
-        mediaLikeBtn.previousSibling.innerHTML = `${likesIncrease} `;
-      }
-      mediaLikeBtn.addEventListener('click', () => {
-        likeIncrease();
-        document.getElementById('counterLikes').innerHTML = `${++likesTotal} `;
-      });
-      mediaLikeBtn.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          mediaLikeBtn.click();
-        }
-      });
-    });
-
-    // Counter Information
-    var likeValues = [];
-    mediaLikeBtns.forEach((mediaLikeBtn) => {
-      const likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
-      likeValues.push(likes);
-    });
-    let likesTotal = likeValues.reduce((a, b) => a + b, 0);
-    document.getElementById('counterLikes').innerHTML = `${likesTotal} `;
-    document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
   });
 
 closeLightbox();
+
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
   this.querySelector('.singlephotographer__dropdown').classList.toggle('open');

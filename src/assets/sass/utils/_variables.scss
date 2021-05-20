@@ -11,3 +11,12 @@ $color-white: #fff;
 /* font */
 
 $font: 'DM Sans', sans-serif;
+
+/*breakpoints*/
+
+$breakpoints: (
+    mobile: 720px,
+    tablet: 768px,
+    large-tablet: 1024px,
+    desktop: 1280px
+)
