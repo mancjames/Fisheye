@@ -11,7 +11,10 @@
         color: black;
     }
     &-contact{
-        margin: .4em 2em;  
+        margin: .4em 2em;
+        @media only screen and (max-width: map-get($breakpoints, mobile)){
+            margin: 0em;
+        }  
     }
     &-submit{
         margin: 1.5em 0;
