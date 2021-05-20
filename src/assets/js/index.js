@@ -71,7 +71,7 @@ fetch('./fisheyedata.json')
         li.className = ('tag card__photographer-tags-list-item');
         li.innerHTML = `
           <span class="sr-only">${tags}</span>
-          ${tags}
+          #${tags}
           `;
         ul[i].appendChild(li);
         // add classes for each of the photographer articles based on tags for searching

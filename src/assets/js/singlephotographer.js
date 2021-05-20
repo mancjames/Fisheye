@@ -37,7 +37,7 @@ fetch('./fisheyedata.json')
       li.className = ('tag card__banner-tags-list-item');
       li.innerHTML = `
             <span class="sr-only">${tags}</span>
-            ${tags}
+            #${tags}
             `;
       ul.appendChild(li);
       const tabIndexTag = document.createAttribute('tabindex');

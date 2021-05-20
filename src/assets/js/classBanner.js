@@ -17,7 +17,7 @@ export default class Banner {
         <div class="card__banner-description">
           <div class="card__banner-title">
             <h2 class="card__banner-title-name" id="photographerName">${this.name}</h2>
-            </div>
+          </div>
             <p class="card__banner-description-location">${this.city}, ${this.country}</p>
             <p class="card__banner-description-tagline">${this.tagline}</p>
           <div class="card__banner-tags">
@@ -28,10 +28,11 @@ export default class Banner {
         <div class="card__banner-contact">
             <button class="btn btn-contact" id="contactButton">Contact Me</button>
         </div>
-      </div>
         <div class="card__banner-portrait">
           <img class="card__banner-portrait-img" src="./assets/img/Photographers ID Photos/${this.imgSrc}" alt="${this.name}">
         </div>
+      </div>
+        
     `;
   }
 }
