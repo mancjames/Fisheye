@@ -1,4 +1,4 @@
-export default function createLightbox(singlePhotographer, data) {
+export function createLightbox(singlePhotographer, data) {
   const lightboxBody = document.getElementById('mediaLightboxBody');
   const lightboxCaption = document.getElementById('mediaLightboxCaption');
   const lightboxNext = document.getElementById('mediaNext');
@@ -14,7 +14,7 @@ export default function createLightbox(singlePhotographer, data) {
   function slideNext() {
     let i = parseInt(lightboxNext.dataset.slide);
     if (i < slides.length) {
-        console.log(i);
+      console.log(i);
       lightboxBody.innerHTML = '';
       lightboxCaption.innerHTML = '';
       const item = data[i];
@@ -61,5 +61,18 @@ export default function createLightbox(singlePhotographer, data) {
 
   lightboxPrevious.addEventListener('click', () => {
     slidePrevious();
+  });
+}
+
+export function closeLightbox() {
+  const lightboxClose = document.getElementById('mediaLightboxClose');
+  const lightbox = document.getElementById('mediaLightbox');
+  lightboxClose.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+  lightboxClose.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      lightboxClose.click();
+    }
   });
 }

@@ -2,7 +2,7 @@ import callback from './pageparse.js';
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
 import { contact as contactForm } from './contactModal.js';
-import createLightbox from './lightbox.js';
+import {createLightbox, closeLightbox} from './lightbox.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -148,14 +148,7 @@ fetch('./fisheyedata.json')
     document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
   });
 
-// lightbox
-
-const lightboxClose = document.getElementById('mediaLightboxClose');
-const lightbox = document.getElementById('mediaLightbox');
-lightboxClose.addEventListener('click', () => {
-  lightbox.style.display = 'none';
-});
-
+closeLightbox();
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
   this.querySelector('.singlephotographer__dropdown').classList.toggle('open');
