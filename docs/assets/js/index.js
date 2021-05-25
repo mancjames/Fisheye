@@ -1,19 +1,10 @@
-import callback from './pageparse.js';
+
 import tagNavigation from './tagNavigation.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
   .then((data) => {
     const { photographers } = data;
-    // Page parsing
-    if (
-      document.readyState === 'complete'
-     || (document.readyState !== 'loading' && !document.documentElement.doScroll)
-    ) {
-      callback(photographers);
-    } else {
-      document.addEventListener('DOMContentLoaded', callback);
-    }
 
     // Creating Card Elements
     class CardElement {

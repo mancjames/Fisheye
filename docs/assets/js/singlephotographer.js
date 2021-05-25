@@ -1,4 +1,3 @@
-import callback from './pageparse.js';
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
 import { contact as contactForm } from './contactModal.js';
@@ -7,18 +6,8 @@ import { createLightbox, closeLightbox } from './lightbox.js';
 fetch('./fisheyedata.json')
   .then((response) => response.json())
   .then((data) => {
-    const { photographers } = data;
-    const { media } = data;
+    const { photographers, media } = data;
 
-    // Page parsing
-    if (
-      document.readyState === 'complete'
-   || (document.readyState !== 'loading' && !document.documentElement.doScroll)
-    ) {
-      callback(photographers);
-    } else {
-      document.addEventListener('DOMContentLoaded', callback);
-    }
     // code below grabs ID from url for banner creation
     const params = new URLSearchParams(document.location.search.substring(1));
     const pageId = params.get('dc');
