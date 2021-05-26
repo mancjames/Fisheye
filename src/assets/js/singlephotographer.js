@@ -8,7 +8,7 @@ fetch('./fisheyedata.json')
   .then((data) => {
     const { photographers, media } = data;
 
-    // code below grabs ID from url for banner creation
+    // code below grabs ID from url to create banner
     const params = new URLSearchParams(document.location.search.substring(1));
     const pageId = params.get('dc');
     const singlePhotographer = photographers.find((photographer) => photographer.id == pageId);
@@ -34,7 +34,7 @@ fetch('./fisheyedata.json')
       li.setAttributeNode(tabIndexTag);
     }
 
-    // create Photographer content based on ID
+    // create content based on ID of URL
     const photographerMedia = media.filter((x) => x.photographerId == pageId);
     const m = photographerMedia.length;
     function createCards(card) {
@@ -60,7 +60,7 @@ fetch('./fisheyedata.json')
 
     createLightbox(singlePhotographer, photographerMedia);
 
-    //likes
+    // likes
 
     function likes() {
       // Likes event listener
@@ -93,48 +93,37 @@ fetch('./fisheyedata.json')
       document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
     }
 
-
     likes();
 
     // dropdown filtering
-
-    const photographerMediaCopy1 = JSON.parse(JSON.stringify(photographerMedia));
-    const photographerMediaCopy2 = JSON.parse(JSON.stringify(photographerMedia));
-    const photographerMediaCopy3 = JSON.parse(JSON.stringify(photographerMedia));
-
-    const sortPopularity = photographerMediaCopy1.sort((a, b) => {
-      if (a.likes > b.likes) return -1;
-      if (a.likes < b.likes) return 1;
-      return 0;
-    });
-
-    const sortDate = photographerMediaCopy2.sort((a, b) => {
-      if (a.date > b.date) return 1;
-      if (a.date < b.date) return -1;
-      return 0;
-    });
-
-    const sortTitle = photographerMediaCopy3.sort((a, b) => {
-      if (a.imgAlt > b.imgAlt) return 1;
-      if (a.imgAlt < b.imgAlt) return -1;
-      return 0;
-    });
 
     const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
     filterButton.forEach((button) => {
       button.addEventListener('click', () => {
         mediaContainer.innerHTML = '';
         if (button.id === 'popularity') {
-          createCards(sortPopularity);
-          createLightbox(singlePhotographer, sortPopularity);
+          photographerMedia.sort((a, b) => {
+            if (a.likes > b.likes) return -1;
+            if (a.likes < b.likes) return 1;
+            return 0;
+          });
+          createCards(photographerMedia);
           likes();
         } else if (button.id === 'date') {
-          createCards(sortDate);
-          createLightbox(singlePhotographer, sortDate);
+          photographerMedia.sort((a, b) => {
+            if (a.date > b.date) return 1;
+            if (a.date < b.date) return -1;
+            return 0;
+          });
+          createCards(photographerMedia);
           likes();
         } else if (button.id === 'title') {
-          createCards(sortTitle);
-          createLightbox(singlePhotographer, sortTitle);
+          photographerMedia.sort((a, b) => {
+            if (a.imgAlt > b.imgAlt) return 1;
+            if (a.imgAlt < b.imgAlt) return -1;
+            return 0;
+          });
+          createCards(photographerMedia);
           likes();
         } else {
           createCards(photographerMedia);
@@ -144,7 +133,6 @@ fetch('./fisheyedata.json')
 
     // contact form function
     contactForm();
-
   });
 
 closeLightbox();

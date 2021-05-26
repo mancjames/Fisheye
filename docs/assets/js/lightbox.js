@@ -7,7 +7,7 @@ export function createLightbox(singlePhotographer, data) {
 
   for (let i = 0; i < slides.length; i++) {
     slides[i].addEventListener('click', () => {
-      lightboxNext.dataset.slide = i++;
+      lightboxNext.dataset.slide = ++i;
     });
   }
 
