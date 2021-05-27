@@ -52,51 +52,41 @@ fetch('./fisheyedata.json')
         } else if (card[i].video) {
           photographerMediaCard.createVideoCard();
         }
+        // likes
+        const likeBtn = document.getElementsByClassName('btn-likes')[i];
+        const likeNumber = document.getElementsByClassName('likeNumber')[i];
+        likeBtn.addEventListener('click', () => {
+          const likesIncrease = ++photographerMedia[i].likes;
+          photographerMedia[i].likes = likesIncrease;
+          likeNumber.innerHTML = `${photographerMedia[i].likes} `;
+          document.getElementById('counterLikes').innerHTML = `${++likesTotal} `;
+        });
+        likeBtn.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            likeBtn.click();
+          }
+        });
       }
     }
     createCards(photographerMedia);
+
+    // Counter Information
+    const likeValues = [];
+    for (let i = 0; i < photographerMedia.length; i++) {
+      const { likes } = photographerMedia[i];
+      likeValues.push(likes);
+    }
+    let likesTotal = likeValues.reduce((a, b) => a + b, 0);
+    document.getElementById('counterLikes').innerHTML = `${likesTotal} `;
+    document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
 
     // lightbox
 
     createLightbox(singlePhotographer, photographerMedia);
 
-    // likes
-
-    function likes() {
-      // Likes event listener
-      const mediaLikeBtns = document.querySelectorAll('.btn-likes');
-      mediaLikeBtns.forEach((mediaLikeBtn) => {
-        function likeIncrease() {
-          let like = parseInt(mediaLikeBtn.previousSibling.innerHTML);
-          const likesIncrease = ++like;
-          mediaLikeBtn.previousSibling.innerHTML = `${likesIncrease} `;
-        }
-        mediaLikeBtn.addEventListener('click', () => {
-          likeIncrease();
-          document.getElementById('counterLikes').innerHTML = `${++likesTotal} `;
-        });
-        mediaLikeBtn.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            mediaLikeBtn.click();
-          }
-        });
-      });
-      // Counter Information
-      const likeValues = [];
-      mediaLikeBtns.forEach((mediaLikeBtn) => {
-        const likes = parseInt(mediaLikeBtn.previousSibling.innerHTML);
-        likeValues.push(likes);
-      });
-      let likesTotal = likeValues.reduce((a, b) => a + b, 0);
-      document.getElementById('counterLikes').innerHTML = `${likesTotal} `;
-      document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
-    }
-
-    likes();
-
     // dropdown filtering
-
+    const mediaContainer = document.getElementById('mediaContainer');
     const filterButton = document.querySelectorAll('.singlephotographer__dropdown-option');
     filterButton.forEach((button) => {
       button.addEventListener('click', () => {
@@ -108,7 +98,6 @@ fetch('./fisheyedata.json')
             return 0;
           });
           createCards(photographerMedia);
-          likes();
         } else if (button.id === 'date') {
           photographerMedia.sort((a, b) => {
             if (a.date > b.date) return 1;
@@ -116,7 +105,6 @@ fetch('./fisheyedata.json')
             return 0;
           });
           createCards(photographerMedia);
-          likes();
         } else if (button.id === 'title') {
           photographerMedia.sort((a, b) => {
             if (a.imgAlt > b.imgAlt) return 1;
@@ -124,7 +112,6 @@ fetch('./fisheyedata.json')
             return 0;
           });
           createCards(photographerMedia);
-          likes();
         } else {
           createCards(photographerMedia);
         }
@@ -157,13 +144,9 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
       this.closest('.singlephotographer__dropdown').querySelector('.singlephotographer__dropdown-trigger span').textContent = this.textContent;
     }
   });
-  option.addEventListener('keypress', function (e) {
+  option.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-      if (!this.classList.contains('selected')) {
-        this.parentNode.querySelector('.singlephotographer__dropdown-option.selected').classList.remove('selected');
-        this.classList.add('selected');
-        this.closest('.singlephotographer__dropdown').querySelector('.singlephotographer__dropdown-trigger span').textContent = this.textContent;
-      }
+      option.click();
     }
   });
 }

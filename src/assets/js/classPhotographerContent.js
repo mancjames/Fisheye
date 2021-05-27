@@ -26,7 +26,7 @@ export default class PhotographerContent {
           <div class="card__media-description">
               <p class="card__media-description-name">${this.imgAlt}</p>
               <p class="card__media-description-price">${this.price} $</p>
-              <p class="card__media-description-likes"><span>${this.likes} </span><button class="btn-likes fas fa-heart"></button></p>
+              <p class="card__media-description-likes"><span class="likeNumber">${this.likes} </span><button class="btn-likes fas fa-heart"></button></p>
           </div>
       `;
     // lightbox event listener
@@ -51,7 +51,7 @@ export default class PhotographerContent {
           <div class="card__media-description">
               <p class="card__media-description-name">${this.imgAlt}</p>
               <p class="card__media-description-price">${this.price} $</p>
-              <p class="card__media-description-likes"><span>${this.likes} </span><button class="btn-likes fas fa-heart"></button></p>
+              <p class="card__media-description-likes"><span class="likeNumber">${this.likes} </span><button class="btn-likes fas fa-heart"></button></p>
           </div>
       `;
     const video = videoCard.getElementsByTagName('video')[0];
