@@ -5,16 +5,16 @@ export function createLightbox(singlePhotographer, data) {
   const lightboxPrevious = document.getElementById('mediaPrevious');
   const slides = document.getElementsByClassName('card__media-media');
 
-  for (let i = 0; i < slides.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     slides[i].addEventListener('click', () => {
-      lightboxNext.dataset.slide = ++i;
+      lightboxNext.dataset.slide = 1 + i;
     });
   }
 
   function slideNext() {
     let i = parseInt(lightboxNext.dataset.slide);
-    if (i < slides.length) {
-      console.log(i);
+    if (i < data.length) {
+      lightboxNext.enabled = true;
       lightboxBody.innerHTML = '';
       lightboxCaption.innerHTML = '';
       const item = data[i];
@@ -35,8 +35,7 @@ export function createLightbox(singlePhotographer, data) {
 
   function slidePrevious() {
     let i = parseInt(lightboxNext.dataset.slide);
-    console.log(i);
-    if (i < slides.length) {
+    if (i < data.length) {
       lightboxBody.innerHTML = '';
       lightboxCaption.innerHTML = '';
       const item = data[i];
@@ -55,12 +54,14 @@ export function createLightbox(singlePhotographer, data) {
     }
   }
 
-  lightboxNext.addEventListener('click', () => {
+  lightboxNext.addEventListener('click', (event) => {
     slideNext();
+    event.stopImmediatePropagation();
   });
 
-  lightboxPrevious.addEventListener('click', () => {
+  lightboxPrevious.addEventListener('click', (event) => {
     slidePrevious();
+    event.stopImmediatePropagation();
   });
 }
 

@@ -68,6 +68,7 @@ fetch('./fisheyedata.json')
           }
         });
       }
+      createLightbox(singlePhotographer, photographerMedia);
     }
     createCards(photographerMedia);
 
@@ -83,7 +84,7 @@ fetch('./fisheyedata.json')
 
     // lightbox
 
-    createLightbox(singlePhotographer, photographerMedia);
+   
 
     // dropdown filtering
     const mediaContainer = document.getElementById('mediaContainer');
