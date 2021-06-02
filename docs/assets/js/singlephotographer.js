@@ -1,7 +1,7 @@
 import Banner from './classBanner.js';
 import PhotographerContent from './classPhotographerContent.js';
 import { contact as contactForm } from './contactModal.js';
-import { createLightbox, closeLightbox } from './lightbox.js';
+import { Lightbox, closeLightbox } from './lightbox.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -47,11 +47,16 @@ fetch('./fisheyedata.json')
           card[i].likes,
           card[i].date,
           card[i].price);
+        let lightbox = new Lightbox(singlePhotographer.name,
+          photographerMediaCard.image,
+          photographerMediaCard.video,
+          photographerMediaCard.imgAlt);
         if (card[i].image) {
-          photographerMediaCard.createImageCard();
+          photographerMediaCard.createImageCard(lightbox.openImage.bind(lightbox));
         } else if (card[i].video) {
-          photographerMediaCard.createVideoCard();
+          photographerMediaCard.createVideoCard(lightbox.openVideo.bind(lightbox));
         }
+
         // likes
         const likeBtn = document.getElementsByClassName('btn-likes')[i];
         const likeNumber = document.getElementsByClassName('likeNumber')[i];
@@ -68,7 +73,7 @@ fetch('./fisheyedata.json')
           }
         });
       }
-      createLightbox(singlePhotographer, photographerMedia);
+      // createLightbox(singlePhotographer, photographerMedia);
     }
     createCards(photographerMedia);
 
@@ -81,10 +86,6 @@ fetch('./fisheyedata.json')
     let likesTotal = likeValues.reduce((a, b) => a + b, 0);
     document.getElementById('counterLikes').innerHTML = `${likesTotal} `;
     document.getElementById('counterPrice').innerHTML = `${singlePhotographer.price}$ / day`;
-
-    // lightbox
-
-   
 
     // dropdown filtering
     const mediaContainer = document.getElementById('mediaContainer');
