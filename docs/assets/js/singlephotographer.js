@@ -50,13 +50,14 @@ fetch('./fisheyedata.json')
         let lightbox = new Lightbox(singlePhotographer.name,
           photographerMediaCard.image,
           photographerMediaCard.video,
-          photographerMediaCard.imgAlt);
+          photographerMediaCard.imgAlt,
+          i);
         if (card[i].image) {
           photographerMediaCard.createImageCard(lightbox.openImage.bind(lightbox));
         } else if (card[i].video) {
           photographerMediaCard.createVideoCard(lightbox.openVideo.bind(lightbox));
         }
-
+        
         // likes
         const likeBtn = document.getElementsByClassName('btn-likes')[i];
         const likeNumber = document.getElementsByClassName('likeNumber')[i];
