@@ -54,6 +54,7 @@ fetch('./fisheyedata.json')
           i);
         if (card[i].image) {
           photographerMediaCard.createImageCard(lightbox.openImage.bind(lightbox));
+          lightbox.slideNext.bind(lightbox);
         } else if (card[i].video) {
           photographerMediaCard.createVideoCard(lightbox.openVideo.bind(lightbox));
         }
