@@ -16,6 +16,12 @@ export default class Banner {
             <p class="card__banner-description-tagline">${this.media.tagline}</p>
           <div class="card__banner-tags">
             <ul class="card__banner-tags-list" id="card__banner-tags-list">
+              ${this.media.tags.map(tag => `
+              <li class="tag card__banner-tags-list-item" tabindex="0"><span class="sr-only">${tag}
+              </span>
+                      ${tag}
+              </li>
+              `).join('')}
             </ul>
           </div>
         </div>

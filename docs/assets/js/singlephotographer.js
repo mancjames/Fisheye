@@ -14,21 +14,6 @@ fetch('./fisheyedata.json')
     const singlePhotographer = photographers.find((photographer) => photographer.id == pageId);
     const photographerBanner = new Banner(singlePhotographer);
     photographerBanner.create();
-    const l = singlePhotographer.tags.length;
-    for (let i = 0; i < l; i++) {
-      const tags = singlePhotographer.tags[i];
-      const ul = document.getElementById('card__banner-tags-list');
-      const li = document.createElement('li');
-      li.className = ('tag card__banner-tags-list-item');
-      li.innerHTML = `
-            <span class="sr-only">${tags}</span>
-            #${tags}
-            `;
-      ul.appendChild(li);
-      const tabIndexTag = document.createAttribute('tabindex');
-      tabIndexTag.value = '0';
-      li.setAttributeNode(tabIndexTag);
-    }
 
     // filter media in JSON based on ID of artist
     const photographerMedia = media.filter((x) => x.photographerId == pageId);
