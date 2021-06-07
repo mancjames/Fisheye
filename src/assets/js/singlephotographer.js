@@ -1,5 +1,5 @@
 import Banner from './classBanner.js';
-import PhotographerContent from './classPhotographerContent.js';
+import {MediaFactory, Image, Video }from './MediaFactory.js';
 import { contact as contactForm } from './contactModal.js';
 import { Lightbox, closeLightbox } from './lightbox.js';
 
@@ -12,11 +12,7 @@ fetch('./fisheyedata.json')
     const params = new URLSearchParams(document.location.search.substring(1));
     const pageId = params.get('dc');
     const singlePhotographer = photographers.find((photographer) => photographer.id == pageId);
-    const photographerBanner = new Banner(singlePhotographer.portrait,
-      singlePhotographer.name,
-      singlePhotographer.city,
-      singlePhotographer.country,
-      singlePhotographer.tagline);
+    const photographerBanner = new Banner(singlePhotographer);
     photographerBanner.create();
     const l = singlePhotographer.tags.length;
     for (let i = 0; i < l; i++) {
@@ -34,31 +30,14 @@ fetch('./fisheyedata.json')
       li.setAttributeNode(tabIndexTag);
     }
 
-    // create content based on ID of URL
+    // filter media in JSON based on ID of artist
     const photographerMedia = media.filter((x) => x.photographerId == pageId);
     const m = photographerMedia.length;
-    function createCards(card) {
+    function createCards() {
       for (let i = 0; i < m; i++) {
-        const photographerMediaCard = new PhotographerContent(card[i].id,
-          singlePhotographer.name,
-          card[i].image,
-          card[i].video,
-          card[i].imgAlt,
-          card[i].likes,
-          card[i].date,
-          card[i].price);
-        let lightbox = new Lightbox(singlePhotographer.name,
-          photographerMediaCard.image,
-          photographerMediaCard.video,
-          photographerMediaCard.imgAlt,
-          i);
-        if (card[i].image) {
-          photographerMediaCard.createImageCard(lightbox.openImage.bind(lightbox));
-          lightbox.slideNext.bind(lightbox);
-        } else if (card[i].video) {
-          photographerMediaCard.createVideoCard(lightbox.openVideo.bind(lightbox));
-        }
-        
+        const photographerMediaCard = new MediaFactory(
+          singlePhotographer.name, photographerMedia[i]);
+        photographerMediaCard.create();
         // likes
         const likeBtn = document.getElementsByClassName('btn-likes')[i];
         const likeNumber = document.getElementsByClassName('likeNumber')[i];
@@ -75,9 +54,8 @@ fetch('./fisheyedata.json')
           }
         });
       }
-      // createLightbox(singlePhotographer, photographerMedia);
     }
-    createCards(photographerMedia);
+    createCards();
 
     // Counter Information
     const likeValues = [];
@@ -101,23 +79,21 @@ fetch('./fisheyedata.json')
             if (a.likes < b.likes) return 1;
             return 0;
           });
-          createCards(photographerMedia);
+          createCards();
         } else if (button.id === 'date') {
           photographerMedia.sort((a, b) => {
             if (a.date > b.date) return 1;
             if (a.date < b.date) return -1;
             return 0;
           });
-          createCards(photographerMedia);
+          createCards();
         } else if (button.id === 'title') {
           photographerMedia.sort((a, b) => {
             if (a.imgAlt > b.imgAlt) return 1;
             if (a.imgAlt < b.imgAlt) return -1;
             return 0;
           });
-          createCards(photographerMedia);
-        } else {
-          createCards(photographerMedia);
+          createCards();
         }
       });
     });

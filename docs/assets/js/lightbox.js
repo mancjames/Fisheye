@@ -7,43 +7,39 @@ const lightboxPrevious = document.getElementById('mediaPrevious');
 const slides = document.getElementsByClassName('card__media-media');
 
 export class Lightbox {
-  constructor(name, image, video, imgAlt, dataset) {
+  constructor(name, media, click) {
+    document.getElementById(click).addEventListener('click', this.openImage);
     this.name = name;
-    this.image = image;
-    this.video = video;
-    this.imgAlt = imgAlt;
-    this.dataset = dataset;
+    this.media = media;
+    this.nextPos = 0;
+    this.prevPos = 0;
   }
 
-  openImage() {
+  openImage(pos) {
+    lightbox.dataset.slide = pos;
     lightbox.style.display = 'block';
-    lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${this.name}/${this.image}" alt="${this.imgAlt}">`;
-    lightboxCaption.innerHTML = `<p>${this.imgAlt}</p>`;
-    lightbox.dataset.slide = this.dataset;
+    lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${this.name}/${this.media.image}" alt="${this.media.imgAlt}">`;
+    lightboxCaption.innerHTML = `<p>${this.media.imgAlt}</p>`;
   }
 
-  openVideo() {
+  openVideo(pos) {
     lightbox.style.display = 'block';
-    lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 src="./assets/img/${this.name}/${this.video}" type="video/mp4" autoplay>
-          ${this.imgAlt}
+    lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 src="./assets/img/${this.name}/${this.media.video}" type="video/mp4" autoplay>
+          ${this.media.imgAlt}
           </video>`;
-    lightboxCaption.innerHTML = `<p>${this.imgAlt}</p>`;
-    lightbox.dataset.slide = this.dataset;
+    lightboxCaption.innerHTML = `<p>${this.media.imgAlt}</p>`;
+    lightbox.dataset.slide = pos;
   }
 
   slideNext() {
-    lightboxNext.addEventListener('click', () => {
-      slideTest();
-    });
-    function slideTest(){
-      let i = parseInt(lightbox.dataset.slide);
-    if (i < slides.length) {
+    this.nextPos = 1 + this.nextPos;
+    if (this.nextPost < slides.length) {
       lightboxNext.enabled = true;
       lightboxBody.innerHTML = '';
       lightboxCaption.innerHTML = '';
       // if (slides.image) {
-      lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${this.name}/${this.image}" alt="${this.imgAlt}">`;
-      lightboxCaption.innerHTML = `<p>${this.imgAlt}</p>`;
+      lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${this.name}/${this.media.image}" alt="${this.media.imgAlt}">`;
+      lightboxCaption.innerHTML = `<p>${this.media.imgAlt}</p>`;
       // }
       //   else if (item.video) {
       //     lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 id=${item.id} src="./assets/img/${singlePhotographer.name}/${item.video}" type="video/mp4" autoplay>
@@ -51,31 +47,30 @@ export class Lightbox {
       // </video>`;
       //     lightboxCaption.innerHTML = `<p>${item.imgAlt}</p>`;
       //   }
-      lightbox.dataset.slide = ++i;
-    } else {
-      lightboxNext.disabled = true;
-    }
+    //     lightbox.dataset.slide = ++i;
+    //   } else {
+    //     lightboxNext.disabled = true;
+    //   }
     }
     // let i = parseInt(lightbox.dataset.slide);
     // if (i < slides.length) {
     //   lightboxNext.enabled = true;
     //   lightboxBody.innerHTML = '';
     //   lightboxCaption.innerHTML = '';
-      // if (slides.image) {
-      // lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${this.name}/${this.image}" alt="${this.imgAlt}">`;
-      // lightboxCaption.innerHTML = `<p>${this.imgAlt}</p>`;
-      // }
-      //   else if (item.video) {
-      //     lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 id=${item.id} src="./assets/img/${singlePhotographer.name}/${item.video}" type="video/mp4" autoplay>
-      // ${item.imgAlt}
-      // </video>`;
-      //     lightboxCaption.innerHTML = `<p>${item.imgAlt}</p>`;
-      //   }
+    // if (slides.image) {
+    // lightboxBody.innerHTML = `<img class="modal__media-content-media" src="./assets/img/${this.name}/${this.image}" alt="${this.imgAlt}">`;
+    // lightboxCaption.innerHTML = `<p>${this.imgAlt}</p>`;
+    // }
+    //   else if (item.video) {
+    //     lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 id=${item.id} src="./assets/img/${singlePhotographer.name}/${item.video}" type="video/mp4" autoplay>
+    // ${item.imgAlt}
+    // </video>`;
+    //     lightboxCaption.innerHTML = `<p>${item.imgAlt}</p>`;
+    //   }
     //   lightbox.dataset.slide = ++i;
     // } else {
     //   lightboxNext.disabled = true;
     // }
-    
   }
 
   // function slidePrevious() {
@@ -108,12 +103,11 @@ export class Lightbox {
   //   slidePrevious();
   //   event.stopImmediatePropagation();
   // });
-}
 // for (let i = 0; i < slides.length; i++) {
 //   slides[i].addEventListener('click', () => {
 //     lightbox.dataset.slide = 1 + i;
 //   });
-// }
+}
 
 export function closeLightbox() {
   const lightboxClose = document.getElementById('mediaLightboxClose');
