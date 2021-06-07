@@ -64,22 +64,20 @@ fetch('./fisheyedata.json')
             if (a.likes < b.likes) return 1;
             return 0;
           });
-          createCards();
         } else if (button.id === 'date') {
           photographerMedia.sort((a, b) => {
             if (a.date > b.date) return 1;
             if (a.date < b.date) return -1;
             return 0;
           });
-          createCards();
         } else if (button.id === 'title') {
           photographerMedia.sort((a, b) => {
             if (a.imgAlt > b.imgAlt) return 1;
             if (a.imgAlt < b.imgAlt) return -1;
             return 0;
           });
-          createCards();
         }
+        createCards();
       });
     });
 
@@ -96,13 +94,14 @@ document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener
 
 document.querySelector('.singlephotographer__dropdown').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
-    document.querySelector('.singlephotographer__dropdown').classList.toggle('open');
+    document.querySelector('.singlephotographer__dropdown').click();
   }
 });
 
 // dropdown functionality
 for (const option of document.querySelectorAll('.singlephotographer__dropdown-option')) {
-  option.addEventListener('click', function () {
+  option.addEventListener('click', function (e) {
+    e.preventDefault();
     if (!this.classList.contains('selected')) {
       this.parentNode.querySelector('.singlephotographer__dropdown-option.selected').classList.remove('selected');
       this.classList.add('selected');
@@ -110,8 +109,7 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
     }
   });
   option.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      option.click();
-    }
+    e.preventDefault();
+    option.click();
   });
 }
