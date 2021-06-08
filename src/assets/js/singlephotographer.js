@@ -7,7 +7,6 @@ fetch('./fisheyedata.json')
   .then((response) => response.json())
   .then((data) => {
     const { photographers, media } = data;
-
     // code below grabs ID from url to create banner
     const params = new URLSearchParams(document.location.search.substring(1));
     const pageId = params.get('dc');
@@ -39,8 +38,10 @@ fetch('./fisheyedata.json')
           }
         });
       }
+      Lightbox.init();
     }
     createCards();
+    
 
     // Counter Information
     const likeValues = [];
