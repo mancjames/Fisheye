@@ -1,7 +1,7 @@
 import Banner from './classBanner.js';
-import {MediaFactory, Image, Video }from './MediaFactory.js';
+import { MediaFactory } from './MediaFactory.js';
 import { contact as contactForm } from './contactModal.js';
-import { Lightbox, closeLightbox } from './lightbox.js';
+import Lightbox from './lightbox.js';
 
 fetch('./fisheyedata.json')
   .then((response) => response.json())
@@ -20,7 +20,8 @@ fetch('./fisheyedata.json')
     function createCards() {
       for (let i = 0; i < m; i++) {
         const photographerMediaCard = new MediaFactory(
-          singlePhotographer.name, photographerMedia[i]);
+          singlePhotographer.name, photographerMedia[i],
+        );
         photographerMediaCard.create();
         // likes
         const likeBtn = document.getElementsByClassName('btn-likes')[i];
@@ -41,7 +42,6 @@ fetch('./fisheyedata.json')
       Lightbox.init();
     }
     createCards();
-    
 
     // Counter Information
     const likeValues = [];
@@ -86,8 +86,6 @@ fetch('./fisheyedata.json')
     contactForm();
   });
 
-closeLightbox();
-
 // show and hide dropdown list item on button click
 document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('click', function () {
   this.querySelector('.singlephotographer__dropdown').classList.toggle('open');
@@ -110,7 +108,9 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
     }
   });
   option.addEventListener('keypress', (e) => {
-    e.preventDefault();
-    option.click();
+    if (e.key === 'Enter'){
+      e.preventDefault();
+      option.click();
+    }
   });
 }
