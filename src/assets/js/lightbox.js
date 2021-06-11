@@ -56,20 +56,24 @@ export default class Lightbox {
   }
 
   next() {
-    lightboxNext.addEventListener('click', () => {
-      const i = this.pos.findIndex((content) => content === this.src);
-      if (i < this.pos.length) {
-        this.open(this.pos[i + 1]);
+    lightboxNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      let i = this.pos.findIndex((content) => content === this.src);
+      if (i === this.pos.length - 1) {
+        i = -1;
       }
+      this.open(this.pos[i + 1]);
     });
   }
 
   previous() {
-    lightboxPrevious.addEventListener('click', () => {
-      const i = this.pos.findIndex((content) => content === this.src);
-      if (i < this.pos.length) {
-        this.open(this.pos[i - 1]);
+    lightboxPrevious.addEventListener('click', (e) => {
+      e.preventDefault();
+      let i = this.pos.findIndex((content) => content === this.src);
+      if (i === 0) {
+        i = this.pos.length;
       }
+      this.open(this.pos[i - 1]);
     });
   }
 
