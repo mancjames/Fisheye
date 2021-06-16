@@ -39,7 +39,7 @@ fetch('./fisheyedata.json')
           }
         });
       }
-      Lightbox.init();
+      Lightbox.init(photographerMedia);
     }
     createCards();
 

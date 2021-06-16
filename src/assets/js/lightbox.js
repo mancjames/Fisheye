@@ -8,13 +8,14 @@ const lightbox = document.getElementById('mediaLightbox');
 const lightboxClose = document.getElementById('mediaLightboxClose');
 
 export default class Lightbox {
-  static init() {
+  static init(data) {
     const slides = Array.from(document.getElementsByClassName('slide'));
+    const name = Array.from(data.map((name) => name.imgAlt));
     const pos = slides.map((slide) => slide.getAttribute('src'));
     slides.forEach((slide) => {
       slide.addEventListener('click', (e) => {
         e.preventDefault();
-        new Lightbox(e.currentTarget.getAttribute('src'), pos);
+        new Lightbox(e.currentTarget.getAttribute('src'), name, pos);
       });
       slide.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -25,34 +26,28 @@ export default class Lightbox {
     });
   }
 
-  constructor(src, pos) {
+  constructor(src, names, pos) {
     this.pos = pos;
-    this.open(src);
+    this.names = names;
+    this.open(src, names);
     this.next();
     this.previous();
     this.close();
     this.keyboard();
   }
 
-  open(src) {
+  open(src, names) {
     this.src = src;
+    let i = this.pos.findIndex((content) => content === this.src);
     lightbox.style.display = 'block';
     if (src.endsWith('.jpg')) {
-      lightboxBody.innerHTML = `<img class="modal__media-content-media" src="${src}" alt="${this.getName(src)}">`;
+      lightboxBody.innerHTML = `<img class="modal__media-content-media" src="${src}" alt="${names[i]}">`;
     } else if (src.endsWith('.mp4')) {
       lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 src="${src}" type="video/mp4" autoplay>
-          ${this.getName(src)}
+          ${names[i]}
           </video>`;
     }
-    lightboxCaption.innerHTML = `<p>${this.getName(src)}</p>`;
-  }
-
-  getName(filepath) {
-    const splitFileName = filepath.split('/');
-    const string = splitFileName[splitFileName.length - 1].split('.')[0];
-    const string2 = string.split('_').slice(1).join(' ');
-    const Title = string2.replaceAll('_', ' ');
-    return Title;
+    lightboxCaption.innerHTML = `<p>${names[i + 1]}</p>`;
   }
 
   next() {
@@ -62,7 +57,7 @@ export default class Lightbox {
       if (i === this.pos.length - 1) {
         i = -1;
       }
-      this.open(this.pos[i + 1]);
+      this.open(this.pos[i + 1], this.names);
     });
   }
 
@@ -73,7 +68,7 @@ export default class Lightbox {
       if (i === 0) {
         i = this.pos.length;
       }
-      this.open(this.pos[i - 1]);
+      this.open(this.pos[i - 1], this.names);
     });
   }
 
