@@ -6,6 +6,7 @@ const lightboxNext = document.getElementById('mediaNext');
 const lightboxPrevious = document.getElementById('mediaPrevious');
 const lightbox = document.getElementById('mediaLightbox');
 const lightboxClose = document.getElementById('mediaLightboxClose');
+const main = document.getElementById('main');
 
 export default class Lightbox {
   static init(data) {
@@ -15,7 +16,7 @@ export default class Lightbox {
     slides.forEach((slide) => {
       slide.addEventListener('click', (e) => {
         e.preventDefault();
-        new Lightbox(e.currentTarget.getAttribute('src'), name, pos);
+        new Lightbox(e.currentTarget.getAttribute('src'), name, pos, slides);
       });
       slide.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -26,7 +27,8 @@ export default class Lightbox {
     });
   }
 
-  constructor(src, names, pos) {
+  constructor(src, names, pos, slides) {
+    this.slides = slides;
     this.pos = pos;
     this.names = names;
     this.open(src, names);
@@ -40,14 +42,17 @@ export default class Lightbox {
     this.src = src;
     let i = this.pos.findIndex((content) => content === this.src);
     lightbox.style.display = 'block';
+    lightbox.focus();
+    lightbox.setAttribute('aria-hidden', 'false');
+    main.setAttribute('aria-hidden', 'true');
     if (src.endsWith('.jpg')) {
-      lightboxBody.innerHTML = `<img class="modal__media-content-media" tab-index=0 src="${src}" alt="${names[i]}">`;
+      lightboxBody.innerHTML = `<img class="modal__media-content-media" src="${src}" alt="${names[i]}">`;
     } else if (src.endsWith('.mp4')) {
-      lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 src="${src}" type="video/mp4" autoplay>
+      lightboxBody.innerHTML = `<video class="modal__media-content-media" src="${src}" type="video/mp4" autoplay>
           ${names[i]}
           </video>`;
     }
-    lightboxCaption.innerHTML = `<p>${names[i + 1]}</p>`;
+    lightboxCaption.innerHTML = `<p tabindex="0">${names[i]}</p>`;
   }
 
   next() {
@@ -75,11 +80,14 @@ export default class Lightbox {
   close() {
     lightboxClose.addEventListener('click', () => {
       lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden', 'true');
+      main.setAttribute('aria-hidden', 'false');
+      this.slides[this.pos.findIndex((content) => content === this.src)].focus();
     });
   }
 
   keyboard() {
-    document.addEventListener('keydown', (e) => {
+    lightbox.addEventListener('keydown', (e) => {
       e.preventDefault();
       if (e.key === 'ArrowRight') {
         lightboxNext.click();

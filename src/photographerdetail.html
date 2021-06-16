@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -14,13 +14,13 @@
 
 <body>
     <div id="photographer-page">
-        <header class="header--photographer container container__header"> <a href="./" aria-label="homepage link">
+        <header class="header--photographer container container__header"> <a href="./" aria-label="homepage link" title="homepage link">
                 <div class="header__logo">
                     <img src="./assets/img/logo.svg" alt="logo" class="header__logo-img" aria-label="logo" role="img">
                 </div>
             </a>
         </header>
-        <main class="main container">
+        <main class="main container" aria-hidden="false" id="main">
             <section>
                 <article class="card__banner container__banner" id="singlePhotographerBanner">
 
@@ -45,63 +45,75 @@
     </div>
     <section class="container container__media" id="mediaContainer">
     </section>
+
     <div class="card__counter">
         <p class="card__counter-likes" ><span id="counterLikes"></span><i class="fas fa-heart"></i></p>
         <p class="card__media-counter-price" id="counterPrice"></p>
     </div>
-    <div id="mediaLightbox" class="modal modal__media">
-        <span class="modal__media-close" id="mediaLightboxClose">&times;</span>
+
+    <div id="mediaLightbox" class="modal modal__media" aria-label="close up image" aria-modal="true" aria-hidden="true" tabindex="0" role="dialog">
+        <span class="modal__media-close" id="mediaLightboxClose" aria-label="Close Image" tabindex="0">&times;</span>
         <div class="modal__media-content">
-            <div class="modal__media-content-media" id="mediaLightboxBody" data-slide=""></div>
-          <button class="modal__media-prev" id="mediaPrevious">&#10094;</button>
-          <button class="modal__media-next" id="mediaNext">&#10095;</button>
-          <div class="modal__media-caption-container" id="mediaLightboxCaption">
-          </div>
-      </div>
-      </div>
-      <div id="contactModal" class="modal modal__contact">
+            <div class="modal__media-content-media" id="mediaLightboxBody" data-slide="">
+
+            </div>
+                <button class="modal__media-prev" id="mediaPrevious" aria-label="Previous Image" tabindex="0">&#10094;</button>
+                <button class="modal__media-next" id="mediaNext" aria-label="Next Image" tabindex="0">&#10095;</button>
+                <div class="modal__media-caption-container" id="mediaLightboxCaption">
+
+                </div>
+        </div>
+    </div>
+
+      <div id="contactModal" class="modal modal__contact" role="dialog" tabindex="0" aria-hidden="true" aria-modal="true" aria-labelledby="modal__contact-title">
         <div class="modal__contact-content">
             <span class="modal__contact-close" id="contactClose" tabindex="0">&times;</span>
-            <h2 class="modal__contact-title" id="contactName"></h2>
+            <h2 class="modal__contact-title" id="contactName" tabindex="0"></h2>
             <div class="modal__contact-body">
                 <form
+                tabindex="0"
                 name="Contact" 
                 action="photographerdetail.html"
                 method="get"
                 id="contactForm">
                 <div class="modal__contact-form-data">
-                    <label>First name</label>
+                    <label for="first">First name</label>
                     <input type="text" 
                             class="modal__contact-form-input"
                             name="first"
+                            id="first"
                             />
                             <br>
                 </div>
                 <div class="modal__contact-form-data">
-                    <label>Last name</label>
+                    <label for="last">Last name</label>
                     <input type="text" 
                             class="modal__contact-form-input"
                             name="last"
+                            id="last"
                             />
                             <br>
                 </div>
                 <div class="modal__contact-form-data">
-                    <label>Email</label> 
+                    <label for="email">Email</label> 
                     <input type="email" 
                             class="modal__contact-form-input"
                             name="email"
+                            id="email"
                             />
                             <br>
                 </div>
                 <div class="modal__contact-form-data">
-                    <label>Your message</label>
+                    <label for="message">Your message</label>
                     <textarea type="text" 
                             class="modal__contact-form-input modal__contact-form-input--message"
                             name="message"
+                            id="message"
                             ></textarea>
                             <br>
                 </div>
-                <input type="submit" 
+                <input type="submit"
+                aria-label="submit" 
                 class="btn btn-submit"
                 value="Send"
                 id="btnSubmit"

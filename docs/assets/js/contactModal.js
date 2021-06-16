@@ -7,13 +7,20 @@ export function contact() {
     const contactModal = document.getElementById('contactModal');
     const contactForm = document.getElementById('contactForm');
     const contactClose = document.getElementById('contactClose');
+    const main  = document.getElementById('main');
     // launch modal form
     function launchContactModal() {
       contactModal.style.display = 'block';
+      contactClose.focus();
+      main.setAttribute('aria-hidden', 'true');
+      contactModal.setAttribute('aria-hidden', 'false');
     }
     // close modal form
     function closeContactModal() {
       contactModal.style.display = 'none';
+      main.setAttribute('aria-hidden', 'false');
+      contactModal.setAttribute('aria-hidden', 'true');
+      contactButton.focus();
     }
     // add name to contact modal
     const name = document.getElementById('photographerName').textContent;
