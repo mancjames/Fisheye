@@ -41,7 +41,7 @@ export default class Lightbox {
     let i = this.pos.findIndex((content) => content === this.src);
     lightbox.style.display = 'block';
     if (src.endsWith('.jpg')) {
-      lightboxBody.innerHTML = `<img class="modal__media-content-media" src="${src}" alt="${names[i]}">`;
+      lightboxBody.innerHTML = `<img class="modal__media-content-media" tab-index=0 src="${src}" alt="${names[i]}">`;
     } else if (src.endsWith('.mp4')) {
       lightboxBody.innerHTML = `<video class="modal__media-content-media" tabindex=0 src="${src}" type="video/mp4" autoplay>
           ${names[i]}

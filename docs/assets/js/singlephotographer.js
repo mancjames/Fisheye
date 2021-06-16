@@ -101,9 +101,11 @@ document.querySelector('.singlephotographer__dropdown').addEventListener('keypre
 for (const option of document.querySelectorAll('.singlephotographer__dropdown-option')) {
   option.addEventListener('click', function (e) {
     e.preventDefault();
+    this.parentNode.querySelector('.singlephotographer__dropdown-option.selected').ariaSelected = false;
     if (!this.classList.contains('selected')) {
       this.parentNode.querySelector('.singlephotographer__dropdown-option.selected').classList.remove('selected');
       this.classList.add('selected');
+      this.ariaSelected = true;
       this.closest('.singlephotographer__dropdown').querySelector('.singlephotographer__dropdown-trigger span').textContent = this.textContent;
     }
   });

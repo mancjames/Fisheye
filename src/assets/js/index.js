@@ -23,9 +23,9 @@ fetch('./fisheyedata.json')
           <div class="card__photographer-title">
             <h2 class="card__photographer-title-name">${this.photographer.name}</h2>
             </div></a>
-            <p class="card__photographer-description-location">${this.photographer.city}, ${this.photographer.country}</p>
-            <p class="card__photographer-description-tagline">${this.photographer.tagline}</p>
-            <p class="card__photographer-description-price">$${this.photographer.price}/day</p>
+            <p class="card__photographer-description-location" tabindex="0">${this.photographer.city}, ${this.photographer.country}</p>
+            <p class="card__photographer-description-tagline" tabindex="0">${this.photographer.tagline}</p>
+            <p class="card__photographer-description-price" tabindex="0">$${this.photographer.price}/day</p>
           <div class="card__photographer-tags">
             <ul class="card__photographer-tags-list" role="navigation" aria-label="Links to tagged photographers">
             ${this.photographer.tags.map((tag) => `
