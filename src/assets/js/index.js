@@ -29,7 +29,7 @@ fetch('./fisheyedata.json')
           <div class="card__photographer-tags">
             <ul class="card__photographer-tags-list" role="navigation" aria-label="Links to tagged photographers">
             ${this.photographer.tags.map((tag) => `
-            <li class="tag card__photographer-tags-list-item" tabindex="0" data-filter-tag = "${tag}"><span class="sr-only">${tag}
+            <li class="tag card__photographer-tags-list-item" tabindex="0" data-filter-tag = "${tag}"><span class="sr-only">tag
             </span>
                     ${tag}
             </li>

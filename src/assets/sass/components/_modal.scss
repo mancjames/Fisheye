@@ -21,6 +21,9 @@
             &:focus{
                 cursor: pointer;
             }
+            @media only screen and (max-width: map-get($breakpoints, mobile)){
+                top: 30px;
+            }
         }
         &-content{
             position: relative;
@@ -29,13 +32,27 @@
             padding: 0;
             max-width: 1300px;
             height: 85%;
+            @media only screen and (max-width: map-get($breakpoints, mobile)){
+                max-width: 95vw;
+            }
             &-media{
                 height: 100%;
                 margin-left: auto;
                 margin-right: auto;
+                @media only screen and (max-width: map-get($breakpoints, mobile)){
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
                 & >* {
                     margin-left: 50%;
                     transform: translate(-50%,0%);
+                    @media only screen and (max-width: map-get($breakpoints, mobile)){
+                        margin: 0;
+                        transform: none;
+                        max-height: 40%;
+                        max-width: 70%;
+                    }
                 }
             }
         }
@@ -92,6 +109,11 @@
             width: 100%;
             max-width: 30em;
             position: relative;
+            @media only screen and (max-width: map-get($breakpoints, mobile)){
+                position: absolute;
+                top: 0;
+                height: 100vh;
+            }
         }
         label{
             display: inline-block;
@@ -99,6 +121,10 @@
             font-family: $font;
             margin-top: .125em;
             margin-bottom: .125em;
+            @media only screen and (max-width: map-get($breakpoints, mobile)){
+                margin-top: .5em;
+                margin-bottom: .25em;
+            }
         }
         &-form-input{
             border: none;
@@ -111,6 +137,9 @@
             height: 2em;
             &--message{
                 height: 6em;
+                @media only screen and (max-width: map-get($breakpoints, mobile)){
+                    height: 8em;
+                }
             }
         }
     }

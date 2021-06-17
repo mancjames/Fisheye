@@ -91,7 +91,7 @@ document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener
   this.querySelector('.singlephotographer__dropdown').classList.toggle('open');
 });
 
-document.querySelector('.singlephotographer__dropdown').addEventListener('keypress', (e) => {
+document.querySelector('.singlephotographer__dropdown-wrapper').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     document.querySelector('.singlephotographer__dropdown').click();
   }
@@ -107,6 +107,7 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
       this.classList.add('selected');
       this.ariaSelected = true;
       this.closest('.singlephotographer__dropdown').querySelector('.singlephotographer__dropdown-trigger span').textContent = this.textContent;
+      this.closest('.singlephotographer__dropdown').querySelector('.singlephotographer__dropdown-trigger span').focus();
     }
   });
   option.addEventListener('keypress', (e) => {
