@@ -10,10 +10,10 @@ export default class Banner {
       <div class="card__banner-information">
         <div class="card__banner-description">
           <div class="card__banner-title">
-            <h2 class="card__banner-title-name" id="photographerName">${this.media.name}</h2>
+            <h2 class="card__banner-title-name" id="photographerName" tabindex="0">${this.media.name}</h2>
           </div>
-            <p class="card__banner-description-location">${this.media.city}, ${this.media.country}</p>
-            <p class="card__banner-description-tagline">${this.media.tagline}</p>
+            <p class="card__banner-description-location" tabindex="0">${this.media.city}, ${this.media.country}</p>
+            <p class="card__banner-description-tagline" tabindex="0">${this.media.tagline}</p>
           <div class="card__banner-tags">
             <ul class="card__banner-tags-list" id="card__banner-tags-list">
               ${this.media.tags.map(tag => `
