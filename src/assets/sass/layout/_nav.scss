@@ -6,7 +6,7 @@
     color: $color-secondary;
     border: 1px $background-color-tertiary solid;
     border-radius: 1em;
-    padding: .125rem .125rem;
+    padding: .125rem .25rem;
     @include transitionshort;
     &:hover,
     &:focus,
