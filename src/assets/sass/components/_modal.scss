@@ -10,6 +10,9 @@
     overflow: auto;
     &__media{
         background-color: white;
+        @media only screen and (max-width: map-get($breakpoints, mobile)){
+            padding-top: 50%;
+        }
         &-close{
             color: $color-primary;
             position: absolute;
@@ -17,12 +20,14 @@
             right: 25px;
             font-size: 35px;
             font-weight: bold;
+            z-index: 10000;
             &:hover,
             &:focus{
                 cursor: pointer;
             }
             @media only screen and (max-width: map-get($breakpoints, mobile)){
-                top: 30px;
+                position: relative;
+                right: -90%;
             }
         }
         &-content{
@@ -34,6 +39,7 @@
             height: 85%;
             @media only screen and (max-width: map-get($breakpoints, mobile)){
                 max-width: 95vw;
+                height: 15em;
             }
             &-media{
                 height: 100%;
@@ -50,8 +56,8 @@
                     @media only screen and (max-width: map-get($breakpoints, mobile)){
                         margin: 0;
                         transform: none;
-                        max-height: 40%;
-                        max-width: 70%;
+                        max-height: 85%;
+                        max-width: 85%;
                     }
                 }
             }
@@ -74,6 +80,9 @@
             border-radius: 0 3px 3px 0;
             user-select: none;
             -webkit-user-select: none;
+            @media only screen and (max-width: map-get($breakpoints, mobile)){
+                margin-top: 0;
+            }
         }
         &-next{
             right: 0;
@@ -84,6 +93,9 @@
             padding: 2px 16px;
             color: $color-primary;
             margin-top: 1em;
+            @media only screen and (max-width: map-get($breakpoints, mobile)){
+                margin-top: 0;
+            }
         }
     }
     &__contact{
