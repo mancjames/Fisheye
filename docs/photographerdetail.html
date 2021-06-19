@@ -44,9 +44,10 @@
     </div>
     <section class="container container__media" id="mediaContainer"></section>
     <div class="card__counter">
-        <p class="card__counter-likes"><span id="counterLikes"></span><i class="fas fa-heart"></i>
+        <p class="card__counter-likes"><span id="counterLikes" tabindex="0" aria-label="total likes for page"></span>
+            <i class="fas fa-heart"></i>
         </p>
-        <p class="card__media-counter-price" id="counterPrice"></p>
+        <p class="card__media-counter-price" id="counterPrice" tabindex="0" aria-label="Price per day"></p>
     </div>
     <div id="mediaLightbox" class="modal modal__media" aria-label="close up image" aria-modal="true" aria-hidden="true" tabindex="0" role="dialog"> <span class="modal__media-close" id="mediaLightboxClose" aria-label="Close Image" tabindex="0">&times;</span>
 
