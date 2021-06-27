@@ -26,7 +26,7 @@ export class MediaFactory {
             <div class="card__media-description">
                 <p class="card__media-description-name" tabindex="0">${this.media.imgAlt}</p>
                 <p class="card__media-description-price" tabindex="0">${this.media.price} $</p>
-                <p class="card__media-description-likes"><span class="likeNumber" tabindex="0" aria-label="Number of likes ${this.media.likes}">${this.media.likes} </span><button class="btn-likes fas fa-heart"></button></p>
+                <p class="card__media-description-likes"><span class="likeNumber" tabindex="0" aria-label="Number of likes ${this.media.likes}">${this.media.likes} </span><button class="btn-likes fas fa-heart" aria-label="add a like" title="add a like" aria-role="button"></button></p>
             </div>
         `;
       mediaContainer.appendChild(imageCard);
@@ -49,7 +49,7 @@ export class MediaFactory {
           <div class="card__media-description">
               <p class="card__media-description-name" tabindex="0">${this.media.imgAlt}</p>
               <p class="card__media-description-price" tabindex="0">${this.media.price} $</p>
-              <p class="card__media-description-likes"><span class="likeNumber" tabindex="0" aria-label="Number of likes ${this.media.likes}">${this.media.likes} </span><button class="btn-likes fas fa-heart"></button></p>
+              <p class="card__media-description-likes"><span class="likeNumber" tabindex="0" aria-label="Number of likes ${this.media.likes}">${this.media.likes} </span><button class="btn-likes fas fa-heart" aria-label="add a like" title="add a like" aria-role="button"></button></p>
           </div>
       `;
     mediaContainer.appendChild(videoCard);
