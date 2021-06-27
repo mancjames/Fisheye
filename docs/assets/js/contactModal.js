@@ -7,7 +7,7 @@ export function contact() {
     const contactModal = document.getElementById('contactModal');
     const contactForm = document.getElementById('contactForm');
     const contactClose = document.getElementById('contactClose');
-    const main  = document.getElementById('main');
+    const main = document.getElementById('main');
     // launch modal form
     function launchContactModal() {
       contactModal.style.display = 'block';

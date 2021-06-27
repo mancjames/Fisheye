@@ -114,6 +114,7 @@ for (const option of document.querySelectorAll('.singlephotographer__dropdown-op
     if (e.key === 'Enter'){
       e.preventDefault();
       option.click();
+      document.querySelector('.singlephotographer__dropdown').classList.toggle('open');
     }
   });
 }

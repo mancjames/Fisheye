@@ -26,16 +26,16 @@
                 <article class="card__banner container__banner" id="singlePhotographerBanner"></article>
                 <div class="singlephotographer__sorting">
                     <p>Order By</p>
-                    <div class="singlephotographer__dropdown-wrapper" aria-label="Image Sorting" role="option">
+                    <div class="singlephotographer__dropdown-wrapper" aria-label="Image Sorting" role="button" aria-haspopup="listbox">
                         <div class="singlephotographer__dropdown" tabindex="0">
                             <div class="singlephotographer__dropdown-trigger"> <span>Popularity</span>
 
                             </div>
                             <div class="singlephotographer__dropdown-arrow"></div>
-                            <div class="singlephotographer__dropdown-options"> <span class="singlephotographer__dropdown-option selected" aria-selected="false" tabindex="0" id="popularity">Popularity</span>
-                                <span class="singlephotographer__dropdown-option" aria-selected="false" tabindex="0" id="date">Date</span>
-                                <span class="singlephotographer__dropdown-option" aria-selected="false" tabindex="0" id="title">Title</span>
+                            <div class="singlephotographer__dropdown-options"> <span class="singlephotographer__dropdown-option selected" aria-selected="false" role="listbox" tabindex="0" id="popularity">Popularity</span>
+                                <span class="singlephotographer__dropdown-option" aria-selected="false" role="listbox" tabindex="0" id="date">Date</span>
 
+                                <span class="singlephotographer__dropdown-option" aria-selected="false" role="listbox" tabindex="0" id="title">Title</span>
                             </div>
                         </div>
                     </div>
@@ -58,12 +58,12 @@
             <div class="modal__media-caption-container" id="mediaLightboxCaption"></div>
         </div>
     </div>
-    <div id="contactModal" class="modal modal__contact" role="dialog" tabindex="0" aria-hidden="true" aria-modal="true" aria-labelledby="modal__contact-title">
-        <div class="modal__contact-content"> <span class="modal__contact-close" id="contactClose" tabindex="0">&times;</span>
+    <div id="contactModal" class="modal modal__contact" role="dialog" tabindex="0" aria-hidden="true" aria-modal="true">
+        <div class="modal__contact-content"> <span class="modal__contact-close" id="contactClose" tabindex="0" aria-label="close">&times;</span>
 
-            <h2 class="modal__contact-title" id="contactName" tabindex="0"></h2>
+            <h2 class="modal__contact-title" id="contactName" tabindex="0" aria-labelledby="contactName"></h2>
             <div class="modal__contact-body">
-                <form tabindex="0" name="Contact" action="photographerdetail.html" method="get" id="contactForm">
+                <form name="Contact" action="photographerdetail.html" method="get" id="contactForm">
                     <div class="modal__contact-form-data">
                         <label for="first">First name</label>
                         <input type="text" class="modal__contact-form-input" name="first" id="first" />
