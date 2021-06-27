@@ -67,7 +67,7 @@
 
       <div id="contactModal" class="modal modal__contact" role="dialog" tabindex="0" aria-hidden="true" aria-modal="true">
         <div class="modal__contact-content">
-            <span class="modal__contact-close" id="contactClose" tabindex="0" aria-label="close">&times;</span>
+            <span class="modal__contact-close" id="contactClose" tabindex="0" aria-label="Close Contact Form">&times;</span>
             <h2 class="modal__contact-title" id="contactName" tabindex="0" aria-labelledby="contactName"></h2>
             <div class="modal__contact-body">
                 <form
@@ -76,43 +76,51 @@
                 method="get"
                 id="contactForm">
                 <div class="modal__contact-form-data">
-                    <label for="first">First name</label>
+                    <label for="first" id="firstNameLabel">First name</label>
                     <input type="text" 
                             class="modal__contact-form-input"
                             name="first"
                             id="first"
+                            aria-labelledby="firstNameLabel"
+                            aria-label="First Name"
                             />
                             <br>
                 </div>
                 <div class="modal__contact-form-data">
-                    <label for="last">Last name</label>
+                    <label for="last" id="lastNameLabel">Last name</label>
                     <input type="text" 
                             class="modal__contact-form-input"
                             name="last"
                             id="last"
+                            aria-labelledby="lastNameLabel"
+                            aria-label="Last Name"
                             />
                             <br>
                 </div>
                 <div class="modal__contact-form-data">
-                    <label for="email">Email</label> 
+                    <label for="email" id="emailLabel">Email</label> 
                     <input type="email" 
                             class="modal__contact-form-input"
                             name="email"
                             id="email"
+                            aria-labelledby="emailLabel"
+                            aria-label="Email"
                             />
                             <br>
                 </div>
                 <div class="modal__contact-form-data">
-                    <label for="message">Your message</label>
+                    <label for="message" id="messageLabel">Your message</label>
                     <textarea type="text" 
                             class="modal__contact-form-input modal__contact-form-input--message"
                             name="message"
                             id="message"
+                            aria-labelledby="messageLabel"
+                            aria-label="Message"
                             ></textarea>
                             <br>
                 </div>
                 <input type="submit"
-                aria-label="submit" 
+                aria-label="Send" 
                 class="btn btn-submit"
                 value="Send"
                 id="btnSubmit"
